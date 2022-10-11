@@ -6,9 +6,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "browser-sync start --server 'src' --files 'src' --single"
+    "start": "browser-sync start --config bs-config.js"
   },
   "devDependencies": {
     "browser-sync": "^2.26.13"
+  },
+  "dependencies": {
+    "@mui/icons-material": "^5.10.6",
+    "@toast-ui/chart": "^4.4.3",
+    "material-icons": "^1.12.0"
   }
 }

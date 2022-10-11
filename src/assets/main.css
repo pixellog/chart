@@ -1,0 +1,14 @@
+header {
+  background: linear-gradient(90deg, #7530a6, #333295);
+}
+
+footer {
+  background-color: #272660;
+  color: #fff;
+  font-size: 11px;
+  margin-top: 50px;
+}
+
+.pt-180 {
+  padding-top: 180px;
+}

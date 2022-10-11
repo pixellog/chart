@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <!--vue3-->
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
+  <!--bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!--toastui-chart-->
+  <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+  <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/assets/main.css" rel="stylesheet"/>
+</head>
+<!-- https://michaelcurrin.github.io/code-cookbook/recipes/javascript/packages/vue/no-build-step.html -->
+<body>
+<div id="app"></div>
+<script src="./app.js"></script>
+<script type="module">
+  const app = Vue.createApp({
+    components: {
+      "navs": Vue.defineAsyncComponent(() =>
+        loadModule("./components/navs.vue", options)
+      ),
+      "footers": Vue.defineAsyncComponent(() =>
+        loadModule("./components/footers.vue", options)
+      ),
+    },
+    template: `
+      <navs></navs>
+
+      <div class="container">
+
+
+      <span class="material-icons md-18"
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="This top tooltip is themed via CSS variables."
+      >info</span>
+
+      <button type="button" class="btn btn-secondary"
+              data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="This top tooltip is themed via CSS variables.">
+        Custom tooltip
+      </button>
+      <div class="position-relative">
+        <p class="muted">Placeholder text to demonstrate some
+          <a href="#" data-bs-toggle="tooltip" data-bs-title="Default tooltip">inline links</a>
+          with tooltips. This is now just filler, no killer. Content placed here just to mimic the presence of
+          <a href="#" data-bs-toggle="tooltip" data-bs-title="Another tooltip">real text</a>.
+          And all that just to give you an idea of how tooltips would look when used in real-world situations. So hopefully you've now seen how
+          <a href="#" data-bs-toggle="tooltip" data-bs-title="Another one here too">these tooltips on links</a> can work in practice, once you use them on
+          <a href="#" data-bs-toggle="tooltip" data-bs-title="The last tip!">your own</a> site or project.
+        </p>
+      </div>
+
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item"
+            v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id" @click="active(i)">
+          <button class="nav-link" :class="tabs !== i || 'active'" :id="item">{{ item }}</button>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane" :id="item" :class="tabs !== i || 'active'"
+             v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id">{{ i }}//{{ item }}</div>
+      </div>
+      </div>
+
+      <footers></footers>
+    `,
+    data() {
+      return {
+        tabs: 0
+      }
+    },
+    methods: {
+      active(i) {
+        this.tabs = i
+      }
+    },
+  });
+
+  app.mount("#app");
+
+
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+
+</body>
+</html>
