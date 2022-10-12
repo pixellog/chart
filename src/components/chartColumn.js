@@ -23,7 +23,14 @@ export default function columnChart() {
     ],
   };
   const options = {
-    chart: {title: 'chart-column', width: 900, height: 400},
+    chart: {
+      title: '',
+      width: '100%',
+      height: 400
+    },
+    legend: {
+      align: 'bottom',
+    }
   };
 
   const chart = toastui.Chart;

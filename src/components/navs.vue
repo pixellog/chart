@@ -3,12 +3,12 @@
     <div class="container py-2">
       <div class="d-flex justify-content-between w-100">
         <a href="/" class="text-white font-weight-black fs-4 text-decoration-none">RNB</a>
-        <div>
-          <a class="link-light ml-5 text-decoration-none" href="/">대시보드</a>
-          <a class="link-light ml-5 text-decoration-none" href="/">이력검색</a>
-          <a class="link-light ml-5 text-decoration-none" href="/">설정</a>
-          <a class="link-light ml-5 text-decoration-none" href="/guide.html">가이드</a>
-          <button class="navbar-toggler white ml-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <div class="hstack gap-3">
+          <a class="link-light text-decoration-none" href="/">대시보드</a>
+          <a class="link-light text-decoration-none" href="/">이력검색</a>
+          <a class="link-light text-decoration-none" href="/">설정</a>
+          <a class="link-light text-decoration-none" href="/guide.html">가이드</a>
+          <button class="navbar-toggler white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">

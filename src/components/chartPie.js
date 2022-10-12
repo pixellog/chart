@@ -31,7 +31,7 @@ export default function pieChart() {
     ],
   };
   const options = {
-    chart: {title: '소비자 유형분석 - 가족구성 및 소득', width: 600, height: 400},
+    chart: {title: '', width: 600, height: 400},
     series: {
       radiusRange: {
         inner: '40%',

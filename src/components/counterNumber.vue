@@ -229,13 +229,9 @@ export default {
   list-style: none;
   margin: 0;
   overflow: hidden;
-  /*font-size: inherit;*/
-  /*height: inherit;*/
 }
 
 .counter-ul .item ul {
-  /*font-size: inherit;*/
-  /*height: inherit;*/
   font-size: 40px;
   height: 40px;
   position: relative;
@@ -248,26 +244,31 @@ export default {
 
 .counter-ul .item li {
   line-height: 1;
-  animation: counterAni 1s ease-out both;
+  animation: counterAni .8s ease-out both;
 }
 
 .counter-ul .item-comma {
   font-size: 20px;
-  width: 20px;
-  animation: counterCommaAni 0.4s ease-out both;
+  line-height: 20px;
+  /*width: 20px;*/
+  animation: counterCommaAni 0.3s ease-out both;
   animation-delay: 0.3s;
 }
 
 .counter-ul .item-unit {
-  margin-left: 8px;
-  animation: counterUnitAni 0.4s ease-out both;
+  margin-left: 6px;
+  line-height: 1;
+  animation: counterUnitAni 0.3s ease-out both;
   animation-delay: 0.2s;
 }
+
 
 @keyframes counterCommaAni {
   0% {
     filter: blur(3px);
     transform: translateY(-100px);
+    width: 3px;
+    opacity: 0;
   }
   99% {
     filter: blur(1px);
@@ -275,6 +276,8 @@ export default {
   100% {
     filter: blur(0);
     transform: translateY(0);
+    width: 8px;
+    opacity: 1;
   }
 }
 
@@ -296,9 +299,12 @@ export default {
   0% {
     filter: blur(0);
     transform: translateY(0);
+    width: 3px;
+    opacity: 0;
   }
   44% {
     filter: blur(3px);
+    width: 8px;
   }
   99% {
     filter: blur(1px);
@@ -307,6 +313,8 @@ export default {
     filter: blur(0);
     /* font-size에 비례 */
     transform: translateY(200px);
+    width: 12px;
+    opacity: 1;
   }
 }
 </style>

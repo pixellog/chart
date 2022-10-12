@@ -1,24 +1,32 @@
 <template>
-  <footer class="p-5">
+  <footer class="p-5 mt-10 text-white text-caption" style="background-color: #272660;">
     <div class="container">
       <div class="row">
         <div class="col-auto">
-          <img style="width: 80px; height: auto; filter: invert(1); margin-top: 6px;"
+          <img style="width: 80px; height: auto; filter: invert(.75); margin-top: 2px;"
                src="https://www.gowid.com/static/media/logovector_logo_basic_black.291ed9f7.svg">
         </div>
-        <div class="col-auto flex-grow-1 lh-lg">
-          주식회사 고위드<span class="px-4 opacity-25">|</span>
-          대표이사 : 김항기 <span class="px-4 opacity-25">|</span>
-          사업자등록번호 : 261-81-25793<span class="px-4 opacity-25">|</span>
-          통신판매업신고 : 제 2020-서울강남-01863호
-          대표전화 : 02-6105-8101<span class="px-4 opacity-25">|</span>
-          이메일 : support@gowid.com<br>
-          서울특별시 강남구 도산대로 317, 14층 (신사동, 호림아트센터 1빌딩) <br>
+        <div class="col-auto flex-grow-1 lh-lg" style="color:rgba(255,255,255,.5);">
+          <div class="hstack gap-2 lh-1">
+            주식회사 고위드
+            <div class="vr"/>
+            대표이사 : 김항기
+            <div class="vr"/>
+            사업자등록번호 : 261-81-25793
+            <div class="vr"/>
+            통신판매업신고 : 제 2020-서울강남-01863호
+            대표전화 : 02-6105-8101
+            <div class="vr"/>
+            이메일 : support@gowid.com
+          </div>
+          서울특별시 강남구 도산대로 317, 14층 (신사동, 호림아트센터 1빌딩)
 
           <div class="d-flex mt-3">
-            <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보 처리방침</a> <span class="px-3 opacity-25">|</span>
-            <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#serviceModal">고위드 통합서비스 이용약관</a>
-
+            <div class="hstack gap-3 lh-1">
+              <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보 처리방침</a>
+              <div class="vr"/>
+              <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#serviceModal">고위드 통합서비스 이용약관</a>
+            </div>
             <!-- privacyModal -->
             <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
               <div class="modal-dialog">

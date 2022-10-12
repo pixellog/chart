@@ -9,20 +9,20 @@ export default function gaugeChart() {
     ],
   };
   const options = {
-    chart: {title: '소셜분석', width: 550, height: 500},
+    chart: {title: '', width: 550, height: 500},
     circularAxis: {
       scale: {
         min: 0,
-        max: 100,
+        // max: 100,
       },
-      title: {text: 'km/h<div>기업평판지수</div>'},
+      title: {text: 'km/h'},
     },
     series: {
       solid: true,
       dataLabels: {
         visible: true,
-        offsetY: -30,
-        formatter: (value) => `${value}% <div>기업평판지수</div>`
+        offsetY: 0,
+        formatter: (value) => `${value}%`
       },
     },
     theme: {
@@ -40,7 +40,6 @@ export default function gaugeChart() {
       series: {
         dataLabels: {
           fontSize: 20,
-          // fontFamily: 'Impact',
           fontWeight: 600,
           color: '#00a9ff',
           textBubble: {

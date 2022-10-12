@@ -31,7 +31,10 @@ export default function columnLineChart() {
     },
   };
   const options = {
-    chart: {title: '조직분석 - 고용현황', width: 900, height: 500},
+    chart: {title: '', width: '100%', height: 500},
+    legend: {
+      align: 'bottom',
+    },
     yAxis: {title: 'Temperature (Celsius)'},
     xAxis: {title: 'Month'},
   };
