@@ -1,31 +1,67 @@
 <template>
-  <div class="nav">
-    <div class="container py-3">
-      <div class="d-flex justify-content-between">
-        <a href="/" class="text-white fw-bold">RNB</a>
+  <div class="navbar">
+    <div class="container py-2">
+      <div class="d-flex justify-content-between w-100">
+        <a href="/" class="text-white font-weight-black fs-4 text-decoration-none">RNB</a>
         <div>
-          <a class="link-info p-1" href="/">데이터룸</a>
-          <a class="link-info p-1" href="/guide.html">분석리포트</a>
+          <a class="link-light ml-5 text-decoration-none" href="/">대시보드</a>
+          <a class="link-light ml-5 text-decoration-none" href="/">이력검색</a>
+          <a class="link-light ml-5 text-decoration-none" href="/">설정</a>
+          <a class="link-light ml-5 text-decoration-none" href="/guide.html">가이드</a>
+          <button class="navbar-toggler white ml-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex mt-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <header class="position-sticky fixed-top" style="z-index: 10">
-    <div class="container py-5">
-      <h4 class="text-white fw-bold">고위드데이터</h4>
-
-      <span v-for="item in [ '기업개요', '트래픽', '기술특허', '소셜 분석', '소비자 거래분석', '소비자 유형분석', '투자유치', '조직 분석', '손익/재무', '보도자료', ]" :key="item.id">
-          <a class="link-info p-1" href="#chart">{{ item }}</a>
-        </span>
-    </div>
-  </header>
-
-
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+    }
+  },
+}
+</script>
+
 <style scoped>
-.nav {
+.navbar {
   background-color: #272660;
   z-index: 100;
   top: 0;

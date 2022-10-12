@@ -1,7 +1,57 @@
 <template>
   <footer class="p-5">
     <div class="container">
-      @ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid beatae blanditiis, eos exercitationem fugiat fugit ipsum, laboriosam mollitia natus nisi numquam obcaecati quo quos, soluta tenetur. Animi nam possimus sit!
+      <div class="row">
+        <div class="col-auto">
+          <img style="width: 80px; height: auto; filter: invert(1); margin-top: 6px;"
+               src="https://www.gowid.com/static/media/logovector_logo_basic_black.291ed9f7.svg">
+        </div>
+        <div class="col-auto flex-grow-1 lh-lg">
+          주식회사 고위드<span class="px-4 opacity-25">|</span>
+          대표이사 : 김항기 <span class="px-4 opacity-25">|</span>
+          사업자등록번호 : 261-81-25793<span class="px-4 opacity-25">|</span>
+          통신판매업신고 : 제 2020-서울강남-01863호
+          대표전화 : 02-6105-8101<span class="px-4 opacity-25">|</span>
+          이메일 : support@gowid.com<br>
+          서울특별시 강남구 도산대로 317, 14층 (신사동, 호림아트센터 1빌딩) <br>
+
+          <div class="d-flex mt-3">
+            <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보 처리방침</a> <span class="px-3 opacity-25">|</span>
+            <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#serviceModal">고위드 통합서비스 이용약관</a>
+
+            <!-- privacyModal -->
+            <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header black--text border-0">
+                    <h1 class="modal-title fs-5">개인정보 처리방침</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text--secondary">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi, atque corporis cumque dicta eos error facere ipsam minima officiis provident saepe sapiente voluptatem voluptates voluptatibus. Dignissimos minus quaerat unde!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- serviceModal -->
+            <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header black--text border-0">
+                    <h1 class="modal-title fs-5">고위드 통합서비스 이용약관</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text--secondary">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi, atque corporis cumque dicta eos error facere ipsam minima officiis provident saepe sapiente voluptatem voluptates voluptatibus. Dignissimos minus quaerat unde!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
 </template>

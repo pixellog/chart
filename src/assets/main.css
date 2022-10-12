@@ -1,6 +1,23 @@
+@import url(./hds.css);
+
+body {
+  font-family: 'NanumSquareNeo', sans-serif;
+  font-size: 14px;
+}
+
 header {
   background: linear-gradient(90deg, #7530a6, #333295);
 }
+
+header .nav-link {
+  border-radius: 20px;
+  color: #fff;
+}
+header .nav-link.active {
+  background-color: #fff;
+  color: #272660;
+}
+
 
 footer {
   background-color: #272660;
@@ -9,6 +26,6 @@ footer {
   margin-top: 50px;
 }
 
-.pt-180 {
-  padding-top: 180px;
+.nav-tabs .nav-link {
+  border-radius: 0;
 }

@@ -4,22 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bootstrap demo</title>
-  <!--vue3-->
   <script src="https://unpkg.com/vue@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
-  <!--bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!--toastui-chart-->
   <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
   <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css"/>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="/assets/main.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/assets/main.css"/>
 </head>
 <!-- https://michaelcurrin.github.io/code-cookbook/recipes/javascript/packages/vue/no-build-step.html -->
 <body>
 <div id="app"></div>
-<script src="./app.js"></script>
+<script src="/assets/app.js"></script>
 <script type="module">
   const app = Vue.createApp({
     components: {
@@ -29,12 +26,80 @@
       "footers": Vue.defineAsyncComponent(() =>
         loadModule("./components/footers.vue", options)
       ),
+      "counter-number": Vue.defineAsyncComponent(() =>
+        loadModule("./components/counterNumber.vue", options)
+      ),
     },
     template: `
       <navs></navs>
 
-      <div class="container">
+      <div class="container p-5">
 
+      <h3>carousel</h3>
+      <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <img :src="src" class="d-block w-100" alt="">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <h3>table</h3>
+      <table class="table table-sm small">
+        <thead>
+        <tr>
+          <th>구분</th>
+          <th>2022-03</th>
+          <th>2022-04</th>
+          <th>2022-05</th>
+          <th>2022-06</th>
+          <th>2022-07</th>
+          <th>2022-08</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>소비자 거래지수</td>
+          <td>100</td>
+          <td>87.4</td>
+          <td>86.3</td>
+          <td>87</td>
+          <td>95.5</td>
+          <td>96.6</td>
+        </tr>
+        <tr>
+          <td>소비자 거래건수</td>
+          <td>4,648만</td>
+          <td>4,104.6만</td>
+          <td>4,007.2만</td>
+          <td>4,030.4만</td>
+          <td>4,350.8만</td>
+          <td>4,391만</td>
+        </tr>
+        <tr>
+          <td>평균 거래단가</td>
+          <td>2.4만원</td>
+          <td>2.4만원</td>
+          <td>2.5만원</td>
+          <td>2.5만원</td>
+          <td>2.5만원</td>
+          <td>2.5만원</td>
+        </tr>
+        </tbody>
+      </table>
 
       <span class="material-icons md-18"
             data-bs-toggle="tooltip" data-bs-placement="top"
@@ -76,7 +141,7 @@
     `,
     data() {
       return {
-        tabs: 0
+        src: "https://source.unsplash.com/random/query='nature'?orientation='landscape'"
       }
     },
     methods: {
@@ -88,10 +153,18 @@
 
   app.mount("#app");
 
-
+  // 부트스트랩 툴팁 활성화
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+  import dayjs from 'https://cdn.skypack.dev/dayjs@1.10.7'; // ES Modules
+  console.log(dayjs('2019-01-25').format('YYYY-MM-DDTHH:mm:ssZ[Z]'));
 </script>
 
+<style>
+  img {
+    width: 100%;
+  }
+</style>
 </body>
 </html>

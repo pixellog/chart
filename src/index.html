@@ -4,24 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bootstrap demo</title>
-  <!--vue3-->
   <script src="https://unpkg.com/vue@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
-  <!--bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!--toastui-chart-->
   <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
   <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css"/>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="/assets/main.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/assets/main.css"/>
 </head>
 <!-- https://michaelcurrin.github.io/code-cookbook/recipes/javascript/packages/vue/no-build-step.html -->
 <body>
 <div id="app"></div>
-<script src="./app.js"></script>
-
-<script>
+<script src="/assets/app.js"></script>
+<script type="module">
   const app = Vue.createApp({
     components: {
       "navs": Vue.defineAsyncComponent(() =>
@@ -30,66 +26,71 @@
       "footers": Vue.defineAsyncComponent(() =>
         loadModule("./components/footers.vue", options)
       ),
-      // "chart-timeline": Vue.defineAsyncComponent(() =>
-      //     loadModule("./components/chartTimeline.js", options)
-      // ),
-      /* "chart-timeline2": Vue.defineAsyncComponent(() =>
-           loadModule("./components/chartTimeline2.vue", options)
-       ),
-       "chart-bar": Vue.defineAsyncComponent(() =>
-           loadModule("./components/chartBar.vue", options)
-       ),
-       "chart-column": Vue.defineAsyncComponent(() =>
-           loadModule("./components/chartColumn.vue", options)
-       ),
-       "chart-columnline": Vue.defineAsyncComponent(() =>
-           loadModule("./components/chartColumnline.vue", options)
-       ),
-       "chart-pie": Vue.defineAsyncComponent(() =>
-           loadModule("./components/chartPie.vue", options)
-       ),
-       "chart-gauge": Vue.defineAsyncComponent(() =>
-           loadModule("./components/chartGauge.vue", options)
-       ),*/
+    },
+    data() {
+      return {
+        items: [
+          {title: '기업개요', id: 'chart'},
+          {title: '기술특허', id: 'chart-timeline2'},
+          {title: '소셜 분석', id: 'chart-gauge'},
+          {title: '소비자 거래분석', id: 'chart-pie'},
+          {title: '소비자 유형분석', id: 'chart-columnline'},
+          {title: '투자유치', id: 'chart-column'},
+          {title: '조직 분석', id: 'chart-bar'},
+          {title: '손익/재무', id: 'chart-bar'},
+          {title: '보도자료', id: 'chart-bar'},
+        ]
+      }
     },
     template: `
       <navs></navs>
 
+      <header class="position-sticky fixed-top" style="z-index: 10">
       <div class="container">
 
-      <h5 class="mt-5">타임라인</h5>
-      <small class="text-secondary">업데이트 : 2022-09-26</small>
-      <div v-for="item in ['chart','chart-gauge']" :key="item.id">
-        <h3 :id="item+'-title'" class="">{{ item }}-title</h3>
-        <div :id="item"></div>
+        <div class="d-flex align-center pt-7">
+          <h4 class="text-white font-weight-black mr-5">주식회사 고위드 (GOWID Inc)</h4>
+          <span class="badge font-weight-light" v-for="item in ['정보통신업','응용소프트웨어 개발 및 공급업']" :key="item.id">
+           #{{ item }}
+          </span>
+        </div>
+
+        <div class="white--text font-weight-light mt-1">
+          <div>
+            <span>261-81-25793</span><span class="px-4 opacity-25">|</span>
+            <span>김항기</span>
+          </div>
+          <div>서울특별시 강남구 도산대로 317, 14층(신사동, 호림아트센터 1빌딩)</div>
+        </div>
+
       </div>
-      <!--            <chart-timeline></chart-timeline>-->
 
-      <!--
-                  <div id="chart-gauge"></div>
-                  <chart-gauge></chart-gauge>
+      <hr>
 
-                  <div id="chart-pie"></div>
-                  <chart-pie></chart-pie>
+      <div class="container">
+        <div class="pb-4">
+          <a v-for="item in items" :key="item.id"
+             class="text-decoration-none d-inline-block pa-2 px-4 nav-link"
+             :href="'#'+item.id+'-title'">{{ item.title }}</a>
+        </div>
+      </div>
+      </header>
 
-                  <div id="chart-columnline"></div>
-                  <chart-columnline></chart-columnline>
-
-                  <div id="chart-column"></div>
-                  <chart-column></chart-column>
-
-                  <div id="chart-bar"></div>
-                  <chart-bar></chart-bar>
-
-      -->
-
+      <div class="container pt-10">
+      <div data-bs-spy="scroll" data-bs-target="#simple-list" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="0">
+        <div v-for="item in items" :key="item.id">
+          <h3 :id="item.id+'-title'">{{ item.title }}</h3>
+          <div :id="item.id"></div>
+        </div>
+      </div>
 
       <hr class="my-5">
 
+      <h5 class="mt-5">타임라인</h5>
+      <small class="text-secondary">업데이트 : 2022-09-26</small>
+
       <h5>트래픽</h5>
       <small class="text-secondary">업데이트 : 2022-09-26</small>
-      <div id="chart2"></div>
-      <chart-timeline2></chart-timeline2>
 
 
       <ul class="list-unstyled text-secondary small">
@@ -105,12 +106,10 @@
         <div class="col">
           <h5>기술/특허</h5>
           <small class="text-secondary">업데이트 : 2022-09-26</small>
-          <div id="chart3"></div>
         </div>
         <div class="col">
           <h5>기술키워드</h5>
           <small class="text-secondary">업데이트 : 2022-09-26</small>
-          <div id="chart4"></div>
         </div>
       </div>
 
@@ -121,9 +120,8 @@
   });
 
   app.mount("#app");
-</script>
 
-<script type="module">
+
   import chart from '/components/chartTimeline.js';
   import chartBar from '/components/chartBar.js'
   import chartColumn from '/components/chartColumn.js'
@@ -134,11 +132,12 @@
 
   chart();
   chartGauge();
-  // chartBar();
-  // chartColumn();
-  // chartColumnline();
-  // chartPie();
-  // lineChart();
+  chartBar();
+  chartColumn();
+  chartColumnline();
+  chartPie();
+  lineChart();
+
 </script>
 </body>
 </html>

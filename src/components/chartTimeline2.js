@@ -1,5 +1,5 @@
 export default function lineChart() {
-  const el = document.getElementById('chart2');
+  const el = document.getElementById('chart-timeline2');
   const data = {
     categories: [
       '01/01/2020',
@@ -23,7 +23,7 @@ export default function lineChart() {
     ],
   };
   const options = {
-    chart: {title: '', width: 1000, height: 500},
+    chart: {title: '', width: '100%', height: 500},
     xAxis: {
       title: 'Month',
     },

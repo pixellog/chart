@@ -12,7 +12,6 @@
     "browser-sync": "^2.26.13"
   },
   "dependencies": {
-    "@mui/icons-material": "^5.10.6",
     "@toast-ui/chart": "^4.4.3",
     "material-icons": "^1.12.0"
   }

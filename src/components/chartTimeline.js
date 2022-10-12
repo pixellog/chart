@@ -39,7 +39,7 @@ export default function chart() {
     ],
   };
   const options = {
-    chart: {title: '', width: 1000, height: 500},
+    chart: {title: '', width: '100%', height: 500},
     xAxis: {
       title: '',
     },
@@ -50,7 +50,7 @@ export default function chart() {
       transition: 'transform .1s ease-in',
       template: (model, defaultTooltipTemplate) => {
         const {body, header} = defaultTooltipTemplate;
-        return `<div style="border-left:1px solid #f00; width: 140px; padding: 5px; color:#000;">
+        return `<div style="width: 140px; padding: 5px; color:#000;">
           ${model.category} ${body}
           </div>`
       },
@@ -62,7 +62,7 @@ export default function chart() {
       lines: [
         {
           value: '02/01/2020',
-          color: '#fa2828',
+          color: '#f00',
         },
       ],
     },
@@ -75,15 +75,10 @@ export default function chart() {
         // borderStyle: 'double',
         header: {
           fontSize: 12,
-          // fontWeight: 700,
-          // color: '#fff',
-          // fontFamily: 'monospace',
         },
         body: {
-          fontSize: 11,
-          // fontWeight: 700,
-          // color: '#fff',
-          // fontFamily: 'monospace',
+          fontSize: 12,
+          color: '#000',
         }
       },
       plot: {
