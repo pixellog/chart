@@ -31,36 +31,36 @@
 
       <header class="position-sticky fixed-top" style="z-index: 10">
       <div class="container">
-        <div class="row align-center pt-7">
+        <div class="row align-center pt-3">
           <div class="col-auto flex-grow-1">
-            <h4 class="text-white font-weight-black mr-5">주식회사 고위드 (GOWID Inc)</h4>
-          </div>
-          <div class="col-auto">
-            <div class="white--text opacity-50 badge d-flex align-center">
-              발급심사일시
-              <i class="material-symbols-outlined body-1 ml-4 mr-1">schedule</i> 2022.10.15 13:45
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
+            <h4 class="text-white font-weight-black">주식회사 고위드 (GOWID Inc)</h4>
+
             <div class="white--text opacity-50 text-caption">
               <div>
-                <span>261-81-25793</span><span class="px-4 opacity-25">|</span>
-                <span>대표 김항기</span>
+                <span class="text-caption opacity-75 mr-3"
+                      v-for="item in ['정보통신업','응용소프트웨어 개발 및 공급업']" :key="item.id">
+                  #{{ item }}</span>
               </div>
-              <div>서울특별시 강남구 도산대로 317, 14층(신사동, 호림아트센터 1빌딩)</div>
-              <div>
-                <span class="text-caption opacity-75 mr-3" v-for="item in ['정보통신업','응용소프트웨어 개발 및 공급업']" :key="item.id">
-           #{{ item }}
-          </span>
+
+              <div class="mt-2 d-flex align-center lh-1">
+                <span>261-81-25793</span><span class="vr mx-3"/>
+                <span>대표 김항기</span><span class="vr mx-3"/>
+                <span>서울특별시 강남구 도산대로 317, 14층(신사동, 호림아트센터 1빌딩)</span>
               </div>
+
             </div>
           </div>
-          <div class="col-auto row gap-3 pt-2">
-            <div class="col-auto opacity-75" v-for="item in 3" :key="item.id">
-              <div class="font-weight-black white--text">Runway {{ item }}</div>
-              <div class="badge rounded-pill border">12Month</div>
+          <div class="col-auto">
+            <div class="row gap-3 pr-2 mt-2">
+              <div class="col-auto opacity-75" v-for="item in 3" :key="item.id">
+                <div class="font-weight-black white--text">Runway {{ item }}</div>
+                <div class="badge rounded-pill border mt-1">12Month</div>
+              </div>
+            </div>
+
+            <div class="white--text opacity-50 badge d-flex align-center justify-content-lg-end mt-3">
+              발급심사일시
+              <i class="material-symbols-outlined body-1 ml-4 mr-1">schedule</i> 2022.10.15 13:45
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="col-lg-auto col-md-12 d-flex align-center">
             <i class="material-symbols-outlined mr-n9 position-relative">search</i>
-            <input type="search" class="form-control rounded-pill pl-10 border-0 font-weight-light" placeholder="Search">
+            <input type="search" class="form-control rounded-pill pl-10 form-control-sm border-0 font-weight-light" placeholder="Search">
           </div>
         </div>
       </div>
@@ -84,23 +84,11 @@
 
       <section>
 
-      <div class="container pt-10">
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item"
-              v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id" @click="active(i)">
-            <button class="nav-link rounded-0 text-capitalize" :class="tabs !== i || 'active'" :id="item">{{ item }}</button>
-          </li>
-        </ul>
-
-        <div class="tab-content">
-          <div class="tab-pane" :id="item" :class="tabs !== i || 'active'"
-               v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id">{{ i }}//{{ item }}</div>
-        </div>
+      <div class="container">
 
         <div class="mt-10" data-bs-spy="scroll" data-bs-target="#simple-list" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="0">
           <div v-for="(item, i) in items" :key="item.id">
-            <h3 :id="item.id+'-title'">{{ item.title }}</h3>
+            <h4 :id="item.id+'-title'">{{ item.title }}</h4>
 
             <div v-if="i==0">
 
@@ -171,7 +159,66 @@
           </div>
 
         </div>
+
+        <table class="table table-bordered- text-right">
+          <col class="text-left">
+          <col span="6">
+          <thead>
+          <tr>
+            <th>구분</th>
+            <th>2022-03</th>
+            <th>2022-04</th>
+            <th>2022-05</th>
+            <th>2022-06</th>
+            <th>2022-07</th>
+            <th>2022-08</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>소비자 거래지수</td>
+            <td>100</td>
+            <td>87.4</td>
+            <td>86.3</td>
+            <td>87</td>
+            <td>95.5</td>
+            <td>96.6</td>
+          </tr>
+          <tr>
+            <td>소비자 거래건수</td>
+            <td>4,648만</td>
+            <td>4,104.6만</td>
+            <td>4,007.2만</td>
+            <td>4,030.4만</td>
+            <td>4,350.8만</td>
+            <td>4,391만</td>
+          </tr>
+          <tr>
+            <td>평균 거래단가</td>
+            <td>2.4만원</td>
+            <td>2.4만원</td>
+            <td>2.5만원</td>
+            <td>2.5만원</td>
+            <td>2.5만원</td>
+            <td>2.5만원</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <ul class="nav nav-tabs mt-10">
+          <li class="nav-item"
+              v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id" @click="active(i)">
+            <button class="nav-link rounded-0 text-capitalize" :class="tabs !== i || 'active'" :id="item">{{ item }}</button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane" :id="item" :class="tabs !== i || 'active'"
+               v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id">{{ i }}//{{ item }}</div>
+        </div>
+
       </div>
+
       </section>
 
       <footers></footers>
