@@ -2,11 +2,11 @@
   <div class="navbar">
     <div class="container">
       <div class="d-flex justify-content-between align-center w-100">
-        <a href="/" class="font-weight-black nav-link fs-4 text-decoration-none bi">RNB</a>
+        <a href="./" class="font-weight-black nav-link fs-4 text-decoration-none bi">RNB</a>
         <div class="hstack gap-3">
-          <a class="link-secondary text-decoration-none" href="/dashboard.html">대시보드</a>
-          <a class="link-secondary text-decoration-none" href="/guide.html">이력검색</a>
-          <a class="link-secondary text-decoration-none" href="/">설정</a>
+          <a class="link-secondary text-decoration-none" href="dashboard.html">대시보드</a>
+          <a class="link-secondary text-decoration-none" href="./guide.html">이력검색</a>
+          <a class="link-secondary text-decoration-none" href="./">설정</a>
 
           <button class="btn rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="material-symbols-outlined lh-base">menu</span>
