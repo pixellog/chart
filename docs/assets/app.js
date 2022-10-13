@@ -19,3 +19,5 @@ const options = {
 };
 
 const {loadModule, version} = window["vue3-sfc-loader"];
+
+console.log('start')
