@@ -1,5 +1,5 @@
 <template>
-  <footer class="py-3 text-white text-caption" style="background-color: #272660;">
+  <footer class="py-5 text-white text-caption" style="background-color: #272660;">
     <div class="container">
       <div class="row">
         <div class="col-auto">
