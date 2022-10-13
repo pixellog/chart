@@ -22,267 +22,138 @@
       "footers": Vue.defineAsyncComponent(() =>
         loadModule("./components/footers.vue", options)
       ),
-      "counter-number": Vue.defineAsyncComponent(() =>
-        loadModule("./components/counterNumber.vue", options)
-      ),
     },
     template: `
       <navs></navs>
 
-      <header class="position-sticky fixed-top" style="z-index: 10">
-      <div class="container">
-        <div class="row align-center pt-3">
-          <div class="col-auto flex-grow-1">
-            <h4 class="text-white font-weight-black">주식회사 고위드 (GOWID Inc)</h4>
+      <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="4000">
 
-            <div class="white--text opacity-50 text-caption">
-              <div>
-                <span class="text-caption opacity-75 mr-3"
-                      v-for="item in ['정보통신업','응용소프트웨어 개발 및 공급업']" :key="item.id">
-                  #{{ item }}</span>
-              </div>
-
-              <div class="mt-2 d-flex align-center lh-1">
-                <span>261-81-25793</span><span class="vr mx-3"/>
-                <span>대표 김항기</span><span class="vr mx-3"/>
-                <span>서울특별시 강남구 도산대로 317, 14층(신사동, 호림아트센터 1빌딩)</span>
-              </div>
-
+          <div class="d-flex align-center justify-center bg"
+               style="background-image: url(https://images.unsplash.com/photo-1437209484568-e63b90a34f8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM4fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
+            <div class="text-center w-50 white--text">
+              <div class="display-4 font-weight-black">GOWID DATA</div>
+              <p class="mt-5 fs-4 font-weight-black">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
             </div>
           </div>
-          <div class="col-auto">
-            <div class="row gap-3 pr-2 mt-2">
-              <div class="col-auto opacity-75" v-for="item in 3" :key="item.id">
-                <div class="font-weight-black white--text">Runway {{ item }}</div>
-                <div class="badge rounded-pill border mt-1">12Month</div>
-              </div>
-            </div>
 
-            <div class="white--text opacity-50 badge d-flex align-center justify-content-lg-end mt-3">
-              발급심사일시
-              <i class="material-symbols-outlined body-1 ml-4 mr-1">schedule</i> 2022.10.15 13:45
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <div class="d-flex align-center justify-center bg"
+               style="background-image: url(https://images.unsplash.com/photo-1466278313810-9aca9abea861?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
+            <div class="text-center w-50 white--text">
+              <div class="display-4 font-weight-black">GOWID DATA</div>
+              <p class="mt-5 fs-4 font-weight-black">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
             </div>
           </div>
         </div>
-
-      </div>
-      <hr class="my-3">
-      <div class="container">
-        <div class="row pb-3">
-          <div class="col-auto flex-grow-1">
-            <a v-for="item in items" :key="item.id"
-               class="text-decoration-none d-inline-block pa-2 px-4 nav-link rounded-pill text-caption"
-               :href="'#'+item.id+'-title'">{{ item.title }}</a>
-          </div>
-          <div class="col-lg-auto col-md-12 d-flex align-center">
-            <i class="material-symbols-outlined mr-n9 position-relative">search</i>
-            <input type="search" class="form-control rounded-pill pl-10 form-control-sm border-0 font-weight-light" placeholder="Search">
+        <div class="carousel-item" data-bs-interval="4000">
+          <div class="d-flex align-center justify-center bg"
+               style="background-image: url(https://images.unsplash.com/photo-1478827121442-6450491fc0d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjY1fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
+            <div class="text-center w-50 white--text">
+              <div class="display-4 font-weight-black">GOWID DATA</div>
+              <p class="mt-5 fs-4 font-weight-black">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
+            </div>
           </div>
         </div>
       </div>
-      </header>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      </div>
+
 
       <section>
 
-      <div class="container">
-
-        <div class="mt-10" data-bs-spy="scroll" data-bs-target="#simple-list" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="0">
-          <div v-for="(item, i) in items" :key="item.id">
-            <h4 :id="item.id+'-title'">{{ item.title }}</h4>
-
-            <div v-if="i==0">
-
-              <h6 class="mt-5 text--secondary">전년도 재무재표</h6>
-              <div class="hstack gap-3">
-                <div class="flex-grow-1 card pa-5" v-for="(item, i) in ['자산','부채','자본']" :key="item.id">
-                  <div class="d-flex justify-space-between">
-                    <div class="h5 flex-grow-0">{{ item }}</div>
-                    <counter-number value="5,562,865" unit="원"></counter-number>
-                  </div>
-                  <div class="vstack gap-1 border-top pt-3 mt-1">
-                    <div class="d-flex justify-space-between" v-for="(item, i) in 3" :key="item.id">
-                      <div class="text--secondary text-caption">당좌자산</div>
-                      <div class="text-caption">45,305,562,865</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <h6 class="mt-5 text--secondary">전년도 손익계산서</h6>
-              <div class="hstack gap-3">
-                <div class="flex-grow-1 card pa-5" v-for="(item, i) in ['매출','비용','손익']" :key="item.id">
-                  <div class="d-flex justify-space-between">
-                    <div class="h5 flex-grow-0">{{ item }}</div>
-                    <counter-number value="45,305,562,865" unit="원"></counter-number>
-                  </div>
-                  <div class="vstack gap-1 border-top pt-3 mt-1">
-                    <div class="d-flex justify-space-between" v-for="(item, i) in 3" :key="item.id">
-                      <div class="text--secondary text-caption">당좌자산</div>
-                      <div class="text-caption">45,305,562,865</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <div class="container">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Accordion Item #1
+              </button>
             </div>
-
-            <div :id="item.id"></div>
-          </div>
-
-          <hr class="my-5">
-
-          <h5 class="mt-5">타임라인</h5>
-          <small class="text-secondary">업데이트 : 2022-09-26</small>
-
-          <h5>트래픽</h5>
-          <small class="text-secondary">업데이트 : 2022-09-26</small>
-
-
-          <ul class="list-unstyled text-secondary small">
-            <li>* 해당 데이터는 국내 사용량을 기준으로 PC, 모바일웹, 앱 데이터를 합산하여 추정한 값으로, 실제 서비스의 월간 활성 사용자수와 다를 수 있습니다.</li>
-            <li>* 서비스 특성에 따라 월별로 포함된 PC, 모바일웹, 앱 데이터가 상이할 수 있습니다.</li>
-            <li>출처:2개 이상의 글로벌 트래픽 분석기업으로부터 제공받은 데이터를 비교, 분석 후 제공합니다.</li>
-            <li>출처:직접제공 데이터(Google Analytics 등)는 해당 기업으로부터 제보받아 혁신의숲 검수가 완료된 트래픽 데이터를 의미합니다.</li>
-          </ul>
-
-          <hr class="my-5">
-
-          <div class="row row-cols-2">
-            <div class="col">
-              <h5>기술/특허</h5>
-              <small class="text-secondary">업데이트 : 2022-09-26</small>
-            </div>
-            <div class="col">
-              <h5>기술키워드</h5>
-              <small class="text-secondary">업데이트 : 2022-09-26</small>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div class="container">
+                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+              </div>
             </div>
           </div>
-
         </div>
-
-        <table class="table table-bordered- text-right">
-          <col class="text-left">
-          <col span="6">
-          <thead>
-          <tr>
-            <th>구분</th>
-            <th>2022-03</th>
-            <th>2022-04</th>
-            <th>2022-05</th>
-            <th>2022-06</th>
-            <th>2022-07</th>
-            <th>2022-08</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>소비자 거래지수</td>
-            <td>100</td>
-            <td>87.4</td>
-            <td>86.3</td>
-            <td>87</td>
-            <td>95.5</td>
-            <td>96.6</td>
-          </tr>
-          <tr>
-            <td>소비자 거래건수</td>
-            <td>4,648만</td>
-            <td>4,104.6만</td>
-            <td>4,007.2만</td>
-            <td>4,030.4만</td>
-            <td>4,350.8만</td>
-            <td>4,391만</td>
-          </tr>
-          <tr>
-            <td>평균 거래단가</td>
-            <td>2.4만원</td>
-            <td>2.4만원</td>
-            <td>2.5만원</td>
-            <td>2.5만원</td>
-            <td>2.5만원</td>
-            <td>2.5만원</td>
-          </tr>
-          </tbody>
-        </table>
-
-        <ul class="nav nav-tabs mt-10">
-          <li class="nav-item"
-              v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id" @click="active(i)">
-            <button class="nav-link rounded-0 text-capitalize" :class="tabs !== i || 'active'" :id="item">{{ item }}</button>
-          </li>
-        </ul>
-
-        <div class="tab-content">
-          <div class="tab-pane" :id="item" :class="tabs !== i || 'active'"
-               v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id">{{ i }}//{{ item }}</div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <div class="container">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                Accordion Item #2
+              </button>
+            </div>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div class="container">
+                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
+              </div>
+            </div>
+          </div>
         </div>
-
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingThree">
+            <div class="container">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                Accordion Item #3
+              </button>
+            </div>
+          </h2>
+          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div class="container">
+                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
       </section>
 
       <footers></footers>
     `,
     data() {
       return {
-        items: [
-          {title: '기업개요', id: 'chart'},
-          {title: '기술특허', id: 'chart-timeline2'},
-          {title: '소셜 분석', id: 'chart-gauge'},
-          {title: '소비자 거래분석', id: 'chart-pie'},
-          {title: '소비자 유형분석', id: 'chart-columnline'},
-          {title: '투자유치', id: 'chart-column'},
-          {title: '조직 분석', id: 'chart-bar'},
-          {title: '손익/재무', id: 'chart-bar'},
-          {title: '보도자료', id: 'chart-bar'},
-        ],
-        tabs: 0
       }
     },
     methods: {
       active(i) {
         this.tabs = i
-      }
+      },
+      toggle() {
+        this.hover = !this.hover
+      },
     },
   });
 
   app.mount("#app");
 
-
-  import chart from '/components/chartTimeline.js';
-  import chartBar from '/components/chartBar.js'
-  import chartColumn from '/components/chartColumn.js'
-  import chartColumnline from '/components/chartColumnline.js'
-  import chartGauge from '/components/chartGauge.js'
-  import chartPie from '/components/chartPie.js'
-  import lineChart from '/components/chartTimeline2.js'
-
-  chart();
-  chartGauge();
-  chartBar();
-  chartColumn();
-  chartColumnline();
-  chartPie();
-  lineChart();
-
 </script>
 <style>
-  .counter-ul .item ul {
-    font-size: 18px;
-    height: 18px;
-  }
-
-  header {
-    background: linear-gradient(90deg, #7530a6, #333295);
-  }
-
-  header .nav-link {
-    color: #fff;
-  }
-
-  header .nav-link.active {
-    background-color: #fff;
-    color: #272660;
+  .bg {
+    background: #fff url(https://images.unsplash.com/photo-1437209484568-e63b90a34f8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM4fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format) 50%/cover no-repeat;
+    height: calc(60vh - 55px);
   }
 </style>
 </body>

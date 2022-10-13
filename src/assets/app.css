@@ -7,3 +7,25 @@ body {
   font-family: 'NanumSquareNeo', sans-serif;
   font-size: 14px;
 }
+.bi {
+  background: linear-gradient(135deg,#fa00ff,#00e0ff 50%,#fa00ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200%;
+  color: #0000;
+}
+.accordion-button.collapsed {
+
+}
+.accordion-button:not(.collapsed) {
+  background-color: #fff;
+  color: #000;
+  box-shadow: none;
+}
+.accordion-header {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  margin-bottom: -1px;
+}
+.accordion-body .container {
+  padding: 0 30px;
+}
