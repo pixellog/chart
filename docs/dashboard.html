@@ -8,10 +8,10 @@
 </head>
 <body>
 <div id="app"></div>
-<script src="https://unpkg.com/vue@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
-<script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="//unpkg.com/vue@latest"></script>
+<script src="//cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
+<script src="//uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/debug.addIndicators.min.js"></script>
@@ -19,7 +19,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
 
 <script src="./assets/app.js"></script>
 <script type="module">
@@ -39,18 +39,13 @@
       <div>
       <navs></navs>
 
-      <button type="button" class="btn"
-              style="position: fixed; right: 0; top: 50vh; z-index: 100">
-        페이지 상단으로 이동하기
-      </button>
-
       <header class="position-sticky fixed-top" style="z-index: 10">
       <div class="container">
         <div class="row align-center pt-3">
           <div class="col-auto flex-grow-1">
             <h4 class="text-white font-weight-black">주식회사 고위드 (GOWID Inc)</h4>
 
-            <div class="white--text opacity-50 text-caption">
+            <div class="text-white opacity-50 text-caption">
               <div>
                 <span class="text-caption opacity-75 mr-3"
                       v-for="item in ['정보통신업','응용소프트웨어 개발 및 공급업']" :key="item.id">
@@ -68,12 +63,12 @@
           <div class="col-auto">
             <div class="row gap-3 pr-2 mt-2">
               <div class="col-auto opacity-75" v-for="item in 3" :key="item.id">
-                <div class="font-weight-black white--text">Runway {{ item }}</div>
+                <div class="font-weight-black text-white">Runway {{ item }}</div>
                 <div class="badge rounded-pill border mt-1">12Month</div>
               </div>
             </div>
 
-            <div class="white--text opacity-50 badge d-flex align-center justify-content-lg-end mt-3">
+            <div class="text-white opacity-50 badge d-flex align-center justify-content-lg-end mt-3">
               발급심사일시
               <i class="material-symbols-outlined body-1 ml-4 mr-1">schedule</i> 2022.10.15 13:45
             </div>
@@ -236,7 +231,12 @@
       </div>
 
       </section>
-
+      <a href="#app"
+              class="btn btn-outline-secondary rounded-0 box-shadow"
+              :class="scrollY >= 200 || 'd-none'"
+              style="position: fixed; right: 20px; top: 50vh; z-index: 100;">
+        <i class="material-symbols-outlined mt-1">north</i>
+      </a>
       <footers></footers>
       </div>
     `,
@@ -255,14 +255,13 @@
         ],
         tabs: 0,
         hover: false,
+        scrollY: 0
       }
     },
     mounted() {
-      // window.addEventListener('scroll', () => {
-      //   console.log(window.scrollY)
-      // })
       window.addEventListener('scroll', _.debounce(() => {
         console.log(window.scrollY)
+        return this.scrollY = window.scrollY;
       }, 50))
     },
     methods: {
@@ -317,6 +316,7 @@
   .card {
     transition: all .2s ease-in-out;
   }
+
   .card:hover {
     box-shadow: 0 35px 80px -20px rgb(0 0 10 / 5%), 0 30px 60px -30px rgb(0 0 0 / 15%);
   }
