@@ -1,4 +1,11 @@
 <template>
+  <a href="#app"
+     class="btn btn-outline-secondary rounded-0"
+     :class="scrollY >= 200 || 'd-none'"
+     style="position: fixed; right: 20px; top: 50vh; z-index: 100;">
+    <i class="material-symbols-outlined mt-1">north</i>
+  </a>
+
   <footer class="py-10 text-white text-caption" style="background-color: #272660;">
     <div class="container">
       <div class="row">
@@ -63,3 +70,20 @@
     </div>
   </footer>
 </template>
+
+<script>
+import _ from '//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js'
+export default {
+  data() {
+    return {
+      scrollY: 0
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', _.debounce(() => {
+      console.log(window.scrollY)
+      return this.scrollY = window.scrollY;
+    }, 50))
+  },
+}
+</script>

@@ -39,8 +39,8 @@
                style="background-image: url(https://images.unsplash.com/photo-1437209484568-e63b90a34f8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM4fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
             <div class="text-center w-50 text-white">
               <div class="display-4 font-weight-black">GOWID DATA</div>
-              <p class="mt-5 fs-4 font-weight-black">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
+              <p class="mt-5 fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="font-weight-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
             </div>
           </div>
 
@@ -50,8 +50,8 @@
                style="background-image: url(https://images.unsplash.com/photo-1466278313810-9aca9abea861?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
             <div class="text-center w-50 text-white">
               <div class="display-4 font-weight-black">GOWID DATA</div>
-              <p class="mt-5 fs-4 font-weight-black">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
+              <p class="mt-5 fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="font-weight-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
             </div>
           </div>
         </div>
@@ -60,8 +60,8 @@
                style="background-image: url(https://images.unsplash.com/photo-1478827121442-6450491fc0d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjY1fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
             <div class="text-center w-50 text-white">
               <div class="display-4 font-weight-black">GOWID DATA</div>
-              <p class="mt-5 fs-4 font-weight-black">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
+              <p class="mt-5 fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="font-weight-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@
 
       <section>
 
-      <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion accordion-flush ml-n8" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="flush-headingOne">
             <div class="container">
@@ -129,13 +129,17 @@
           </div>
         </div>
       </div>
+
+      <div class="container my-10">
+        <p v-for="item in 10" :key="item.id">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto ea, eius labore nesciunt perferendis placeat quas tempora veritatis. Delectus eaque harum incidunt laudantium mollitia rem sit voluptate. Eligendi!</p>
+      </div>
+
       </section>
 
       <footers></footers>
     `,
     data() {
-      return {
-      }
+      return {}
     },
     methods: {
       active(i) {
