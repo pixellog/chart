@@ -12,6 +12,15 @@
 <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
 <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/debug.addIndicators.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+
 <script src="./assets/app.js"></script>
 <script type="module">
   const app = Vue.createApp({
@@ -27,7 +36,13 @@
       ),
     },
     template: `
+      <div>
       <navs></navs>
+
+      <button type="button" class="btn"
+              style="position: fixed; right: 0; top: 50vh; z-index: 100">
+        페이지 상단으로 이동하기
+      </button>
 
       <header class="position-sticky fixed-top" style="z-index: 10">
       <div class="container">
@@ -97,7 +112,7 @@
                 <div class="flex-grow-1 card pa-5" v-for="(item, i) in ['자산','부채','자본']" :key="item.id">
                   <div class="d-flex justify-space-between">
                     <div class="h5 flex-grow-0">{{ item }}</div>
-                    <counter-number value="5562865" unit="원"></counter-number>
+                    <counter-number :value="5562865" unit="원"></counter-number>
                   </div>
                   <div class="vstack gap-1 border-top pt-3 mt-1">
                     <div class="d-flex justify-space-between" v-for="(item, i) in 3" :key="item.id">
@@ -114,7 +129,7 @@
                      v-for="(item, i) in ['매출','비용','손익']" :key="item.id">
                   <div class="d-flex justify-space-between">
                     <div class="h5 flex-grow-0">{{ item }}</div>
-                    <counter-number value="45305562865" unit="원"></counter-number>
+                    <counter-number :value="45305562865" unit="원"></counter-number>
                   </div>
                   <div class="vstack gap-1 border-top pt-3 mt-1">
                     <div class="d-flex justify-space-between" v-for="(item, i) in 6" :key="item.id">
@@ -148,7 +163,7 @@
 
           <hr class="my-5">
 
-          <div class="row row-cols-2">
+          <div class="row row-cols-2" id="pin1">
             <div class="col">
               <h5>기술/특허</h5>
               <small class="text-secondary">업데이트 : 2022-09-26</small>
@@ -223,6 +238,7 @@
       </section>
 
       <footers></footers>
+      </div>
     `,
     data() {
       return {
@@ -238,8 +254,16 @@
           {title: '보도자료', id: 'chart-bar'},
         ],
         tabs: 0,
-        hover: false
+        hover: false,
       }
+    },
+    mounted() {
+      // window.addEventListener('scroll', () => {
+      //   console.log(window.scrollY)
+      // })
+      window.addEventListener('scroll', _.debounce(() => {
+        console.log(window.scrollY)
+      }, 50))
     },
     methods: {
       active(i) {
@@ -290,6 +314,9 @@
     color: #272660;
   }
 
+  .card {
+    transition: all .2s ease-in-out;
+  }
   .card:hover {
     box-shadow: 0 35px 80px -20px rgb(0 0 10 / 5%), 0 30px 60px -30px rgb(0 0 0 / 15%);
   }
