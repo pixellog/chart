@@ -35,8 +35,12 @@ body {
   font-size: 16px;
 }
 
-.btn-primary {
-  background-color: #6E45E4;
+.btn-primary, .bg-primary {
+  background-color: #6E45E4 !important;
+}
+
+.text-primary {
+  color: #6E45E4 !important;
 }
 
 .bi {
@@ -98,6 +102,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .counter-number {
 
 .icon-sm {
   font-size: 18px;
+}
+
+.material-symbols-outlined {
+  /*font-size: 20px;*/
+  font-weight: 300;
 }
 
 .text-left {

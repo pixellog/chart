@@ -73,11 +73,11 @@
             </tbody>
           </table>
 
-          <span class="material-symbols-outlined"
+          <i class="material-symbols-outlined"
                 data-bs-toggle="tooltip" data-bs-placement="top"
                 data-bs-custom-class="custom-tooltip"
                 data-bs-title="This top tooltip is themed via CSS variables."
-          >info</span>
+          >info</i>
 
           <button type="button" class="btn btn-secondary"
                   data-bs-toggle="tooltip" data-bs-placement="top"
@@ -132,12 +132,7 @@
 
   app.mount("#app");
 
-  // 부트스트랩 툴팁 활성화
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-  import dayjs from 'https://cdn.skypack.dev/dayjs@1.10.7'; // ES Modules
-  console.log(dayjs('2019-01-25').format('YYYY-MM-DDTHH:mm:ssZ[Z]'));
 </script>
 
 </body>

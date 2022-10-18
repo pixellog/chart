@@ -91,4 +91,8 @@ export default {
     }, 50))
   },
 }
+
+// 부트스트랩 툴팁 활성화
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>

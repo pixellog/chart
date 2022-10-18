@@ -33,7 +33,7 @@
                     <h6 class="mb-1">김항기</h6>
                     <div class="text-secondary text-opacity-50">until99@gowid.com</div>
                     <div class="d-flex align-center mt-2">
-                      <i class="material-symbols-outlined font-weight-light icon-sm">settings</i>
+                      <i class="material-symbols-outlined font-weight-light">settings</i>
                       <a href="#none" class="ml-1 nav-link text-decoration-underline">프로필 변경하기</a>
                     </div>
                   </div>
