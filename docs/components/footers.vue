@@ -17,18 +17,22 @@
           <div class="hstack gap-2 lh-1">
             주식회사 고위드
             <div class="vr"/>
-            대표이사 : 김항기
+            대표이사 김항기
             <div class="vr"/>
-            사업자등록번호 : 261-81-25793
+            사업자등록번호 261-81-25793
             <div class="vr"/>
-            통신판매업신고 : 제 2020-서울강남-01863호
-            대표전화 : 02-6105-8101
-            <div class="vr"/>
-            이메일 : support@gowid.com
+            통신판매업신고 제 2020-서울강남-01863호
           </div>
-          서울특별시 강남구 도산대로 317, 14층 (신사동, 호림아트센터 1빌딩)
+          <div class="hstack gap-2 lh-1 mt-3">
+            대표전화 02-6105-8101
+            <div class="vr"/>
+            이메일 support@gowid.com
+          </div>
+          <div class="mt-2">
+            서울특별시 강남구 도산대로 317, 14층 (신사동, 호림아트센터 1빌딩)
+          </div>
 
-          <div class="d-flex mt-3">
+          <div class="d-flex mt-4">
             <div class="hstack gap-3 lh-1">
               <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보 처리방침</a>
               <div class="vr"/>
@@ -42,7 +46,7 @@
                     <h1 class="modal-title fs-5">개인정보 처리방침</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body text--secondary">
+                  <div class="modal-body ">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi, atque corporis cumque dicta eos error facere ipsam minima officiis provident saepe sapiente voluptatem voluptates voluptatibus. Dignissimos minus quaerat unde!</p>
                   </div>
                 </div>
@@ -57,7 +61,7 @@
                     <h1 class="modal-title fs-5">고위드 통합서비스 이용약관</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body text--secondary">
+                  <div class="modal-body ">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi, atque corporis cumque dicta eos error facere ipsam minima officiis provident saepe sapiente voluptatem voluptates voluptatibus. Dignissimos minus quaerat unde!</p>
                   </div>
                 </div>
@@ -73,6 +77,7 @@
 
 <script>
 import _ from '//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js'
+
 export default {
   data() {
     return {
@@ -81,7 +86,7 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', _.debounce(() => {
-      console.log(window.scrollY)
+      //console.log(window.scrollY)
       return this.scrollY = window.scrollY;
     }, 50))
   },

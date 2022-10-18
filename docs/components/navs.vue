@@ -2,35 +2,45 @@
   <div class="navbar">
     <div class="container">
       <div class="d-flex justify-content-between align-center w-100">
-        <a href="./" class="font-weight-black nav-link fs-4 text-decoration-none bi">RNB</a>
-        <div class="hstack gap-3">
-          <a class="link-secondary text-decoration-none" href="./dashboard.html">대시보드</a>
-          <a class="link-secondary text-decoration-none" href="./guide.html">이력검색</a>
-          <a class="link-secondary text-decoration-none" href="./">설정</a>
-
-          <button class="btn rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-            <span class="material-symbols-outlined lh-base">menu</span>
-          </button>
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <a href="/guide.html">가이드</a>
-            </div>
-          </div>
+        <a href="./" class="font-weight-black nav-link fs-4 text-decoration-none bi">
+          <img src="/assets/img/bi.svg" alt="GDS"/>
+        </a>
+        <div class="hstack gap-4">
+          <a v-for="(item,i) in navs" :key="item.id"
+             :href="item.to"
+             :class="!item.to.match(path) || 'active'"
+             class="nav-link position-relative">
+            {{ item.title }}
+            <span v-if="item.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ item.length }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </a>
 
           <div class="dropdown">
             <a href="#none" data-bs-toggle="dropdown" aria-expanded="false">
               <img class="rounded-pill"
-                   src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfDB8MHx8&auto=format&fit=crop&w=36&h=36"/>
+                   :src="userImg+'&w=36&h=36'"/>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end text-caption">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Logout</a></li>
-            </ul>
+
+            <div class="dropdown-menu dropdown-menu-end text-caption pb-0 mt-1">
+              <div class="card border-0">
+                <div class="d-flex pa-4 pr-5">
+                  <div>
+                    <img class="rounded-pill" :src="userImg+'&w=42&h=42'"/>
+                  </div>
+                  <div class="ml-3">
+                    <h6 class="mb-1">김항기</h6>
+                    <div class="text-secondary text-opacity-50">until99@gowid.com</div>
+                    <div class="d-flex align-center mt-2">
+                      <i class="material-symbols-outlined font-weight-light icon-sm">settings</i>
+                      <a href="#none" class="ml-1 nav-link text-decoration-underline">프로필 변경하기</a>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="card-footer btn btn-primary mb-0 text-white">로그아웃</button>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -38,3 +48,40 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      userImg: userImg,
+      path: path,
+      navs: [
+        {title: '로그인', to: './login.html', length: 0},
+        {title: '데이터룸', to: './dataroom.html', length: 0},
+        {title: '신규기업', to: './dashboard.html', length: 99},
+        {title: '업데이트', to: './guide.html', length: 189},
+      ]
+    }
+  },
+  mounted() {
+    console.log(this.path)
+  }
+}
+
+</script>
+
+<style>
+.navbar .nav-link {
+  padding: 5px 0;
+  border-bottom: 3px solid transparent;
+}
+
+.navbar .nav-link:hover {
+  color: #622B9A;
+}
+
+.navbar .nav-link.active {
+  color: #622B9A;
+  border-color: #622B9A;
+}
+</style>

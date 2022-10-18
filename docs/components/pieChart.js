@@ -1,32 +1,28 @@
-export default function pieChart() {
+// 주주현황
+export function pieChartStock() {
 // https://toastui-chart4.netlify.app/?path=/story/chart-columnline--secondary-y-axis
-  const el = document.getElementById('chart-pie');
   const data = {
     categories: ['Browser'],
     series: [
       {
-        name: 'Chrome',
-        data: 46.02,
+        name: '김항기 외2',
+        data: 43,
       },
       {
-        name: 'IE',
-        data: 20.47,
+        name: 'DSC투자자문',
+        data: 12,
       },
       {
-        name: 'Firefox',
-        data: 17.71,
+        name: '카카오',
+        data: 12,
       },
       {
-        name: 'Safari',
-        data: 5.45,
+        name: '인베스트',
+        data: 13,
       },
       {
-        name: 'Opera',
-        data: 3.1,
-      },
-      {
-        name: 'Etc',
-        data: 7.25,
+        name: '신한벤처투자',
+        data: 22,
       },
     ],
   };
@@ -49,5 +45,6 @@ export default function pieChart() {
   };
 
   const chart = toastui.Chart;
+  const el = document.getElementById('stock');
   chart.pieChart({el, data, options});
 }

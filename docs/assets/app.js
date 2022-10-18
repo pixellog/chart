@@ -19,3 +19,6 @@ const options = {
 };
 
 const {loadModule, version} = window["vue3-sfc-loader"];
+
+const userImg = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfDB8MHx8&auto=format&fit=crop'
+const path = window.location.pathname;

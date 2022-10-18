@@ -26,6 +26,13 @@ export default function columnChart() {
     legend: {
       align: 'bottom',
     },
+    theme: {
+      plot: {
+        horizontal: {
+          lineColor: 'rgba(0, 0, 0, 0)',
+        },
+      },
+    },
     xAxis: { // https://github.com/nhn/tui.chart/blob/main/docs/ko/common-axes.md
       pointOnColumn: false,
       label: {
@@ -34,13 +41,13 @@ export default function columnChart() {
         },
       },
       title: {
-        text: '업데이트 : 2022-09-26',
+        // text: '업데이트 : 2022-09-26',
         offsetX: 0,
         offsetY: 0,
       }
     },
     yAxis: [
-      {title: 'Temperature (Celsius)'},
+      // {title: 'Temperature (Celsius)'},
       {
         title: 'Percent (%)',
       },
