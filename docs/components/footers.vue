@@ -38,35 +38,12 @@
               <div class="vr"/>
               <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#serviceModal">고위드 통합서비스 이용약관</a>
             </div>
-            <!-- privacyModal -->
-            <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header black--text border-0">
-                    <h1 class="modal-title fs-5">개인정보 처리방침</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body ">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi, atque corporis cumque dicta eos error facere ipsam minima officiis provident saepe sapiente voluptatem voluptates voluptatibus. Dignissimos minus quaerat unde!</p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <!-- serviceModal -->
-            <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header black--text border-0">
-                    <h1 class="modal-title fs-5">고위드 통합서비스 이용약관</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body ">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi, atque corporis cumque dicta eos error facere ipsam minima officiis provident saepe sapiente voluptatem voluptates voluptatibus. Dignissimos minus quaerat unde!</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <terms1></terms1>
+            <terms2></terms2>
+
+
+
 
           </div>
         </div>
@@ -77,8 +54,14 @@
 
 <script>
 import _ from '//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js'
+import terms1 from "./terms1.vue";
+import terms2 from "./terms2.vue";
 
 export default {
+  components:{
+    terms1,
+    terms2
+  },
   data() {
     return {
       scrollY: 0
