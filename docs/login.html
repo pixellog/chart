@@ -21,6 +21,9 @@
       ),
       "footers": Vue.defineAsyncComponent(() =>
         loadModule("./components/footers.vue", options)
+      ),
+      "findId": Vue.defineAsyncComponent(() =>
+        loadModule("./components/findId.vue", options)
       )
     },
     template: `
@@ -38,9 +41,10 @@
       <div class="d-flex justify-space-between mt-5">
       <div class=""><input type="checkbox"> 보안접속</div>
       <div>
-        <a href="#none" class="link-secondary">아이디 찾기</a>
+        <a href="#none" class="link-secondary" data-bs-toggle="modal" data-bs-target="#findIdModal">아이디 찾기</a>
+        <find-id></find-id>
         <div class="vr mx-4"/>
-        <a href="#none" class="link-secondary">비밀번호 찾기</a>
+        <a href="#none" class="link-secondary" data-bs-toggle="modal" data-bs-target="#privacyModal">비밀번호 찾기</a>
       </div>
       </div>
             <a href="./dataroom.html" class="btn btn-primary w-100 btn-lg mt-5">로그인</a>
@@ -66,6 +70,7 @@
   .navbar .hstack.gap-4 {
     display: none;
   }
+
   .card {
     border: 1px solid #DBDBDB;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.04);

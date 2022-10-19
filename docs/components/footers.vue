@@ -42,9 +42,6 @@
             <terms1></terms1>
             <terms2></terms2>
 
-
-
-
           </div>
         </div>
       </div>
@@ -58,7 +55,7 @@ import terms1 from "./terms1.vue";
 import terms2 from "./terms2.vue";
 
 export default {
-  components:{
+  components: {
     terms1,
     terms2
   },

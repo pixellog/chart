@@ -14,7 +14,7 @@ const options = {
     document.head.insertBefore(style, ref);
   },
   log(type, ...args) {
-    console.log(type, ...args);
+    // console.log(type, ...args);
   },
 };
 
