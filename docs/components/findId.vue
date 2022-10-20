@@ -3,10 +3,6 @@
   <div class="modal fade" id="findIdModal" tabindex="-1" aria-labelledby="findIdModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-scrollable modal-dialog-centered">
       <div class="modal-content">
-        <!--        <div class="modal-header">-->
-        <!--          <h1 class="modal-title fs-5">개인정보 처리방침</h1>-->
-        <!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-        <!--        </div>-->
         <div class="modal-body text-secondary pa-15">
 
           <div v-if="show">
@@ -15,7 +11,9 @@
             <input type="text" class="form-control" placeholder="이름">
             <input type="mail" class="form-control mt-3" placeholder="이메일">
 
-            <button type="button" @click="show=!show" class="btn btn-primary w-100 btn-lg mt-5">확인</button>
+            <button type="button" @click="show=!show"
+                    class="btn btn-primary w-100 btn-lg mt-5">확인
+            </button>
           </div>
           <div v-else>
             <h5>고객님의 계정을 찾았습니다.</h5>
@@ -29,12 +27,14 @@
               </div>
               <div class="ml-3">
                 <h6 class="mb-1">pixel***</h6>
-                <div class="text-secondary text-opacity-50">가입일 2022.06.12</div>
+                <div class="text-secondary text-opacity-75">가입일 2022.06.12</div>
               </div>
             </div>
 
-            <a data-bs-toggle="modal" data-bs-target="#findIdModal"
-               href="#none" class="btn btn-primary w-100 btn-lg mt-5">확인</a>
+            <button type="button" @click="show=!show"
+                    data-bs-toggle="modal" data-bs-target="#findIdModal"
+                    class="btn btn-primary w-100 btn-lg mt-5">확인
+            </button>
           </div>
 
         </div>
