@@ -1,8 +1,8 @@
 {
-  "name": "goodbye-webpack-building-vue-applications-without-webpack",
+  "name": "chart",
   "version": "0.1.0",
-  "author": "Markus Oberlehner",
-  "homepage": "https://github.com/maoberlehner/goodbye-webpack-building-vue-applications-without-webpack",
+  "author": "lee okhee",
+  "homepage": "https://github.com/pixellog/chart",
   "license": "MIT",
   "private": true,
   "scripts": {

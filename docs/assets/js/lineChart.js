@@ -1,5 +1,5 @@
 // 타임라인
-export function lineChartTimeline() {
+function lineChartTimeline() {
   const data = {
     categories: [
       '2019-11',
@@ -125,7 +125,7 @@ export function lineChartTimeline() {
   chart.lineChart({el, data, options});
 }
 // 직전년도 현금보유.입출금 현황
-export function lineChartPrevious() {
+function lineChartPrevious() {
   const data = {
     categories: [
       '2019-11',
@@ -251,7 +251,7 @@ export function lineChartPrevious() {
   chart.lineChart({el, data, options});
 }
 // 당해년도 현금 보유 현황
-export function lineChartCurrently() {
+function lineChartCurrently() {
   const data = {
     categories: [
       '2019-11',
@@ -377,7 +377,7 @@ export function lineChartCurrently() {
   chart.lineChart({el, data, options});
 }
 // 런웨이
-export function lineChartRunway() {
+function lineChartRunway() {
   const data = {
     categories: [
       '2019-11',
@@ -503,7 +503,7 @@ export function lineChartRunway() {
   chart.lineChart({el, data, options});
 }
 // 고용.인건비.생산성 현황
-export function lineChartProductivity() {
+function lineChartProductivity() {
   const data = {
     categories: [
       '01/01/2020',

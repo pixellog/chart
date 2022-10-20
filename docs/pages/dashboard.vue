@@ -1,5 +1,7 @@
 <template>
   <div>
+    <navs></navs>
+
     <header class="position-sticky fixed-top" style="z-index: 10">
       <div class="container py-6">
         <div class="row align-center">
@@ -203,20 +205,22 @@
       </div>
 
     </section>
+
+    <footers></footers>
   </div>
 </template>
 
-<script type="module">
-import CounterNumber from "./counterNumber.vue";
-import {lineChartTimeline, lineChartPrevious, lineChartCurrently, lineChartRunway, lineChartProductivity} from './lineChart.js';
-import {pieChartStock} from './pieChart.js';
-import {columnChartProfit, columnChartCash} from './columnChart.js';
+<script>
+import navs from "../components/navs.vue";
+import footers from "../components/footers.vue";
+import CounterNumber from "../components/counterNumber.vue";
 
-const userImg = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfDB8MHx8&auto=format&fit=crop'
-const path = window.location.pathname;
 export default {
-  name: "dashboard",
-  components: {CounterNumber},
+  components: {
+    navs,
+    footers,
+    CounterNumber,
+  },
   data() {
     return {
       btnradio: 0,
@@ -240,14 +244,11 @@ export default {
     }
   },
   mounted() {
-    console.log(999)
-// 타임라인
     lineChartTimeline();
-// // 고용.인건비.생산성 현황
-    lineChartProductivity();
-    lineChartPrevious();
-    lineChartCurrently();
-    lineChartRunway();
+    lineChartPrevious()
+    lineChartCurrently()
+    lineChartRunway()
+    lineChartProductivity()
     pieChartStock();
     columnChartProfit();
     columnChartCash();

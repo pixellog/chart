@@ -2,20 +2,15 @@
   <div class="navbar">
     <div class="container">
       <div class="d-flex justify-content-between align-center w-100">
-        <a href="./" class="font-weight-black nav-link fs-4 text-decoration-none bi">
+        <router-link to="./" class="font-weight-black nav-link fs-4 text-decoration-none bi">
           <img src="/assets/img/bi.svg" alt="GDS"/>
-        </a>
+        </router-link>
         <div class="hstack gap-4">
-          <a v-for="(item,i) in navs" :key="item.id"
-             :href="item.to"
-             :class="!item.to.match(path) || 'active'"
-             class="nav-link position-relative">
+          <router-link v-for="(item,i) in navs" :key="item.id"
+             :to="item.to"
+             class="nav-link">
             {{ item.title }}
-            <span v-if="item.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ item.length }}
-              <span class="visually-hidden">unread messages</span>
-            </span>
-          </a>
+          </router-link>
 
           <div class="dropdown">
             <a href="#none" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,15 +51,14 @@ export default {
       userImg: userImg,
       path: path,
       navs: [
-        {title: '로그인', to: './login.html', length: 0},
-        {title: '데이터룸', to: './dataroom.html', length: 0},
-        {title: '신규기업', to: './dashboard.html', length: 99},
-        {title: '업데이트', to: './guide.html', length: 189},
+        {title: '로그인', to: '/login'},
+        {title: '데이터룸', to: '/dataroom'},
+        {title: '대시보드', to: '/dashboard'},
       ]
     }
   },
   mounted() {
-    // console.log(this.path)
+    // console.log(routes)
   }
 }
 
@@ -74,14 +68,5 @@ export default {
 .navbar .nav-link {
   padding: 5px 0;
   border-bottom: 3px solid transparent;
-}
-
-.navbar .nav-link:hover {
-  color: #622B9A;
-}
-
-.navbar .nav-link.active {
-  color: #622B9A;
-  border-color: #622B9A;
 }
 </style>

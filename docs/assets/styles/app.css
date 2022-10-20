@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 @import url(https://uicdn.toast.com/chart/latest/toastui-chart.min.css);
 @import url(https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css);
-@import url(./hds.css);
+@import url(hds.css);
 
 body {
   font-family: 'NanumSquareNeo', sans-serif;
