@@ -3,7 +3,7 @@
     <div class="container">
       <div class="d-flex justify-content-between align-center w-100">
         <a href="./" class="font-weight-black nav-link fs-4 text-decoration-none bi">
-          <img src="/assets/img/bi.svg" alt="GDS"/>
+          <img src="assets/bi.svg" alt="GDS"/>
         </a>
 
         <div class="d-flex align-center">
