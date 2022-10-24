@@ -1,12 +1,10 @@
 <template>
-<!--
-  <router-link
+  <a href="#app"
      class="btn btn-outline-secondary rounded-0"
      :class="scrollY >= 200 || 'd-none'"
      style="position: fixed; right: 20px; top: 50vh; z-index: 100;">
     <i class="material-symbols-outlined mt-1">north</i>
-  </router-link>
--->
+  </a>
 
   <footer class="py-10 text-white text-caption" style="background-color: #272660;">
     <div class="container">
@@ -52,7 +50,7 @@
 </template>
 
 <script>
-// import _ from '//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js'
+import _ from '//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js'
 import terms1 from "./terms1.vue";
 import terms2 from "./terms2.vue";
 
@@ -67,12 +65,14 @@ export default {
     }
   },
   mounted() {
-   /* window.addEventListener('scroll', _.debounce(() => {
+    window.addEventListener('scroll', _.debounce(() => {
       //console.log(window.scrollY)
       return this.scrollY = window.scrollY;
-    }, 50))*/
+    }, 50))
   },
 }
 
-
+// 부트스트랩 툴팁 활성화
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>

@@ -1,5 +1,5 @@
 // 주주현황
-function pieChartStock() {
+export function pieChartStock() {
 // https://toastui-chart4.netlify.app/?path=/story/chart-columnline--secondary-y-axis
   const data = {
     categories: ['Browser'],

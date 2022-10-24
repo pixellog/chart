@@ -1,7 +1,5 @@
 <template>
   <div>
-    <navs></navs>
-
     <header class="position-sticky fixed-top" style="z-index: 10">
       <div class="container py-6">
         <div class="row align-center">
@@ -24,6 +22,9 @@
                 <span>서울특별시 강남구 도산대로 317, 14층(신사동, 호림아트센터 1빌딩)</span>
               </div>
             </div>
+          </div>
+          <div class="col-auto text-right text-white">
+            정보수집일 : 2022.11.21
           </div>
         </div>
 
@@ -205,22 +206,20 @@
       </div>
 
     </section>
-
-    <footers></footers>
   </div>
 </template>
 
-<script>
-import navs from "../components/navs.vue";
-import footers from "../components/footers.vue";
-import CounterNumber from "../components/counterNumber.vue";
+<script type="module">
+import CounterNumber from "./counterNumber.vue";
+import {lineChartTimeline, lineChartPrevious, lineChartCurrently, lineChartRunway, lineChartProductivity} from './lineChart.js';
+import {pieChartStock} from './pieChart.js';
+import {columnChartProfit, columnChartCash} from './columnChart.js';
 
+const userImg = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfDB8MHx8&auto=format&fit=crop'
+const path = window.location.pathname;
 export default {
-  components: {
-    navs,
-    footers,
-    CounterNumber,
-  },
+  name: "dashboard",
+  components: {CounterNumber},
   data() {
     return {
       btnradio: 0,
@@ -232,24 +231,26 @@ export default {
         {title: '투자 현황', id: 'invest'},
         {title: '주주 현황', id: 'stock'},
         {title: '재무 현황', id: 'finance'},
-        // {title: '직전년도 현금보유.입출금 현황', id: 'previous'},
+        {title: '직전년도 현금보유.입출금 현황', id: 'previous'},
         {title: '당해년도 현금 보유 현황', id: 'currently'},
         {title: '매출.지출.손익 현황', id: 'profit'},
         {title: 'Cash In/Out', id: 'cash'},
         {title: '런웨이', id: 'runway'},
         {title: '자회사 현황', id: 'subsidiary'},
-        {title: '이상거래내역', id: 'subsidiary'},
       ],
       tabs: 0,
       hover: false,
     }
   },
   mounted() {
+    console.log(999)
+// 타임라인
     lineChartTimeline();
-    lineChartPrevious()
-    lineChartCurrently()
-    lineChartRunway()
-    lineChartProductivity()
+// // 고용.인건비.생산성 현황
+    lineChartProductivity();
+    lineChartPrevious();
+    lineChartCurrently();
+    lineChartRunway();
     pieChartStock();
     columnChartProfit();
     columnChartCash();

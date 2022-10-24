@@ -1,4 +1,4 @@
-function columnChartProfit() {
+export function columnChartProfit() {
 // https://toastui-chart4.netlify.app/?path=/story/chart-column-general--positive-and-negative
 
   const data = {
@@ -41,7 +41,7 @@ function columnChartProfit() {
   chart.columnChart({el, data, options});
 }
 
-function columnChartCash() {
+export function columnChartCash() {
 // https://toastui-chart4.netlify.app/?path=/story/chart-column-general--positive-and-negative
   const data = {
     categories: ['2022.1', '2022.2', '2022.3', '2022.4', '2022.5', '2022.6', '2022.7', '2022.8', '2022.9', '2022.10'],

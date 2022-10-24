@@ -23,7 +23,7 @@
 
             </div>
 
-            <router-link to="/dataroom" class="btn btn-primary w-100 btn-lg mt-10">로그인</router-link>
+            <a href="./dataroom.html" class="btn btn-primary w-100 btn-lg mt-5">로그인</a>
 
           </div>
         </div>
@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import navs from "../components/navs.vue";
-import footers from "../components/footers.vue";
-import findId from "../components/findId.vue";
-import findPassword from "../components/findPassword.vue";
+import navs from "./navs.vue";
+import footers from "./footers.vue";
+import findId from "./findId.vue";
+import findPassword from "./findPassword.vue";
 
 export default {
   components: {
@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      show: true,
+      show: true
     }
   },
 }

@@ -2,15 +2,23 @@
   <div class="navbar">
     <div class="container">
       <div class="d-flex justify-content-between align-center w-100">
-        <router-link to="./" class="font-weight-black nav-link fs-4 text-decoration-none bi">
+        <a href="./" class="font-weight-black nav-link fs-4 text-decoration-none bi">
           <img src="/assets/img/bi.svg" alt="GDS"/>
-        </router-link>
-        <div class="hstack gap-4">
-          <router-link v-for="(item,i) in navs" :key="item.id"
-             :to="item.to"
-             class="nav-link">
+        </a>
+
+        <a v-if="path == '/login.html' || path == '/'" class="nav-link d-flex align-center" href="./login.html"><i class="material-symbols-outlined mr-2">lock</i>LOGIN</a>
+
+        <div v-else class="hstack gap-4">
+          <a v-for="(item,i) in navs" :key="item.id"
+             :href="item.to"
+             :class="!item.to.match(path) || 'active'"
+             class="nav-link position-relative">
             {{ item.title }}
-          </router-link>
+            <span v-if="item.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ item.length }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </a>
 
           <div class="dropdown">
             <a href="#none" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,14 +34,14 @@
                   </div>
                   <div class="ml-3">
                     <h6 class="mb-1">김항기</h6>
-                    <div class="text-secondary text-opacity-50">until99@gowid.com</div>
+                    <div class="text-secondary">until99@gowid.com</div>
                     <div class="d-flex align-center mt-2">
-                      <i class="material-symbols-outlined font-weight-light">settings</i>
+                      <i class="material-symbols-outlined font-weight-light icon-sm">settings</i>
                       <a href="#none" class="ml-1 nav-link text-decoration-underline">프로필 변경하기</a>
                     </div>
                   </div>
                 </div>
-                <button type="button" class="card-footer btn btn-primary mb-0 text-white">로그아웃</button>
+                <a href="/login.html" class="card-footer btn btn-primary mb-0 text-white">로그아웃</a>
               </div>
             </div>
           </div>
@@ -51,14 +59,15 @@ export default {
       userImg: userImg,
       path: path,
       navs: [
-        {title: '로그인', to: '/login'},
-        {title: '데이터룸', to: '/dataroom'},
-        {title: '대시보드', to: '/dashboard'},
+        // {title: '로그인', to: './login.html', length: 0},
+        // {title: '데이터룸', to: './dataroom.html', length: 0},
+        // {title: '신규기업', to: './dashboard.html', length: 99},
+        // {title: '업데이트', to: './guide.html', length: 189},
       ]
     }
   },
   mounted() {
-    // console.log(routes)
+    // console.log(this.path)
   }
 }
 
@@ -68,5 +77,14 @@ export default {
 .navbar .nav-link {
   padding: 5px 0;
   border-bottom: 3px solid transparent;
+}
+
+.navbar .nav-link:hover {
+  color: #622B9A;
+}
+
+.navbar .nav-link.active {
+  color: #622B9A;
+  border-color: #622B9A;
 }
 </style>
