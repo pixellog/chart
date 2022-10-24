@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="col-auto text-right text-white">
-            정보수집일 : 2022.11.21
+            정보수집일 : 2022.10.24
           </div>
         </div>
 
@@ -57,7 +57,7 @@
                   <h5 class="ma-0">{{ item.title }}</h5>
                   <div class="ml-3 d-flex align-center">
                     <i class="material-symbols-outlined mr-1">schedule</i> Update
-                    <div class="ml-2">2022.03.15</div>
+                    <div class="ml-2">2022.10.24</div>
                   </div>
                 </div>
                 <div class="d-flex align-center">
