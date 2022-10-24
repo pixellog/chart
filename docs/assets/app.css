@@ -106,7 +106,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .counter-number {
 }
 
 .material-symbols-outlined {
-  /*font-size: 20px;*/
   font-weight: 300;
 }
 
@@ -116,4 +115,21 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .counter-number {
 
 .text-right {
   text-align: right !important;
+}
+.badge {
+  font-weight: 300;
+}
+.bg-danger {
+  background-color: #FF2E00 !important;
+}
+.bg-primary {
+  background-color: #6E4CE1 !important;
+}
+.btn-outline-primary, .btn-outline-primary:hover {
+  border-color: #6E4CE1 !important;
+  color: #6E4CE1 !important;
+}
+.btn-outline-primary:hover, .btn-outline-primary:active {
+  background-color: #6E4CE1 !important;
+  color: #fff!important;
 }

@@ -24,6 +24,8 @@
             </div>
 
             <a href="./dataroom.html" class="btn btn-primary w-100 btn-lg mt-5">로그인</a>
+            <a href="#none" data-bs-toggle="modal" data-bs-target="#joinModal" class="btn btn-outline-primary w-100 btn-lg mt-3">회원가입</a>
+            <join></join>
 
           </div>
         </div>
@@ -39,13 +41,15 @@ import navs from "./navs.vue";
 import footers from "./footers.vue";
 import findId from "./findId.vue";
 import findPassword from "./findPassword.vue";
+import join from "./join.vue";
 
 export default {
   components: {
     navs,
     footers,
     findId,
-    findPassword
+    findPassword,
+    join
   },
   data() {
     return {
