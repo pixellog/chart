@@ -3,26 +3,26 @@
   <div class="modal fade" id="findIdModal" tabindex="-1" aria-labelledby="findIdModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-scrollable modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-body text-secondary pa-15">
+        <div class="modal-body pa-15">
 
-          <div v-if="step1">
-            <h3 class="mb-10 text-center">아이디 찾기</h3>
+          <div v-if="step">
+            <h3 class="text-center">아이디 찾기</h3>
 
-            <input type="text" class="form-control" placeholder="이름">
+            <input type="text" class="form-control mt-8" placeholder="이름">
             <input type="mail" class="form-control mt-3" placeholder="이메일">
 
-            <button @click="step1=false; step2=true"
-                    type="button" class="btn btn-primary w-100 btn-lg mt-5">확인
+            <button @click="step=!step"
+                    type="button" class="btn btn-primary btn-lg w-100 mt-8">확인
             </button>
           </div>
 
-          <div v-else-if="step2">
+          <div v-else>
             <h5>고객님의 계정을 찾았습니다.</h5>
             <p>아이디 확인 후 로그인해 주세요.</p>
 
             <hr>
 
-            <div class="d-flex pa-4 pr-5">
+            <div class="d-flex py-2">
               <div>
                 <img class="rounded-pill" :src="userImg+'&w=42&h=42'"/>
               </div>
@@ -32,10 +32,8 @@
               </div>
             </div>
 
-            <button @click="step2=false"
-                    data-bs-toggle="modal" data-bs-target="#findIdModal"
-                    type="button"
-                    class="btn btn-primary w-100 btn-lg mt-5">확인
+            <button data-bs-dismiss="modal" type="button"
+                    class="btn btn-primary btn-lg w-100 mt-5">확인
             </button>
           </div>
 
@@ -49,14 +47,18 @@
 export default {
   data() {
     return {
-      step1: true,
-      step2: !true,
+      step: true,
       userImg: userImg,
     }
+  },
+  mounted() {
+    const myModalEl = document.getElementById('findIdModal')
+    myModalEl.addEventListener('hidden.bs.modal', event => {
+      this.step = true
+    })
+  },
+  methods: {
   },
 }
 </script>
 
-<style scoped>
-
-</style>

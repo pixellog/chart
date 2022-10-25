@@ -2,12 +2,12 @@
   <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-scrollable modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-body text-secondary pa-15">
+        <div class="modal-body pa-15">
 
           <div v-if="step1">
-            <h3 class="mb-10 text-center">회원가입</h3>
+            <h3 class="text-center">회원가입</h3>
 
-            <input type="mail" class="form-control mt-3" placeholder="이메일">
+            <input type="mail" class="form-control mt-8" placeholder="이메일">
 
             <div class="mt-3">
               <input type="checkbox" class="mr-2">
@@ -16,7 +16,7 @@
             </div>
 
             <button type="button" @click="step1=false; step2=true"
-                    class="btn btn-primary w-100 btn-lg mt-10">확인
+                    class="btn btn-primary w-100 btn-lg mt-8">확인
             </button>
           </div>
           <div v-else-if="step2">
@@ -40,13 +40,13 @@
           </div>
 
           <div v-else-if="step4">
-            <h3 class="mb-10 text-center">비밀번호 재설정</h3>
+            <h3 class="text-center">비밀번호 재설정</h3>
 
-            인
+            <input type="password" class="form-control mt-8" placeholder="새 비밀번호 입력">
+            <input type="password" class="form-control mt-3" placeholder="새 비밀번호 확인">
 
-            <button type="button" @click="step4=false; initStep"
-                    data-bs-toggle="modal" data-bs-target="#joinModal"
-                    class="btn btn-primary w-100 btn-lg mt-10">확인
+            <button data-bs-dismiss="modal" type="button"
+                    class="btn btn-primary btn-lg w-100 mt-8">확인
             </button>
           </div>
 

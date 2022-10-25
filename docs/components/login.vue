@@ -9,9 +9,9 @@
           <div class="card-body pa-15">
             <h3 class="mb-10 text-center">로그인</h3>
             <input type="mail" class="form-control" placeholder="이메일">
-            <input type="password" class="form-control mt-5" placeholder="비밀번호">
+            <input type="password" class="form-control mt-3" placeholder="비밀번호">
             <div class="d-flex justify-space-between mt-5">
-              <div class=""><input type="checkbox"> 보안접속</div>
+              <div><input type="checkbox"> 보안접속</div>
 
               <div>
                 <a href="#none" class="link-secondary" data-bs-toggle="modal" data-bs-target="#findIdModal">아이디 찾기</a>
@@ -50,11 +50,6 @@ export default {
     findId,
     findPassword,
     join
-  },
-  data() {
-    return {
-      show: true
-    }
   },
 }
 </script>

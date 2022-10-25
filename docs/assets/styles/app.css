@@ -22,6 +22,7 @@ body {
   font-size: 13px;
   color: #666;
 }
+
 .table th {
   vertical-align: middle;
   font-weight: 400;
@@ -133,4 +134,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .counter-number {
 .btn-outline-primary:hover, .btn-outline-primary:active {
   background-color: #6E4CE1 !important;
   color: #fff!important;
+}
+.modal-sm {
+  --bs-modal-width: 380px;
 }
