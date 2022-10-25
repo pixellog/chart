@@ -16,23 +16,23 @@
         <div class="col-auto flex-grow-1 lh-lg" style="color:rgba(255,255,255,.5);">
           <div class="hstack gap-2 lh-1">
             주식회사 고위드
-            <div class="vr"/>
+            <div class="vr mx-1"/>
             대표이사 김항기
-            <div class="vr"/>
+            <div class="vr mx-1"/>
             사업자등록번호 261-81-25793
-            <div class="vr"/>
+            <div class="vr mx-1"/>
             통신판매업신고 제 2020-서울강남-01863호
           </div>
           <div class="hstack gap-2 lh-1 mt-3">
             대표전화 02-6105-8101
-            <div class="vr"/>
+            <div class="vr mx-1"/>
             이메일 support@gowid.com
           </div>
           <div class="mt-2">
             서울특별시 강남구 도산대로 317, 14층 (신사동, 호림아트센터 1빌딩)
           </div>
 
-          <div class="d-flex mt-4">
+<!--          <div class="d-flex mt-4">
             <div class="hstack gap-3 lh-1">
               <a class="nav-link" href="#none" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보 처리방침</a>
               <div class="vr"/>
@@ -41,8 +41,7 @@
 
             <terms1></terms1>
             <terms2></terms2>
-
-          </div>
+          </div>-->
         </div>
       </div>
     </div>

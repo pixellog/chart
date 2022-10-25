@@ -5,17 +5,18 @@
       <div class="modal-content">
         <div class="modal-body text-secondary pa-15">
 
-          <div v-if="show">
+          <div v-if="step1">
             <h3 class="mb-10 text-center">아이디 찾기</h3>
 
             <input type="text" class="form-control" placeholder="이름">
             <input type="mail" class="form-control mt-3" placeholder="이메일">
 
-            <button type="button" @click="show=!show"
-                    class="btn btn-primary w-100 btn-lg mt-5">확인
+            <button @click="step1=false; step2=true"
+                    type="button" class="btn btn-primary w-100 btn-lg mt-5">확인
             </button>
           </div>
-          <div v-else>
+
+          <div v-else-if="step2">
             <h5>고객님의 계정을 찾았습니다.</h5>
             <p>아이디 확인 후 로그인해 주세요.</p>
 
@@ -31,8 +32,9 @@
               </div>
             </div>
 
-            <button type="button" @click="show=!show"
+            <button @click="step2=false"
                     data-bs-toggle="modal" data-bs-target="#findIdModal"
+                    type="button"
                     class="btn btn-primary w-100 btn-lg mt-5">확인
             </button>
           </div>
@@ -47,7 +49,8 @@
 export default {
   data() {
     return {
-      show: true,
+      step1: true,
+      step2: !true,
       userImg: userImg,
     }
   },

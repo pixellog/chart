@@ -42,8 +42,7 @@
           <div v-else-if="step4">
             <h3 class="mb-10 text-center">비밀번호 재설정</h3>
 
-            <input type="password" class="form-control mt-5" placeholder="새 비밀번호 입력">
-            <input type="password" class="form-control mt-3" placeholder="새 비밀번호 확인">
+            인
 
             <button type="button" @click="step4=false; initStep"
                     data-bs-toggle="modal" data-bs-target="#joinModal"
