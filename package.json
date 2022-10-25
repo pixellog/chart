@@ -10,10 +10,5 @@
   },
   "devDependencies": {
     "browser-sync": "^2.26.13"
-  },
-  "dependencies": {
-    "@toast-ui/chart": "^4.4.3",
-    "material-icons": "^1.12.0",
-    "vue-router": "^4.1.5"
   }
 }
