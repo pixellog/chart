@@ -10,26 +10,24 @@
     <div class="container">
       <div class="row">
         <div class="col-auto">
-          <img style="width: 80px; height: auto; filter: invert(.75); margin-top: 2px;"
-               src="https://www.gowid.com/static/media/logovector_logo_basic_black.291ed9f7.svg">
+          <img style="width: 140px; height: auto; margin-top: 2px;"
+               src="assets/img/ci.png" alt="고위드데이터 로고">
         </div>
         <div class="col-auto flex-grow-1 lh-lg" style="color:rgba(255,255,255,.5);">
           <div class="hstack gap-2 lh-1">
-            주식회사 고위드
+            고위드데이터 주식회사
             <div class="vr mx-1"/>
-            대표이사 김항기
+            대표이사 김대희
             <div class="vr mx-1"/>
-            사업자등록번호 261-81-25793
-            <div class="vr mx-1"/>
-            통신판매업신고 제 2020-서울강남-01863호
+            사업자등록번호 297-87-02490
           </div>
           <div class="hstack gap-2 lh-1 mt-3">
-            대표전화 02-6105-8101
+            대표전화 02-2088-0862
             <div class="vr mx-1"/>
-            이메일 support@gowid.com
+            이메일 support@gowiddata.com
           </div>
           <div class="mt-2">
-            서울특별시 강남구 도산대로 317, 14층 (신사동, 호림아트센터 1빌딩)
+            서울특별시 중구 통일로 10 연세 세브란스빌딩 17층 1714호
           </div>
 
 <!--          <div class="d-flex mt-4">
@@ -46,6 +44,7 @@
       </div>
     </div>
   </footer>
+
 </template>
 
 <script>
@@ -56,11 +55,12 @@ import terms2 from "./terms2.vue";
 export default {
   components: {
     terms1,
-    terms2
+    terms2,
   },
   data() {
     return {
-      scrollY: 0
+      scrollY: 0,
+      toast: ''
     }
   },
   mounted() {

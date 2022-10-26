@@ -15,16 +15,6 @@
           </div>
 
           <div v-if="path.match('dataroom.html')||path.match('dashboard.html')" class="hstack gap-4">
-            <a v-for="(item,i) in navs" :key="item.id"
-               :href="item.to"
-               :class="!item.to.match(path) || 'active'"
-               class="nav-link position-relative">
-              {{ item.title }}
-              <span v-if="item.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ item.length }}
-              <span class="visually-hidden">unread messages</span>
-            </span>
-            </a>
 
             <div class="dropdown">
               <a href="#none" data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,12 +63,6 @@ export default {
     return {
       userImg: userImg,
       path: path,
-      navs: [
-        // {title: '로그인', to: './login.html', length: 0},
-        // {title: '데이터룸', to: './dataroom.html', length: 0},
-        // {title: '신규기업', to: './dashboard.html', length: 99},
-        // {title: '업데이트', to: './guide.html', length: 189},
-      ]
     }
   },
   mounted() {

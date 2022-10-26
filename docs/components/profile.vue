@@ -25,12 +25,15 @@
 
           <div class="d-flex justify-end mt-5">
             <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
-            <button type="button" class="btn" data-bs-dismiss="modal">확인</button>
+            <button type="button" class="btn" data-bs-dismiss="modal" @click="openToasts('프로필이 수정되었습니다.')">확인</button>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+
+  <toasts :value="toast"></toasts>
 
   <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered">
@@ -44,6 +47,7 @@
           <input type="password" class="form-control mt-3" placeholder="새 비밀번호 확인">
 
           <button type="button" data-bs-toggle="modal" data-bs-target="#profileModal"
+                  @click="openToasts('비밀번호가 변경되었습니다.')"
                   class="btn btn-primary btn-lg w-100 mt-5">확인
           </button>
 
@@ -54,15 +58,26 @@
 </template>
 
 <script>
+import Toasts from "./toasts.vue";
+
 export default {
+  components: {Toasts},
   data() {
     return {
       userImg: userImg,
+      toast: ''
     }
   },
   mounted() {
   },
-  methods: {},
+  methods: {
+    openToasts(x) {
+      this.toast = x;
+      const toastLiveExample = document.getElementById('toasts')
+      const toast = new bootstrap.Toast(toastLiveExample)
+      toast.show()
+    }
+  },
 }
 </script>
 
