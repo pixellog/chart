@@ -152,29 +152,7 @@
                       </div>
 
                       <div v-if="item.title=='재무 현황'" class="py-5">
-                        <table class="table table-hover">
-                          <thead>
-                          <tr>
-                            <th class="text-center" v-for="item in ['기준일','자산','부채','자본','매출','손익','B/S','P/L']" :key="item.id">
-                              {{ item }}
-                            </th>
-                          </tr>
-                          </thead>
-                          <tbody class="table-group-divider">
-                          <tr v-for="(item,i) in 2" :key="item.id">
-                            <td class="text-center">202{{ i }}년</td>
-                            <td class="text-center">500,000,000</td>
-                            <td class="text-center">500,000,000</td>
-                            <td class="text-center">500,000,000</td>
-                            <td class="text-center">500,000,000</td>
-                            <td class="text-center">500,000,000</td>
-                            <td class="text-center"><a href="#none"><i class="material-symbols-outlined">picture_as_pdf</i></a></td>
-                            <td class="text-center"><a href="#none"><i class="material-symbols-outlined">picture_as_pdf</i></a></td>
-                          </tr>
-                          </tbody>
-                        </table>
-
-                        <div class="row mt-8">
+                        <div class="row">
 
                           <div class="col-12">
 

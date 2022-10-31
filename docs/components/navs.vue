@@ -7,9 +7,14 @@
         </a>
 
         <div class="d-flex align-center">
+
           <a v-if="!path.match('.html')" class="btn btn-outline-primary btn-sm rounded-pill px-5" href="./login.html">LOGIN</a>
 
+
           <div class="d-flex align-center" v-if="path.match('dashboard.html')">
+<!--            <div class="mr-5">-->
+<!--              <searchFilter></searchFilter>-->
+<!--            </div>-->
             <i class="material-symbols-outlined mr-n9 position-relative">search</i>
             <input type="search" class="form-control rounded-pill pl-10 mr-5" placeholder="Search" style="width: 240px;"/>
           </div>
@@ -54,10 +59,12 @@
 
 <script>
 import profile from '../components/profile.vue'
+import searchFilter from './searchFilter.vue'
 
 export default {
   components: {
-    profile
+    profile,
+    searchFilter
   },
   data() {
     return {
