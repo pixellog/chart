@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RND</title>
-  <link rel="stylesheet" href="./assets/styles/app.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RND</title>
+    <link rel="stylesheet" href="./assets/styles/app.css"/>
 </head>
 <body>
 <div id="app"></div>
@@ -12,152 +12,19 @@
 <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./assets/js/app.js"></script>
-<script type="module">
-  const app = Vue.createApp({
-    components: {
-      "navs": Vue.defineAsyncComponent(() =>
-        loadModule("./components/navs.vue", options)
-      ),
-      "footers": Vue.defineAsyncComponent(() =>
-        loadModule("./components/footers.vue", options)
-      ),
-    },
-    template: `
-      <navs></navs>
-
-      <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="4000">
-
-          <div class="d-flex align-center justify-center bg"
-               style="background-image: url(https://images.unsplash.com/photo-1437209484568-e63b90a34f8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM4fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
-            <div class="text-center w-50 text-white">
-              <div class="display-4 font-weight-black">GOWID DATA</div>
-              <p class="mt-5 fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
-            </div>
-          </div>
-
-        </div>
-        <div class="carousel-item" data-bs-interval="4000">
-          <div class="d-flex align-center justify-center bg"
-               style="background-image: url(https://images.unsplash.com/photo-1466278313810-9aca9abea861?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
-            <div class="text-center w-50 text-white">
-              <div class="display-4 font-weight-black">GOWID DATA</div>
-              <p class="mt-5 fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="4000">
-          <div class="d-flex align-center justify-center bg"
-               style="background-image: url(https://images.unsplash.com/photo-1478827121442-6450491fc0d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjY1fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format);">
-            <div class="text-center w-50 text-white">
-              <div class="display-4 font-weight-black">GOWID DATA</div>
-              <p class="mt-5 fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci deserunt dicta enim in minima nisi officiis perferendis quo rem, unde! Eos expedita fugiat magni possimus provident repellat rerum sit tempora?</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-      </div>
-
-
-      <section>
-
-      <div class="accordion accordion-flush ml-n8" id="accordionFlushExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingOne">
-            <div class="container">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                Accordion Item #1
-              </button>
-            </div>
-          </h2>
-          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              <div class="container">
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingTwo">
-            <div class="container">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                Accordion Item #2
-              </button>
-            </div>
-          </h2>
-          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              <div class="container">
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingThree">
-            <div class="container">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                Accordion Item #3
-              </button>
-            </div>
-          </h2>
-          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              <div class="container">
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container my-10">
-        <p v-for="item in 10" :key="item.id">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto ea, eius labore nesciunt perferendis placeat quas tempora veritatis. Delectus eaque harum incidunt laudantium mollitia rem sit voluptate. Eligendi!</p>
-      </div>
-
-      </section>
-
-      <footers></footers>
+<script>
+    const app = Vue.createApp({
+        components: {
+            "login": Vue.defineAsyncComponent(() =>
+                loadModule("./components/login.vue", options)
+            ),
+        },
+        template: `
+        <login/>
     `,
-    data() {
-      return {}
-    },
-    methods: {
-      active(i) {
-        this.tabs = i
-      },
-      toggle() {
-        this.hover = !this.hover
-      },
-    },
-  });
+    });
 
-  app.mount("#app");
-
+    app.mount("#app");
 </script>
-<style>
-  .bg {
-    background: #fff url(https://images.unsplash.com/photo-1437209484568-e63b90a34f8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM4fHxsYW5kc2NhcGV8ZW58MHwwfDB8fA%3D%3D&auto=format) 50%/cover no-repeat;
-    height: calc(60vh - 55px);
-  }
-</style>
 </body>
 </html>

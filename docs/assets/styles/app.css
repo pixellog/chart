@@ -11,11 +11,15 @@ body {
   color: rgb(136, 136, 136);
 }
 
-.form-control {
+.title {
+  font-size: 16px;
+}
+
+.form-control, .form-select {
   font-weight: 300;
   font-size: 13px;
-  /*min-height: 40px;*/
   border-radius: 4px;
+  /*min-height: 40px;*/
 }
 
 .table {

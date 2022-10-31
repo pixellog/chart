@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RND</title>
-  <link rel="stylesheet" href="./assets/styles/app.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RND</title>
+    <link rel="stylesheet" href="./assets/styles/app.css"/>
 </head>
 <body>
 <div id="app"></div>
@@ -12,100 +12,128 @@
 <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="//uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
 <script src="./assets/js/app.js"></script>
 <script type="module">
-  const app = Vue.createApp({
-    components: {
-      "navs": Vue.defineAsyncComponent(() =>
-        loadModule("./components/navs.vue", options)
-      ),
-      "footers": Vue.defineAsyncComponent(() =>
-        loadModule("./components/footers.vue", options)
-      ),
-      "errorInfo": Vue.defineAsyncComponent(() =>
-        loadModule("./components/errorInfo.vue", options)
-      )
-    },
-    template: `
-      <div class="vh-100 d-flex flex-column">
-      <navs></navs>
+    const app = Vue.createApp({
+        components: {
+            "navs": Vue.defineAsyncComponent(() =>
+                loadModule("./components/navs.vue", options)
+            ),
+            "footers": Vue.defineAsyncComponent(() =>
+                loadModule("./components/footers.vue", options)
+            ),
+            "errorInfo": Vue.defineAsyncComponent(() =>
+                loadModule("./components/errorInfo.vue", options)
+            )
+        },
+        template: `
+          <div class="vh-100 d-flex flex-column">
+          <navs></navs>
 
 
-      <section>
+          <section style="min-height: calc(100vh - 65px - 148px)">
 
-        <div class="category-area">
-          <div class="container py-6 d-flex align-center justify-space-between">
-            <h4 class="text-white mb-0">데이터룸</h4>
-            <div class="d-flex align-center">
-              <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']" :key="item.id">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i" checked>
-                <label class="form-check-label" :for="'inlineRadio'+i">{{ item }}</label>
-              </div>
-              <div class="d-flex align-center ml-5">
-                <i class="material-symbols-outlined mr-n9 position-relative">search</i>
-                <input type="search" class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
+            <div class="category-area">
+              <div class="container py-6 d-flex align-center justify-space-between">
+                <h4 class="text-white mb-0">데이터룸</h4>
+                <div class="d-flex align-center">
+                  <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']" :key="item.id">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i" checked>
+                    <label class="form-check-label" :for="'inlineRadio'+i">{{ item }}</label>
+                  </div>
+                  <div class="d-flex align-center ml-5">
+                    <i class="material-symbols-outlined mr-n9 position-relative">search</i>
+                    <input type="search" class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <div class="container py-15">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th :class="i==0 || 'text-center'" v-for="(item, i) in th" :key="item.id">{{ item }}</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr v-for="(item, i) in trList" :key="item.id">
+                  <td class="">
+                    <a href="./dashboard.html" class="link-secondary">{{ item.title }}</a>
+                    <span v-if="i==1" class="badge rounded-pill bg-primary ml-2 text-uppercase">update</span>
+                    <span v-else class="badge rounded-pill bg-danger ml-2 text-uppercase">new</span>
+                  </td>
+                  <td class="text-center text-secondary" style="width: 150px;">{{ item.date }}</td>
+                  <td class="text-center text-secondary" style="width: 150px;">{{ item.update }}</td>
+                  <td class="text-center pb-0" style="width: 100px;">
+                    <i v-if="i!==1" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
+                    <div v-else>
+                      <a href="#none" data-bs-toggle="modal" data-bs-target="#errorInfoModal">
+                        <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
+                      </a>
+                      <error-info></error-info>
+                      <!--                  <a href="#none" data-bs-toggle="dropdown" aria-expanded="false">
+                                          <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
+                                        </a>
+                                        <div :class="true || 'show'" class="dropdown-menu dropdown-menu-end text-caption pa-3" style="width: 600px;">
+
+                                        </div>-->
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <div id="pagination1" class="tui-pagination mt-10"></div>
+            </div>
+
+          </section>
+
+          <footers></footers>
           </div>
-        </div>
+        `,
+        data() {
+            return {
+                th: ['기업명', '등록일', '업데이트', '상태'],
+                trList: [
+                    {
+                        title: '고위드데이터1',
+                        date: '2022.02.12',
+                        update: '2022.02.12',
+                        status: 'Y'
+                    },
+                    {
+                        title: '고위드데이터2',
+                        date: '2022.02.12',
+                        update: '2022.02.12',
+                        status: 'Y'
+                    },
+                    {
+                        title: '고위드데이터3',
+                        date: '2022.02.12',
+                        update: '2022.02.12',
+                        status: 'Y'
+                    },
+                    {
+                        title: '고위드데이터4',
+                        date: '2022.02.12',
+                        update: '2022.02.12',
+                        status: 'Y'
+                    }
+                ]
+            }
+        },
+        methods: {},
+    });
 
-        <div class="container py-15">
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th :class="i==0 || 'text-center'" v-for="(item, i) in ['기업명','등록일','업데이트','상태']" :key="item.id">{{ item }}</th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <tr v-for="(item, i) in 10" :key="item.id">
-              <td class="">
-                <a href="./dashboard.html" class="link-secondary">고위드데이터</a>
-                <span v-if="i==1" class="badge rounded-pill bg-primary ml-2 text-uppercase">update</span>
-                <span v-else class="badge rounded-pill bg-danger ml-2 text-uppercase">new</span>
-              </td>
-              <td class="text-center text-secondary" style="width: 150px;">2022.11.25</td>
-              <td class="text-center text-secondary" style="width: 150px;">2022.11.25</td>
-              <td class="text-center pb-0" style="width: 100px;">
-                <i v-if="i!==1" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
-                <div v-else>
-                  <a href="#none" data-bs-toggle="modal" data-bs-target="#errorInfoModal">
-                    <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
-                  </a>
-                  <error-info></error-info>
-                  <!--                  <a href="#none" data-bs-toggle="dropdown" aria-expanded="false">
-                                      <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
-                                    </a>
-                                    <div :class="true || 'show'" class="dropdown-menu dropdown-menu-end text-caption pa-3" style="width: 600px;">
+    app.mount("#app");
 
-                                    </div>-->
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-
-          <div id="pagination1" class="tui-pagination mt-10"></div>
-        </div>
-
-      </section>
-
-      <footers></footers>
-      </div>
-    `,
-    data() {
-      return {}
-    },
-    methods: {},
-  });
-
-  app.mount("#app");
-
-  var pagination1 = new tui.Pagination('pagination1', {
-    totalItems: 500,
-    itemsPerPage: 10,
-    visiblePages: 5
-  });
-
+    var pagination1 = new tui.Pagination('pagination1', {
+        totalItems: 300,
+        itemsPerPage: 10,
+        visiblePages: 5
+    });
 
 </script>
 <style>

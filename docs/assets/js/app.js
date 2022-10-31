@@ -22,10 +22,3 @@ const {loadModule, version} = window["vue3-sfc-loader"];
 
 const userImg = 'https://images.unsplash.com/flagged/photo-1573740144655-bbb6e88fb18a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop'
 const path = window.location.pathname;
-
-function openToasts(x) {
-  // this.toast = x;
-  const toastLiveExample = document.getElementById('toasts')
-  const toast = new bootstrap.Toast(toastLiveExample)
-  toast.show()
-}
