@@ -16,7 +16,7 @@ body {
 }
 
 .form-control, .form-select {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 13px;
   border-radius: 4px;
   /*min-height: 40px;*/
@@ -98,11 +98,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .counter-number {
   border-color:#6E45E4;
 }
 
-.form-check-input {
+.category-area .form-check-input {
   background-color: transparent;
   border-color: #fff;
 }
-.form-check-input:checked {
+.category-area .form-check-input:checked {
   background-color: transparent;
   border-color: #fff;
 }
@@ -141,4 +141,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .counter-number {
 }
 .modal-sm {
   --bs-modal-width: 380px;
+}
+.error-msg {
+  margin-top: 5px;
+  color: #f00;
+  font-size: 13px;
+  font-weight: 400;
 }

@@ -12,9 +12,9 @@
 
 
           <div class="d-flex align-center" v-if="path.match('dashboard.html')">
-<!--            <div class="mr-5">-->
-<!--              <searchFilter></searchFilter>-->
-<!--            </div>-->
+            <div class="mr-5">
+              <searchFilter></searchFilter>
+            </div>
             <i class="material-symbols-outlined mr-n9 position-relative">search</i>
             <input type="search" class="form-control rounded-pill pl-10 mr-5" placeholder="Search" style="width: 240px;"/>
           </div>
