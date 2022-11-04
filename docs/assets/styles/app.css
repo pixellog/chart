@@ -139,6 +139,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .counter-number {
   background-color: #6E4CE1 !important;
   color: #fff!important;
 }
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+  background-color: #6E4CE1;
+  color: #fff !important;
+}
 .modal-sm {
   --bs-modal-width: 380px;
 }
@@ -148,3 +152,5 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .counter-number {
   font-size: 13px;
   font-weight: 400;
 }
+
+

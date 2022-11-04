@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RND</title>
+    <title>RND > 대시보드</title>
     <link rel="stylesheet" href="./assets/styles/app.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="//code.jquery.com/jquery-3.6.0.js"></script>
@@ -76,6 +76,8 @@
                   <a v-for="item in items" :key="item.id"
                      class="text-decoration-none d-inline-block pa-2 px-4 nav-link rounded-pill text-caption"
                      :href="'#'+item.id+'-title'">{{ item.title }}</a>
+                 <a class="text-decoration-none d-inline-flex align-center pa-2 px-4 nav-link rounded-pill text-caption"
+                     href="./data-management.html">데이터 수기 관리 <i class="material-symbols-outlined ml-2 icon-sm">open_in_new</i></a>
                 </div>
               </div>
             </div>
@@ -86,7 +88,8 @@
             <div class="container">
 
 
-              <div data-bs-spy="scroll" data-bs-target="#simple-list" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="0" class="pt-10">
+              <div data-bs-spy="scroll" data-bs-target="#simple-list" data-bs-offset="0"
+              data-bs-smooth-scroll="true" tabindex="0" class="pt-10">
 
                 <div v-for="(item, i) in items" :key="item.id">
 
@@ -286,50 +289,6 @@
 
                       </div>
 
-                      <div v-if="item.title=='미확인 거래내역'">
-                        <div v-if="false" class="d-flex position-absolute top-0 end-0 mt-5 mr-10">
-
-                          <div class="btn-group" role="group">
-                            <template v-for="(item,i) in ['3% 이상','2% 이상','1% 이상']">
-                              <input type="radio" class="btn-check" name="radio" :id="'radio'+i" autocomplete="off" :checked="i==0">
-                              <label class="btn btn-outline-primary" :for="'radio'+i">{{ item }}</label>
-                            </template>
-                          </div>
-
-                          <select name="" id="" class="form-select ml-3" style="width: 120px;">
-                            <option selected>수동분류</option>
-                            <option v-for="item in ['대출','투자','매출','비용']" :key="item.id" :value="item">
-                              {{ item }}
-                            </option>
-                          </select>
-                        </div>
-
-                        <table class="table table-hover">
-                          <thead>
-                          <tr>
-                            <th class="text-center" v-for="item in ['거래일시','은행','계좌번호','입금액','출금액','현재잔액','적요1','적요2','적요3','적요4']" :key="item.id">
-                              {{ item }}
-                            </th>
-                          </tr>
-                          </thead>
-                          <tbody class="table-group-divider">
-                          <tr v-for="item in 10" :key="item.id">
-                            <td style="width: 160px;">2022.01.01 12:00:00</td>
-                            <td class="text-center">우리은행</td>
-                            <td class="text-center">102-643-661704</td>
-                            <td class="text-center">125,000,000</td>
-                            <td class="text-center">125,000,000</td>
-                            <td class="text-center">125,000,000</td>
-                            <td class="text-center">-</td>
-                            <td class="text-center">-</td>
-                            <td class="text-center">-</td>
-                            <td class="text-center">-</td>
-                          </tr>
-                          </tbody>
-                        </table>
-
-                        <div id="pagination1" class="tui-pagination mt-7"></div>
-                      </div>
 
                     </div>
                   </div>
@@ -366,7 +325,7 @@
                     {title: 'Cash In/Out', id: 'cash'},
                     {title: '런웨이', id: 'runway'},
                     {title: '자회사 현황', id: 'subsidiary'},
-                    {title: '미확인 거래내역', id: 'none'},
+                    // {title: '미확인 거래내역', id: 'none'},
                 ],
                 tabs: 0,
                 hover: false,
@@ -399,13 +358,6 @@
     pieChartStock();
     columnChartProfit();
     columnChartCash();
-
-    var pagination1 = new tui.Pagination('pagination1', {
-        totalItems: 300,
-        itemsPerPage: 10,
-        visiblePages: 5
-    });
-
 </script>
 <script src="./assets/js/app.js"></script>
 <style>
