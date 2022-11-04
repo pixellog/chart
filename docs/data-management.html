@@ -5,274 +5,251 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RND > 데이터 수기 관리</title>
   <link rel="stylesheet" href="./assets/styles/app.css"/>
+  <script src="//unpkg.com/vue@latest"></script>
+  <script src="//cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
+    <script src="//cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="//code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="//uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+  <script src="./assets/js/app.js"></script>
 </head>
 <body>
-<div id="app"></div>
-<script src="//unpkg.com/vue@latest"></script>
-<script src="//cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
-<script src="//cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="//uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="//code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
-<script src="./assets/js/app.js"></script>
+<div id="app">
+  <layout>
+
+    <header class="position-sticky fixed-top" style="z-index: 10">
+      <div class="container py-6 d-flex align-center justify-space-between">
+        <h4 class="text-white mb-0">데이터 수기 관리</h4>
+        <a href="./dashboard.html" class="text-decoration-none d-inline-flex align-center nav-link rounded-pill text-caption text-white opacity-50">
+          <i class="material-symbols-outlined mr-2 icon-sm">west</i>대시보드로 돌아가기</a>
+      </div>
+
+      <hr class="ma-0">
+
+      <div class="container py-3">
+        <div class="row">
+          <div class="col-auto flex-grow-1" id="simple-list">
+            <a v-for="(item,i) in items" :key="item.id"
+               class="text-decoration-none d-inline-block pa-2 px-4 nav-link rounded-pill text-caption"
+               :href="'#article-'+i">{{ item }}</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+
+      <div data-bs-spy="scroll" data-bs-target="#simple-list" data-bs-offset="50"
+           data-bs-smooth-scroll="true" tabindex="0">
+
+        <div class="card pa-8 my-15 rounded-xl overflow-hidden" v-for="(item, i) in items" :key="item.id" :id="'article-'+i">
+          <article v-if="i==0">
+            <div class="d-flex align-center justify-space-between"><h5>{{item}}</h5></div>
+            <hr class="mx-n8 mb-5">
+            <table class="table table-hover text-center">
+              <thead>
+              <tr>
+                <th v-for="(item, i) in ['은행','계좌번호','소유자','입금금액','날짜','시간','상대은행','상대계좌']" :key="item.id">{{ item }}</th>
+              </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              <tr v-for="(item, i) in 5" :key="item.id">
+                <td>우리은행</td>
+                <td>102-643-661704</td>
+                <td>김대희</td>
+                <td>152,000,000</td>
+                <td>2022-10-22</td>
+                <td>12:00:00</td>
+                <td>기업은행</td>
+                <td>123-4567-8978</td>
+              </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article v-if="i==1">
+            <div class="d-flex align-center justify-space-between"><h5>{{item}}</h5></div>
+            <hr class="mx-n8 mb-5">
+            <table class="table table-hover text-center">
+              <thead>
+              <tr>
+                <th><input type="checkbox" class="form-check-input"></th>
+                <th v-for="item in ['거래일시','은행','계좌번호','출금액','적요1','적요2','적요3','적요4']" :key="item.id">
+                  {{ item }}
+                </th>
+              </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              <tr v-for="item in 5" :key="item.id">
+                <td style="width: 50px;"><input type="checkbox" class="form-check-input"></td>
+                <td style="width: 160px;">2022.01.01 12:00:00</td>
+                <td>우리은행</td>
+                <td>102-643-661704</td>
+                <td>125,000,000</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div class="d-flex justify-center mt-8">
+              <button type="button" class="btn btn-primary btn-lg">선택 항목 전송</button>
+            </div>
+          </article>
+
+          <article v-if="i==2">
+            <div class="d-flex align-center justify-space-between">
+              <h5>{{item}}</h5>
+              <div class="ml-auto mr-3">추정투자일</div>
+              <div class="btn-group" role="group">
+                <template v-for="(item,i) in ['2022.03','2022.06','2022.09']">
+                  <input type="radio" class="btn-check" name="radio-invest" :id="'radio-invest-'+i" autocomplete="off" :checked="!i">
+                  <label class="btn btn-outline-primary" :for="'radio-invest-'+i">{{ item }}</label>
+                </template>
+              </div>
+            </div>
+            <hr class="mx-n8 mb-5">
+            <table class="table table-hover text-center">
+              <thead>
+              <tr>
+                <th v-for="item in ['거래일시','은행','계좌번호','입금액','현재잔액','적요1','적요2','적요3','적요4','항목선택']" :key="item.id">
+                  {{ item }}
+                </th>
+              </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              <tr v-for="item in 5" :key="item.id">
+                <td>2022.01.01 12:00:00</td>
+                <td>우리은행</td>
+                <td>102-643-661704</td>
+                <td>125,000,000</td>
+                <td>125,000,000</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td style="width: 180px;">
+                  <div class="d-flex">
+                    <select name="" class="form-select ml-auto" style="width: 100px;">
+                      <option v-for="item in ['투자','대출','사채','연관없음']" :key="item.id" :value="item">
+                        {{ item }}
+                      </option>
+                    </select>
+                    <button type="button" class="btn btn-primary btn-sm ml-2">확인</button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article v-if="i==3">
+            <div class="d-flex align-center justify-space-between"><h5>{{item}}</h5></div>
+            <hr class="mx-n8 mb-5">
+            <table class="table table-hover text-center">
+              <thead>
+              <tr>
+                <th v-for="item in ['공급업체명','사업자번호','총 세금계산서 발행액','평균 금액','요청횟수','항목선택']" :key="item.id">
+                  {{ item }}
+                </th>
+              </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              <tr v-for="item in 5" :key="item.id">
+                <td>고위드데이터</td>
+                <td>297-87-02490</td>
+                <td>123,000,000</td>
+                <td>123,000,000</td>
+                <td>123</td>
+                <td style="width: 180px;">
+                  <div class="d-flex">
+                    <select name="" class="form-select ml-auto" style="width: 100px;">
+                      <option v-for="item in ['임대료','통신비','기타']" :key="item.id" :value="item">
+                        {{ item }}
+                      </option>
+                    </select>
+                    <button type="button" class="btn btn-primary btn-sm ml-2">확인</button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article v-if="i==4">
+            <div class="d-flex align-center justify-space-between">
+              <h5>{{item}}</h5>
+
+              <div class="btn-group" role="group">
+                <template v-for="(item,i) in ['3% 이상','5% 이상','7% 이상']">
+                  <input type="radio" class="btn-check" name="radio" :id="'radio'+i" autocomplete="off" :checked="!i">
+                  <label class="btn btn-outline-primary" :for="'radio'+i">{{ item }}</label>
+                </template>
+              </div>
+            </div>
+            <hr class="mx-n8 mb-5">
+            <table class="table table-hover text-center">
+              <thead>
+              <tr>
+                <th v-for="(item, i) in ['거래일시','은행','계좌번호','입금액','출금액','현재잔액','적요1','적요2','적요3','적요4','항목선택']" :key="item.id">{{ item }}</th>
+              </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              <tr v-for="(item, i) in 5" :key="item.id">
+                <td>2022-10-22 12:00:00</td>
+                <td>우리은행</td>
+                <td>102-643-661704</td>
+                <td>152,000,000</td>
+                <td>152,000,000</td>
+                <td>152,000,000</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td style="width: 160px;">
+                  <div class="d-flex">
+                    <select name="" id="" class="form-select" style="width: 80px;">
+                      <option v-for="item in ['대출','투자','매출','비용']" :key="item.id" :value="item">
+                        {{ item }}
+                      </option>
+                    </select>
+                    <button type="button" class="btn btn-primary btn-sm ml-2">확인</button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div id="pagination" class="tui-pagination mt-10"></div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </layout>
+</div>
 <script type="module">
   const app = Vue.createApp({
     components: {
-      "navs": Vue.defineAsyncComponent(() =>
-        loadModule("./components/navs.vue", options)
-      ),
-      "footers": Vue.defineAsyncComponent(() =>
-        loadModule("./components/footers.vue", options)
-      ),
-      "errorInfo": Vue.defineAsyncComponent(() =>
-        loadModule("./components/errorInfo.vue", options)
-      )
+      "layout": Vue.defineAsyncComponent(() => loadModule("./components/layout.vue", options))
     },
-    template: `
-      <div>
-      <navs></navs>
-
-        <header class="position-sticky fixed-top" style="z-index: 10">
-          <div class="container py-6 d-flex align-center justify-space-between">
-            <h4 class="text-white mb-0">데이터 수기 관리</h4>
-            <a href="./dashboard.html" class="text-decoration-none d-inline-flex align-center nav-link rounded-pill text-caption text-white opacity-50">
-            <i class="material-symbols-outlined mr-2 icon-sm">west</i>대시보드로 돌아가기</a>
-          </div>
-
-          <hr class="ma-0">
-
-          <div class="container py-3">
-            <div class="row">
-              <div class="col-auto flex-grow-1" id="simple-list">
-                <a v-for="(item,i) in items" :key="item.id"
-                   class="text-decoration-none d-inline-block pa-2 px-4 nav-link rounded-pill text-caption"
-                   :href="'#article-'+i">{{ item }}</a>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <div class="container">
-
-         <div data-bs-spy="scroll" data-bs-target="#simple-list" data-bs-offset="50"
-         data-bs-smooth-scroll="true" tabindex="0">
-
-            <div class="card pa-8 my-15 rounded-xl overflow-hidden"  v-for="(item, i) in items" :key="item.id" :id="'article-'+i">
-<article v-if="i==0">
-          <div class="d-flex align-center justify-space-between"><h5>{{item}}</h5></div>
-          <hr class="mx-n8 mb-5">
-          <table class="table table-hover text-center">
-            <thead>
-            <tr>
-              <th v-for="(item, i) in ['은행','계좌번호','소유자','입금금액','날짜','시간','상대은행','상대계좌']" :key="item.id">{{ item }}</th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <tr v-for="(item, i) in 5" :key="item.id">
-              <td>우리은행</td>
-              <td>102-643-661704</td>
-              <td>김대희</td>
-              <td>152,000,000</td>
-              <td>2022-10-22</td>
-              <td>12:00:00</td>
-              <td>기업은행</td>
-              <td>123-4567-8978</td>
-            </tr>
-            </tbody>
-          </table>
-</article>
-
-<article v-if="i==1">
-          <div class="d-flex align-center justify-space-between"><h5>{{item}}</h5></div>
-          <hr class="mx-n8 mb-5">
-          <table class="table table-hover text-center">
-            <thead>
-            <tr>
-              <th><input type="checkbox" class="form-check-input"></th>
-              <th v-for="item in ['거래일시','은행','계좌번호','출금액','적요1','적요2','적요3','적요4']" :key="item.id">
-                {{ item }}
-              </th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <tr v-for="item in 5" :key="item.id">
-              <td style="width: 50px;"><input type="checkbox" class="form-check-input"></td>
-              <td style="width: 160px;">2022.01.01 12:00:00</td>
-              <td>우리은행</td>
-              <td>102-643-661704</td>
-              <td>125,000,000</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-            </tr>
-            </tbody>
-          </table>
-
-          <div class="d-flex justify-center mt-8">
-            <button type="button" class="btn btn-primary btn-lg">선택 항목 커밋</button>
-          </div>
-</article>
-
-<article v-if="i==2">
-          <div class="d-flex align-center justify-space-between">
-          <h5>{{item}}</h5>
-          <select name="" id="" class="form-select ml-auto" style="width: 120px;">
-              <option selected>수동분류</option>
-              <option v-for="item in ['투자','대출','사채','연관없음']" :key="item.id" :value="item">
-                {{ item }}
-              </option>
-            </select>
-          </div>
-          <hr class="mx-n8 mb-5">
-          <table class="table table-hover text-center">
-            <thead>
-            <tr>
-              <th v-for="item in ['투정투자일','은행','계좌번호','입금액','현재잔액','적요1','적요2','적요3','적요4']" :key="item.id">
-                {{ item }}
-              </th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <tr v-for="item in 5" :key="item.id">
-              <td style="width: 120px;">2022.01.01</td>
-              <td>우리은행</td>
-              <td>102-643-661704</td>
-              <td>125,000,000</td>
-              <td>125,000,000</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-            </tr>
-            </tbody>
-          </table>
-</article>
-
-<article v-if="i==3">
-          <div class="d-flex align-center justify-space-between"><h5>{{item}}</h5></div>
-          <hr class="mx-n8 mb-5">
-          <table class="table table-hover text-center">
-            <thead>
-            <tr>
-              <th v-for="item in ['공급업체명','공급업체 사업자번호','총 세금계산서 발행액','평균 금액','요청횟수','셀렉트 박스','버튼']" :key="item.id">
-                {{ item }}
-              </th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <tr v-for="item in 5" :key="item.id">
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>
-                <select name="" id="" class="form-select ml-auto" style="width: 120px;">
-                  <option v-for="item in ['임대료','통신비','기타']" :key="item.id" :value="item">
-                    {{ item }}
-                  </option>
-                </select>
-              </td>
-              <td><button type="button" class="btn btn-primary btn-sm">삭제</button></td>
-            </tr>
-            </tbody>
-          </table>
-</article>
-
-<article v-if="i==4">
-        <div class="d-flex align-center justify-space-between">
-        <h5>{{item}}</h5>
-
-        <div class="btn-group ml-auto" role="group">
-        <template v-for="(item,i) in ['3% 이상','5% 이상','7% 이상']">
-          <input type="radio" class="btn-check" name="radio" :id="'radio'+i" autocomplete="off" :checked="!i">
-          <label class="btn btn-outline-primary" :for="'radio'+i">{{ item }}</label>
-        </template>
-        </div>
-
-        <select name="" id="" class="form-select ml-3" style="width: 120px;">
-        <option selected>수동분류</option>
-        <option v-for="item in ['대출','투자','매출','비용']" :key="item.id" :value="item">
-          {{ item }}
-        </option>
-        </select>
-        </div>
-        <hr class="mx-n8 mb-5">
-        <table class="table table-hover text-center">
-        <thead>
-        <tr>
-        <th v-for="(item, i) in ['은행','계좌번호','소유자','입금금액','날짜','시간','상대은행','상대계좌']" :key="item.id">{{ item }}</th>
-        </tr>
-        </thead>
-        <tbody class="table-group-divider">
-        <tr v-for="(item, i) in 5" :key="item.id">
-        <td>우리은행</td>
-        <td>102-643-661704</td>
-        <td>김대희</td>
-        <td>152,000,000</td>
-        <td>2022-10-22</td>
-        <td>12:00:00</td>
-        <td>기업은행</td>
-        <td>123-4567-8978</td>
-        </tr>
-        </tbody>
-        </table>
-
-        <div id="pagination1" class="tui-pagination mt-10"></div>
-</article>
-            </div>
-        </div>
-
-
-        </div>
-
-
-      <footers></footers>
-      </div>
-    `,
+    mounted(){
+    },
     data() {
       return {
         items: ['1. 추정 누락계좌 및 연계 거래', '2. 급여 추정 거래 선택', '3. 투자 추정 거래 선택', '4. 반복 지출 거래 계정 선택', '5. 미확인 이상 거래'],
-        th: ['기업명', '등록일', '업데이트', '상태'],
-        trList: [
-          {
-            title: '고위드데이터1',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터2',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터3',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터4',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          }
-        ]
       }
     },
-    methods: {},
   });
 
-  app.mount("#app");
-
-  var pagination1 = new tui.Pagination('pagination1', {
+  const pagination = new tui.Pagination('pagination', {
     totalItems: 300,
     itemsPerPage: 10,
     visiblePages: 5
   });
 
+  app.mount("#app");
 </script>
 <style>
   header {
