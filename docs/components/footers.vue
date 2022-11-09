@@ -9,22 +9,19 @@
   <footer class="py-10 text-white text-caption" style="background-color: #272660;">
     <div class="container">
       <div class="row">
-        <div class="col-auto">
+        <div class="col-12 col-lg-auto">
           <img style="width: 140px; height: auto; margin-top: 2px;"
                src="assets/img/ci.png" alt="고위드데이터 로고">
         </div>
-        <div class="col-auto flex-grow-1 lh-lg" style="color:rgba(255,255,255,.5);">
-          <div class="hstack gap-2 lh-1">
-            고위드데이터 주식회사
-            <div class="vr mx-1"/>
-            대표이사 김대희
-            <div class="vr mx-1"/>
-            사업자등록번호 297-87-02490
+        <div class="col-12 col-lg-auto flex-grow-1 lh-lg" style="color:rgba(255,255,255,.5);">
+          <div class="d-flex flex-column flex-lg-row">
+            <div>고위드데이터 주식회사<div class="vr mx-3 d-none d-lg-inline-block"></div></div>
+            <div>대표이사 김대희<div class="vr mx-3 d-none d-lg-inline-block"></div></div>
+            <div>사업자등록번호 297-87-02490</div>
           </div>
-          <div class="hstack gap-2 lh-1 mt-3">
-            대표전화 02-2088-0862
-            <div class="vr mx-1"/>
-            이메일 support@gowiddata.com
+          <div class="d-flex flex-column flex-lg-row">
+            <div>대표전화 02-2088-0862<div class="vr mx-3 d-none d-lg-inline-block"></div></div>
+            <div>이메일 support@gowiddata.com</div>
           </div>
           <div class="mt-2">
             서울특별시 중구 통일로 10 연세 세브란스빌딩 17층 1714호

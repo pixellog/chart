@@ -43,6 +43,10 @@
   box-shadow: 0 35px 80px -20px rgb(0 0 10 / 5%), 0 30px 60px -30px rgb(0 0 0 / 15%);
 }
 
+.container {
+  padding: 0;
+}
+
 body {
   font-family: 'NanumSquareNeo', sans-serif;
   font-size: 14px;

@@ -1,8 +1,8 @@
 <template>
   <layout>
-    <div class="container mt-15 pt-15">
-      <div class="card rounded-lg mx-auto" style="width: 500px;">
-        <div class="card-body pa-15">
+    <div class="container mt-lg-15">
+      <div class="card rounded-lg mx-auto col-lg-5">
+        <div class="card-body pa-lg-15">
           <h3 class="mb-10 text-center">로그인</h3>
           <input type="mail" class="form-control" placeholder="이메일">
           <input type="password" class="form-control mt-3" placeholder="비밀번호">

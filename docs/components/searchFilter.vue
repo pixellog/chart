@@ -4,7 +4,7 @@
     <input type="search" class="form-control rounded-pill pl-10" placeholder="Search" style="width: 240px;"/>
   </a>
 
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="myOffcanvas" aria-labelledby="myOffcanvasLabel">
+  <div class="show- offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="myOffcanvas" aria-labelledby="myOffcanvasLabel">
     <div class="offcanvas-header border-bottom">
       <h6 class="offcanvas-title opacity-50">검색필터</h6>
       <button @click="submitForm" type="button" class="btn btn-outline-primary btn-sm ml-auto mr-2">전체 초기화</button>
@@ -26,7 +26,7 @@
           <button @click="category = []" type="button" class="btn">초기화</button>
         </div>
 
-        <div class="row mx-0 mt-3">
+        <div class="row no-gutters pl-5 mt-3">
           <div class="col-6 form-check" v-for="item in categorys" :key="item.id">
             <input v-model="category" class="form-check-input" type="checkbox" :value="item" :id="'category'+item">
             <label class="form-check-label" :for="'category'+item">{{ item }}</label>
