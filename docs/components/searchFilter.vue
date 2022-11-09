@@ -26,7 +26,7 @@
           <button @click="category = []" type="button" class="btn">초기화</button>
         </div>
 
-        <div class="row no-gutters pl-5 mt-3">
+        <div class="row no-gutters pl-5 mt-3 body-2">
           <div class="col-6 form-check" v-for="item in categorys" :key="item.id">
             <input v-model="category" class="form-check-input" type="checkbox" :value="item" :id="'category'+item">
             <label class="form-check-label" :for="'category'+item">{{ item }}</label>
@@ -47,7 +47,7 @@
           <button @click="radioInvest='전체'" type="button" class="btn">초기화</button>
         </div>
 
-        <div class="">
+        <div class="body-2">
           <div class="form-check" v-for="(item,i) in [ '전체', '최근 3개월', '최근 6개월', '최근 1년', '직접입력' ]" :key="item.id">
             <input class="form-check-input" type="radio" :value="item" :id="'invest'+i" v-model="radioInvest">
             <label class="form-check-label" :for="'invest'+i">{{ item }}</label>
@@ -73,7 +73,7 @@
           <button @click="radioEmploy='전체'" type="button" class="btn">초기화</button>
         </div>
 
-        <div class="">
+        <div class="body-2">
           <div class="form-check" v-for="(item,i) in [ '전체', '0 ~ 10인', '11 ~ 50인', '51 ~ 100인', '100인 초과' ]" :key="item.id">
             <input class="form-check-input" type="radio" :value="item" :id="'employ'+i" v-model="radioEmploy">
             <label class="form-check-label" :for="'employ'+i">{{ item }}</label>

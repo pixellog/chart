@@ -2,7 +2,7 @@
   <a href="#app"
      class="btn btn-outline-secondary rounded-0"
      :class="scrollY >= 200 || 'd-none'"
-     style="position: fixed; right: 20px; top: 50vh; z-index: 100;">
+     style="position: fixed; right: 20px; top: 50vh; z-index: 100; padding: 0 6px;">
     <i class="material-symbols-outlined mt-1">north</i>
   </a>
 
