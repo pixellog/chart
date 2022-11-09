@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RND > 데이터룸</title>
-  <link rel="stylesheet" href="/assets/styles/app.css"/>
+  <link rel="stylesheet" href="./assets/styles/app.css"/>
   <script src="//unpkg.com/vue@latest"></script>
   <script src="//cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
   <script src="//cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="//uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-  <script src="/assets/js/app.js"></script>
+  <script src="./assets/js/app.js"></script>
 </head>
 <body>
 <div id="app">
@@ -49,7 +49,7 @@
       </tr>
       <tr v-for="(item, i) in filteredWorkers" :key="item.id">
         <td>
-          <a href="/dashboard.html" class="link-secondary text-decoration-none">{{ item.corp_nm }}</a>
+          <a href="./dashboard.html" class="link-secondary text-decoration-none">{{ item.corp_nm }}</a>
           <span v-if="item.corp_status=='update'" class="badge rounded-pill bg-primary ml-2 text-uppercase">{{item.corp_status}}</span>
           <span v-else class="badge rounded-pill bg-danger ml-2 text-uppercase">{{item.corp_status}}</span>
         </td>
@@ -76,8 +76,8 @@
 <script type="module">
   const app = Vue.createApp({
     components: {
-      "layout": Vue.defineAsyncComponent(() => loadModule("./components/layout.vue", options)),
-      "errorInfo": Vue.defineAsyncComponent(() => loadModule("./components/errorInfo.vue", options))
+      "layout": Vue.defineAsyncComponent(() => loadModule("/components/layout.vue", options)),
+      "errorInfo": Vue.defineAsyncComponent(() => loadModule("/components/errorInfo.vue", options))
     },
     data() {
       return {
