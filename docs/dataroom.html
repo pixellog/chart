@@ -20,41 +20,49 @@
         <h4 class="text-white mb-0">데이터룸</h4>
         <div class="d-flex align-center">
           <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']" :key="item.id">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i" checked>
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i" :checked="item==null || item=='전체'">
             <label class="form-check-label" :for="'inlineRadio'+i">{{ item }}</label>
           </div>
           <div class="d-flex align-center ml-5">
             <i class="material-symbols-outlined mr-n9 position-relative">search</i>
-            <input type="search" class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
+            <input v-model="searchString" type="search" class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
           </div>
         </div>
       </div>
     </div>
-
     <div class="container py-15">
       <table class="table table-hover">
         <thead>
         <tr>
-          <th :class="i==0 || 'text-center'" v-for="(item, i) in th" :key="item.id">{{ item }}</th>
+          <th v-for="(header,i) in headers" @click="setSortColumn(header.key)" :class="i==0 || 'text-center'">
+            {{ header.value }}
+            <span class="arrow" :class="{ active: this.sortColumn === header.key && this.order === 'ASC'}">&#8593;</span>
+            <span class="arrow" :class="{ active: this.sortColumn === header.key && this.order === 'DESC'}">&#8595;</span>
+          </th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <tr v-for="(item, i) in trList" :key="item.id">
-          <td class="">
-            <a href="./dashboard.html" class="link-secondary">{{ item.title }}</a>
-            <span v-if="i==1" class="badge rounded-pill bg-primary ml-2 text-uppercase">update</span>
-            <span v-else class="badge rounded-pill bg-danger ml-2 text-uppercase">new</span>
+        <tr v-if="!filteredWorkers.length">
+          <td colspan="4" class="text-center">검색결과가 없습니다.</td>
+        </tr>
+        <tr v-for="(item, i) in filteredWorkers" :key="item.id">
+          <td>
+            <a href="./dashboard.html" class="link-secondary text-decoration-none">{{ item.corp_nm }}</a>
+            <span v-if="item.corp_status=='update'" class="badge rounded-pill bg-primary ml-2 text-uppercase">{{item.corp_status}}</span>
+            <span v-else class="badge rounded-pill bg-danger ml-2 text-uppercase">{{item.corp_status}}</span>
           </td>
-          <td class="text-center text-secondary" style="width: 150px;">{{ item.date }}</td>
-          <td class="text-center text-secondary" style="width: 150px;">{{ item.update }}</td>
+          <td class="text-center text-secondary" style="width: 150px;">{{ item.crt_dt }}</td>
+          <td class="text-center text-secondary" style="width: 150px;">{{ item.up_dt }}</td>
           <td class="text-center pb-0" style="width: 100px;">
-            <i v-if="i!==1" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
-            <div v-else>
+            <i v-if="item.ssr_fail==0" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
+            <span v-else>
               <a href="#none" data-bs-toggle="modal" data-bs-target="#errorInfoModal">
                 <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
               </a>
-              <error-info></error-info>
-            </div>
+              <error-info :data="errorList"></error-info>
+            </span>
+            <!-- 메뉴얼 업데이트 아이콘 추가 -->
+            <a href="#none" class="ml-3"><i class="material-symbols-outlined font-weight-light text-primary">refresh</i></a>
           </td>
         </tr>
         </tbody>
@@ -74,92 +82,382 @@
     },
     data() {
       return {
-        th: ['기업명', '등록일', '업데이트', '상태'],
-        trList: [
-          {
-            title: '고위드데이터1',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터2',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터3',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터4',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터1',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터2',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터3',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터4',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터1',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터2',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터3',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-          {
-            title: '고위드데이터4',
-            date: '2022.02.12',
-            update: '2022.02.12',
-            status: 'Y'
-          },
-        ]
+        headers: [],
+        workers: [],
+        sortColumn: "",
+        order: "ASC",
+        searchString: "",
+        errorList: errorList.errorInfo,
+      }
+    },
+    mounted() {
+      this.getWorkers();
+    },
+    computed: {
+      filteredWorkers() {
+        const filteredWorkers = this.searchString === ""
+          ? this.workers
+          : this.workers.filter(wo => Object.values(wo).join("").indexOf(this.searchString) !== -1);
+
+        const column = this.sortColumn
+        const order = this.order;
+
+        filteredWorkers.sort(function (a, b) {
+          var nameA = a[column] + "".toUpperCase();
+          var nameB = b[column] + "".toUpperCase();
+          if (order === "DESC" && nameA > nameB) {
+            return -1;
+          }
+          if (order === "DESC" && nameA < nameB) {
+            return 1;
+          }
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+
+        return filteredWorkers;
+      },
+    },
+    methods: {
+      setSortColumn(column) {
+        if (this.sortColumn === column) {
+          this.order = this.order === "ASC" ? "DESC" : "ASC";
+        } else {
+          this.order = "ASC";
+          this.sortColumn = column;
+        }
+      },
+      async getWorkers() {
+        const workers = corpList.corpInfo;
+
+        const headers = [
+          {key: "corp_nm", value: "기업명"},
+          {key: "crt_dt", value: "등록일시"},
+          {key: "up_dt", value: "업데이트"},
+          {key: "ssr_fail", value: "상태"},
+        ];
+
+        this.headers = headers;
+        this.workers = workers;
       }
     },
   });
+  /*
+            "up_dt": 업데이트 일시
+            "crt_dt": 등록일시
+            "corp_nm": 기업명
+            "corp_no": 사업자번호(페이지 이동시 파라메터)
+            "ssr_fail": 상태 (스크래핑 오류여부    0: 에러없음, 1:에러발생),
+            "task_id": 작업아이디 (오류페이지 클릭시 파라메터로 사용)
+            "corp_status": 배지상태 ("new"", "update, "")
+*/
+  const corpList = {
+    "corpInfo": [
+      {
+        "up_dt": "2022-11-08",
+        "crt_dt": "2022-11-08",
+        "corp_nm": "주식회사 스키니피그크리머리",
+        "corp_no": "3238700980",
+        "ssr_fail": "1",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": "new"
+
+      },
+      {
+        "up_dt": "2022-11-03",
+        "crt_dt": "2022-11-03",
+        "corp_nm": "주식회사 수버킷",
+        "corp_no": "1668701047",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": "new"
+      },
+      {
+        "up_dt": "2022-11-03",
+        "crt_dt": "2022-11-03",
+        "corp_nm": "주식회사 레이지소사이어티",
+        "corp_no": "5278600829",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": "update"
+      },
+      {
+        "up_dt": "2022-11-03",
+        "crt_dt": "2022-11-03",
+        "corp_nm": "주식회사 프레시코드",
+        "corp_no": "8838100307",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": "update"
+      },
+      {
+        "up_dt": "2022-11-02",
+        "crt_dt": "2022-11-02",
+        "corp_nm": "주식회사 오늘식탁",
+        "corp_no": "7058100628",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": ""
+      },
+      {
+        "up_dt": "2022-10-31",
+        "crt_dt": "2022-10-31",
+        "corp_nm": "주식회사 랩도쿠",
+        "corp_no": "1268682138",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": ""
+      },
+      {
+        "up_dt": "2022-10-24",
+        "crt_dt": "2022-10-24",
+        "corp_nm": "주식회사 건강한친구들",
+        "corp_no": "5278600396",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": ""
+      },
+      {
+        "up_dt": "2022-10-18",
+        "crt_dt": "2022-10-18",
+        "corp_nm": "주식회사 차일디(CHILDY Co., Ltd.)",
+        "corp_no": "8338101903",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": ""
+      },
+      {
+        "up_dt": "2022-10-18",
+        "crt_dt": "2022-10-18",
+        "corp_nm": "주식회사 레드블루 (REDBLUE Inc.)",
+        "corp_no": "8448600156",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": ""
+      },
+      {
+        "up_dt": "2022-10-14",
+        "crt_dt": "2022-10-14",
+        "corp_nm": "주식회사 슬릭코퍼레이션",
+        "corp_no": "6538100730",
+        "ssr_fail": "0",
+        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
+        "corp_status": ""
+      }
+    ],
+    "page_cnt": 16
+  }
+
+  const errorList = {
+    "errorInfo": [
+      {
+        "ret_cd": 2813,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0002110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0003110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0004110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0007110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0020110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0023110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0027110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0031110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0032110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0034110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0035110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0037110001"
+      },
+      {
+        "ret_cd": 2813,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0039110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0045110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0048110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0071110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0081110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0089110001"
+      },
+      {
+        "ret_cd": 2813,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0002110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0003110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0004110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0007110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0020110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0023110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0027110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0031110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0032110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0034110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0035110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0037110001"
+      },
+      {
+        "ret_cd": 2813,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0039110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0045110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0048110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0071110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0081110001"
+      },
+      {
+        "ret_cd": 2805,
+        "crt_dt": "2022-10-24",
+        "module_name": "KRBK0089110001"
+      }
+    ]
+  }
 
   const pagination = new tui.Pagination('pagination', {
-    totalItems: 12,
-    itemsPerPage: 10,
+    totalItems: corpList.corpInfo.length,
+    itemsPerPage: 100,
     visiblePages: 5
   });
 
   app.mount("#app");
 </script>
+<style>
+  th {
+    cursor: pointer;
+  }
+
+  .arrow {
+    color: gray;
+  }
+
+  .active {
+    color: black;
+  }
+</style>
 </body>
 </html>
