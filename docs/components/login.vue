@@ -1,7 +1,7 @@
 <template>
   <layout>
     <div class="container mt-lg-15">
-      <div class="card rounded-lg mx-auto col-md-5">
+      <div class="card rounded-lg mx-auto col-md-5" style="max-width: 500px">
         <div class="card-body pa-lg-15">
           <h3 class="mb-10 text-center">로그인</h3>
           <input type="mail" class="form-control" placeholder="이메일">
