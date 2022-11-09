@@ -76,8 +76,8 @@
 <script type="module">
   const app = Vue.createApp({
     components: {
-      "layout": Vue.defineAsyncComponent(() => loadModule("/components/layout.vue", options)),
-      "errorInfo": Vue.defineAsyncComponent(() => loadModule("/components/errorInfo.vue", options))
+      "layout": Vue.defineAsyncComponent(() => loadModule("./components/layout.vue", options)),
+      "errorInfo": Vue.defineAsyncComponent(() => loadModule("./components/errorInfo.vue", options))
     },
     data() {
       return {
