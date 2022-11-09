@@ -17,13 +17,16 @@
 
     <div class="category-area">
       <div class="container py-6 d-flex align-center justify-space-between">
-        <h4 class="text-white mb-0">데이터룸</h4>
-        <div class="d-flex align-center">
-          <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']" :key="item.id">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i" :checked="item==null || item=='전체'">
-            <label class="form-check-label" :for="'inlineRadio'+i">{{ item }}</label>
+
+        <div class="row no-gutters align-center">
+          <div class="col-12 col-lg-auto"><h4 class="text-white">데이터룸</h4></div>
+          <div class="col-12 col-lg-auto ml-auto my-3 my-lg-0">
+            <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']" :key="item.id">
+              <input @change="onErrorCheck(item)" class="form-check-input" type="radio" name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i" :checked="item==null || item=='전체'">
+              <label class="form-check-label" :for="'inlineRadio'+i">{{ item }}</label>
+            </div>
           </div>
-          <div class="d-flex align-center ml-5">
+          <div class="col-12 col-lg-auto d-flex align-center pl-3">
             <i class="material-symbols-outlined mr-n9 position-relative">search</i>
             <input v-model="searchString" type="search" class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
           </div>
@@ -62,7 +65,7 @@
               <error-info :data="errorList"></error-info>
             </span>
             <!-- 메뉴얼 업데이트 아이콘 추가 -->
-            <a href="#none" class="ml-3"><i class="material-symbols-outlined font-weight-light text-primary">refresh</i></a>
+            <a @click="onRefresh" href="#none" class="ml-3"><i class="material-symbols-outlined font-weight-light text-primary">refresh</i></a>
           </td>
         </tr>
         </tbody>
@@ -94,44 +97,19 @@
       this.getWorkers();
     },
     computed: {
-      filteredWorkers() {
-        const filteredWorkers = this.searchString === ""
-          ? this.workers
-          : this.workers.filter(wo => Object.values(wo).join("").indexOf(this.searchString) !== -1);
-
-        const column = this.sortColumn
-        const order = this.order;
-
-        filteredWorkers.sort(function (a, b) {
-          var nameA = a[column] + "".toUpperCase();
-          var nameB = b[column] + "".toUpperCase();
-          if (order === "DESC" && nameA > nameB) {
-            return -1;
-          }
-          if (order === "DESC" && nameA < nameB) {
-            return 1;
-          }
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-          return 0;
-        });
-
-        return filteredWorkers;
-      },
+      filteredWorkers: filteredWorkers
     },
     methods: {
-      setSortColumn(column) {
-        if (this.sortColumn === column) {
-          this.order = this.order === "ASC" ? "DESC" : "ASC";
-        } else {
-          this.order = "ASC";
-          this.sortColumn = column;
-        }
+      onErrorCheck(x) {
+        this.workers = corpList.corpInfo; // 필터 초기화
+        this.workers = x == '전체' ?
+          corpList.corpInfo :
+          this.workers.filter(error => error.ssr_fail == (x == '성공' ? '0' : '1'));
       },
+      onRefresh() {
+        alert('onRefresh')
+      },
+      setSortColumn: setSortColumn,
       async getWorkers() {
         const workers = corpList.corpInfo;
 
