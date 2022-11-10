@@ -4,16 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RND > 데이터룸</title>
-  <link rel="stylesheet" href="./assets/styles/app.css"/>
+  <link rel="stylesheet" href="/assets/styles/app.css"/>
   <script src="//unpkg.com/vue@latest"></script>
   <script src="//cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
   <script src="//cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="//uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-  <script src="./assets/js/app.js"></script>
+  <script src="//code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="/assets/js/app.js"></script>
 </head>
 <body>
-<div id="app">
-<layout>
+<div id="app" class="d-flex flex-column" style="min-height: 100vh">
+  <navs></navs>
+
   <div class="category-area">
     <div class="container py-6 d-flex align-center justify-space-between">
 
@@ -27,12 +29,13 @@
         </div>
         <div class="col-12 col-lg-auto d-flex align-center pl-3">
           <i class="material-symbols-outlined mr-n9 position-relative">search</i>
-          <input v-model="searchString" type="search" class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
+          <input @keyup="renderPagination" v-model="searchString" type="search" class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
         </div>
       </div>
     </div>
   </div>
-  <div class="container py-15">
+
+  <div class="container py-15 flex-grow-1">
     <table class="table table-hover">
       <thead>
       <tr>
@@ -49,35 +52,42 @@
       </tr>
       <tr v-for="(item, i) in filteredWorkers" :key="item.id">
         <td>
-          <a href="./dashboard.html" class="link-secondary text-decoration-none">{{ item.corp_nm }}</a>
-          <span v-if="item.corp_status=='update'" class="badge rounded-pill bg-primary ml-2 text-uppercase">{{item.corp_status}}</span>
-          <span v-else class="badge rounded-pill bg-danger ml-2 text-uppercase">{{item.corp_status}}</span>
+          <a href="/dashboard" class="link-secondary text-decoration-none">{{ item.corp_nm }}</a>
+          <span v-if="item.new_status=='1'" class="badge rounded-pill bg-primary ml-2 text-uppercase">new</span>
+          <span v-else-if="item.update_status=='1'" class="badge rounded-pill bg-danger ml-2 text-uppercase">update</span>
+          <span v-else></span>
         </td>
         <td class="text-center text-secondary" style="width: 150px;">{{ item.crt_dt }}</td>
-        <td class="text-center text-secondary" style="width: 150px;">{{ item.up_dt }}</td>
+        <td class="text-center text-secondary" style="width: 150px;">{{ item.fin_dt }}</td>
         <td class="text-center pb-0" style="width: 100px;">
-          <i v-if="item.ssr_fail==0" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
+          <!--          {{item.ssr_fail}}-->
+          <i v-if="!item.ssr_fail" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
           <span v-else>
               <a href="#none" data-bs-toggle="modal" data-bs-target="#errorInfoModal">
                 <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
               </a>
               <error-info :data="errorList"></error-info>
-            </span>
+            <!--            {{item}}-->
+            <!--            <error-info :data=selectErrorList(item.corp_no, item.task_id)></error-info>-->
+            <!--                        <error-info :data="selectErrorList" :id="item.corp_no" :task="item.task_id"></error-info>-->
+          </span>
           <!-- 메뉴얼 업데이트 아이콘 추가 -->
-          <a @click="onRefresh" href="#none" class="ml-3"><i class="material-symbols-outlined font-weight-light text-primary">refresh</i></a>
+          <a @click="onRefresh(item.corp_no)" href="#none" class="ml-3"><i class="material-symbols-outlined font-weight-light text-primary">refresh</i></a>
         </td>
       </tr>
       </tbody>
     </table>
     <div id="pagination" class="tui-pagination mt-10"></div>
   </div>
-</layout>
+
+  <footers></footers>
 </div>
 <script type="module">
   const app = Vue.createApp({
     components: {
-      "layout": Vue.defineAsyncComponent(() => loadModule("./components/layout.vue", options)),
-      "errorInfo": Vue.defineAsyncComponent(() => loadModule("./components/errorInfo.vue", options))
+      "navs": Vue.defineAsyncComponent(() => loadModule("/components/navs.vue", options)),
+      "footers": Vue.defineAsyncComponent(() => loadModule("/components/footers.vue", options)),
+      "errorInfo": Vue.defineAsyncComponent(() => loadModule("/components/errorInfo.vue", options))
     },
     data() {
       return {
@@ -85,29 +95,93 @@
         workers: [],
         sortColumn: "",
         order: "ASC",
-        searchString: "",
+        searchString: '',
         errorList: errorList.errorInfo,
+        corpList: this.selectCorpList().corpInfo
+      }
+    },
+    computed: {
+      filteredWorkers() {
+        const filteredWorkers = this.searchString === ""
+          ? this.workers
+          : this.workers.filter(wo => Object.values(wo).join("").indexOf(this.searchString) !== -1);
+
+        const column = this.sortColumn
+        const order = this.order;
+
+        filteredWorkers.sort(function (a, b) {
+          const nameA = a[column] + "".toUpperCase();
+          const nameB = b[column] + "".toUpperCase();
+          if (order === "DESC" && nameA > nameB) {
+            return -1;
+          }
+          if (order === "DESC" && nameA < nameB) {
+            return 1;
+          }
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+
+        console.log('필터링된 데이터 수 : ' + filteredWorkers.length)
+
+        return filteredWorkers;
       }
     },
     mounted() {
       this.getWorkers();
-    },
-    computed: {
-      filteredWorkers: filteredWorkers
+      this.selectCorpList();
+      this.renderPagination();
+      this.selectErrorList();
     },
     methods: {
+      renderPagination() {
+        var pagination = new tui.Pagination('pagination', {
+          totalItems: this.filteredWorkers.length,
+          itemsPerPage: 10,
+          visiblePages: 10,
+        });
+
+        pagination.on('beforeMove', function (eventData) {
+          // return confirm('Go to page ' + eventData.page + '?');
+        });
+
+        pagination.on('afterMove', function (eventData) {
+          // alert('The current page is ' + eventData.page);
+        });
+      },
       onErrorCheck(x) {
-        this.workers = corpList.corpInfo; // 필터 초기화
-        this.workers = x == '전체' ?
-          corpList.corpInfo :
-          this.workers.filter(error => error.ssr_fail == (x == '성공' ? '0' : '1'));
+        this.workers = this.corpList; // 필터 초기화
+        this.workers = x == '전체' ? this.corpList :
+          this.workers.filter(error => x == '성공' ? error.ssr_fail == 0 : error.ssr_fail != 0);
       },
-      onRefresh() {
-        alert('onRefresh')
+      onRefresh(i) {
+        alert(i)
       },
-      setSortColumn: setSortColumn,
+      setSortColumn(column) {
+        if (this.sortColumn === column) {
+          this.order = this.order === "ASC" ? "DESC" : "ASC";
+        } else {
+          this.order = "ASC";
+          this.sortColumn = column;
+        }
+      },
       async getWorkers() {
-        const workers = corpList.corpInfo;
+        const workers = this.corpList;
+
+        /*
+            "up_dt": 업데이트 일시
+            "crt_dt": 등록일시
+            "corp_nm": 기업명
+            "corp_no": 사업자번호(페이지 이동시 파라메터)
+            "ssr_fail": 상태 (스크래핑 오류여부    0: 에러없음, 1:에러발생),
+            "task_id": 작업아이디 (오류페이지 클릭시 파라메터로 사용)
+            "corp_status": 배지상태 ("new"", "update, "")
+        */
 
         const headers = [
           {key: "corp_nm", value: "기업명"},
@@ -118,114 +192,58 @@
 
         this.headers = headers;
         this.workers = workers;
-      }
-    },
-  });
-  /*
-            "up_dt": 업데이트 일시
-            "crt_dt": 등록일시
-            "corp_nm": 기업명
-            "corp_no": 사업자번호(페이지 이동시 파라메터)
-            "ssr_fail": 상태 (스크래핑 오류여부    0: 에러없음, 1:에러발생),
-            "task_id": 작업아이디 (오류페이지 클릭시 파라메터로 사용)
-            "corp_status": 배지상태 ("new"", "update, "")
-*/
-  const corpList = {
-    "corpInfo": [
-      {
-        "up_dt": "2022-11-08",
-        "crt_dt": "2022-11-08",
-        "corp_nm": "주식회사 스키니피그크리머리",
-        "corp_no": "3238700980",
-        "ssr_fail": "1",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": "new"
+      },
+      selectCorpList() {
+        var returnValue;
+        var params = {};
+        params.stCnt = 0;
+        params.enCnt = 20;
+        params.searchText = this.searchString;
 
+        $.ajax({
+          url: "http://localhost:8080/dataroom/selectCorpList",
+          type: "POST",
+          data: JSON.stringify(params),
+          dataType: "json",
+          async: false,
+          contentType: "application/json;charset=utf-8",
+          success: function (data) {
+            returnValue = data;
+            // console.log(returnValue);
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+
+        return returnValue;
       },
-      {
-        "up_dt": "2022-11-03",
-        "crt_dt": "2022-11-03",
-        "corp_nm": "주식회사 수버킷",
-        "corp_no": "1668701047",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": "new"
-      },
-      {
-        "up_dt": "2022-11-03",
-        "crt_dt": "2022-11-03",
-        "corp_nm": "주식회사 레이지소사이어티",
-        "corp_no": "5278600829",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": "update"
-      },
-      {
-        "up_dt": "2022-11-03",
-        "crt_dt": "2022-11-03",
-        "corp_nm": "주식회사 프레시코드",
-        "corp_no": "8838100307",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": "update"
-      },
-      {
-        "up_dt": "2022-11-02",
-        "crt_dt": "2022-11-02",
-        "corp_nm": "주식회사 오늘식탁",
-        "corp_no": "7058100628",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": ""
-      },
-      {
-        "up_dt": "2022-10-31",
-        "crt_dt": "2022-10-31",
-        "corp_nm": "주식회사 랩도쿠",
-        "corp_no": "1268682138",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": ""
-      },
-      {
-        "up_dt": "2022-10-24",
-        "crt_dt": "2022-10-24",
-        "corp_nm": "주식회사 건강한친구들",
-        "corp_no": "5278600396",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": ""
-      },
-      {
-        "up_dt": "2022-10-18",
-        "crt_dt": "2022-10-18",
-        "corp_nm": "주식회사 차일디(CHILDY Co., Ltd.)",
-        "corp_no": "8338101903",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": ""
-      },
-      {
-        "up_dt": "2022-10-18",
-        "crt_dt": "2022-10-18",
-        "corp_nm": "주식회사 레드블루 (REDBLUE Inc.)",
-        "corp_no": "8448600156",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": ""
-      },
-      {
-        "up_dt": "2022-10-14",
-        "crt_dt": "2022-10-14",
-        "corp_nm": "주식회사 슬릭코퍼레이션",
-        "corp_no": "6538100730",
-        "ssr_fail": "0",
-        "task_id": "01070344c06610b9653624ccab6fc0bc3bdc7ded",
-        "corp_status": ""
+      selectErrorList(corpNo, taskId) {
+        var returnValue;
+        var params = {};
+        params.corpNo = corpNo;
+        params.taskId = taskId;
+
+        $.ajax({
+          url: "http://localhost:8080/dataroom/selectErrorList",
+          type: "POST",
+          data: JSON.stringify(params),
+          dataType: "json",
+          async: false,
+          contentType: "application/json;charset=utf-8",
+          success: function (data) {
+            console.log(data)
+            returnValue = data;
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+
+        return returnValue;
       }
-    ],
-    "page_cnt": 16
-  }
+    }
+  });
 
   const errorList = {
     "errorInfo": [
@@ -412,13 +430,8 @@
     ]
   }
 
-  const pagination = new tui.Pagination('pagination', {
-    totalItems: corpList.corpInfo.length,
-    itemsPerPage: 100,
-    visiblePages: 5
-  });
-
   app.mount("#app");
+
 </script>
 <style>
   th {
