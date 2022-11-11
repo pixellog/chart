@@ -70,7 +70,6 @@
                 <a href="#none" data-bs-toggle="modal" :data-bs-target="'#errorInfoModal'+item.corp_no">
                 <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
               </a>
-<!--              <error-info :data="selectErrorList(item.corp_no, item.task_id)"></error-info>-->
               <error-info :data="[item.corp_no, item.task_id]"></error-info>
 <!--              <error-info></error-info>-->
           </span>
@@ -147,7 +146,6 @@
       this.getWorkers();
       this.selectCorpList();
       this.renderPagination();
-      // this.selectErrorList();
     },
     methods: {
       renderPagination() {
@@ -231,30 +229,6 @@
 
         return returnValue;
       },
-      selectErrorList(corpNo, taskId) {
-        var returnValue;
-        var params = {};
-        params.corpNo = corpNo;
-        params.taskId = taskId;
-
-        $.ajax({
-          url: "http://localhost:8080/dataroom/selectErrorList",
-          type: "POST",
-          data: JSON.stringify(params),
-          dataType: "json",
-          async: false,
-          contentType: "application/json;charset=utf-8",
-          success: function (data) {
-            console.log(data)
-            returnValue = data;
-          },
-          error: function (err) {
-            console.log(err);
-          }
-        });
-
-        return returnValue;
-      }
     }
   });
 
