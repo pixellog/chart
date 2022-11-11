@@ -22,14 +22,18 @@
       <div class="row no-gutters align-center">
         <div class="col-12 col-lg-auto"><h4 class="text-white">데이터룸</h4></div>
         <div class="col-12 col-lg-auto ml-auto my-3 my-lg-0">
-          <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']" :key="item.id">
-            <input @change="onErrorCheck(item)" class="form-check-input" type="radio" name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i" :checked="item==null || item=='전체'">
+          <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']"
+               :key="item.id">
+            <input @change="onErrorCheck(item)" class="form-check-input" type="radio"
+                   name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i"
+                   :checked="item==null || item=='전체'">
             <label class="form-check-label" :for="'inlineRadio'+i">{{ item }}</label>
           </div>
         </div>
         <div class="col-12 col-lg-auto d-flex align-center pl-3">
           <i class="material-symbols-outlined mr-n9 position-relative">search</i>
-          <input @keyup="renderPagination" v-model="searchString" type="search" class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
+          <input @keyup="renderPagination" v-model="searchString" type="search"
+                 class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
         </div>
       </div>
     </div>
@@ -50,29 +54,29 @@
       <tr v-if="!filteredWorkers.length">
         <td colspan="4" class="text-center">검색결과가 없습니다.</td>
       </tr>
-      <tr v-for="(item, i) in filteredWorkers" :key="item.id">
+      <tr v-for="(item, i) in paginatedData" :key="item.id">
         <td>
           <a href="/dashboard" class="link-secondary text-decoration-none">{{ item.corp_nm }}</a>
-          <span v-if="item.new_status=='1'" class="badge rounded-pill bg-primary ml-2 text-uppercase">new</span>
+          <span v-if="item.new_status=='1'"
+                class="badge rounded-pill bg-primary ml-2 text-uppercase">new</span>
           <span v-else-if="item.update_status=='1'" class="badge rounded-pill bg-danger ml-2 text-uppercase">update</span>
           <span v-else></span>
         </td>
         <td class="text-center text-secondary" style="width: 150px;">{{ item.crt_dt }}</td>
         <td class="text-center text-secondary" style="width: 150px;">{{ item.fin_dt }}</td>
         <td class="text-center pb-0" style="width: 100px;">
-          <!--          {{item.ssr_fail}}-->
           <i v-if="!item.ssr_fail" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
           <span v-else>
-              <a href="#none" data-bs-toggle="modal" data-bs-target="#errorInfoModal">
+                <a href="#none" data-bs-toggle="modal" :data-bs-target="'#errorInfoModal'+item.corp_no">
                 <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
               </a>
-              <error-info :data="errorList"></error-info>
-            <!--            {{item}}-->
-            <!--            <error-info :data=selectErrorList(item.corp_no, item.task_id)></error-info>-->
-            <!--                        <error-info :data="selectErrorList" :id="item.corp_no" :task="item.task_id"></error-info>-->
+<!--              <error-info :data="selectErrorList(item.corp_no, item.task_id)"></error-info>-->
+              <error-info :data="[item.corp_no, item.task_id]"></error-info>
+<!--              <error-info></error-info>-->
           </span>
           <!-- 메뉴얼 업데이트 아이콘 추가 -->
-          <a @click="onRefresh(item.corp_no)" href="#none" class="ml-3"><i class="material-symbols-outlined font-weight-light text-primary">refresh</i></a>
+          <a @click="onRefresh(item.corp_no)" href="#none" class="ml-3"><i
+            class="material-symbols-outlined font-weight-light text-primary">refresh</i></a>
         </td>
       </tr>
       </tbody>
@@ -96,8 +100,9 @@
         sortColumn: "",
         order: "ASC",
         searchString: '',
-        errorList: errorList.errorInfo,
-        corpList: this.selectCorpList().corpInfo
+        corpList: this.selectCorpList().corpInfo,
+        pageNum: 0,
+        pageSize: 10,
       }
     },
     computed: {
@@ -130,13 +135,19 @@
         console.log('필터링된 데이터 수 : ' + filteredWorkers.length)
 
         return filteredWorkers;
+      },
+      paginatedData() {
+        console.log('page : ' + this.pageNum)
+        const start = this.pageNum * this.pageSize,
+          end = start + this.pageSize;
+        return this.filteredWorkers.slice(start, end);
       }
     },
     mounted() {
       this.getWorkers();
       this.selectCorpList();
       this.renderPagination();
-      this.selectErrorList();
+      // this.selectErrorList();
     },
     methods: {
       renderPagination() {
@@ -146,18 +157,18 @@
           visiblePages: 10,
         });
 
-        pagination.on('beforeMove', function (eventData) {
-          // return confirm('Go to page ' + eventData.page + '?');
-        });
+        var self = this;
 
         pagination.on('afterMove', function (eventData) {
-          // alert('The current page is ' + eventData.page);
+          return self.pageNum = eventData.page - 1
         });
       },
       onErrorCheck(x) {
+        this.pageNum = 0;
         this.workers = this.corpList; // 필터 초기화
         this.workers = x == '전체' ? this.corpList :
           this.workers.filter(error => x == '성공' ? error.ssr_fail == 0 : error.ssr_fail != 0);
+        this.renderPagination();
       },
       onRefresh(i) {
         alert(i)
@@ -197,8 +208,10 @@
         var returnValue;
         var params = {};
         params.stCnt = 0;
-        params.enCnt = 20;
+        params.enCnt = 100;
         params.searchText = this.searchString;
+
+        // console.log(this.corpList)
 
         $.ajax({
           url: "http://localhost:8080/dataroom/selectCorpList",
@@ -245,190 +258,6 @@
     }
   });
 
-  const errorList = {
-    "errorInfo": [
-      {
-        "ret_cd": 2813,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0002110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0003110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0004110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0007110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0020110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0023110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0027110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0031110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0032110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0034110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0035110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0037110001"
-      },
-      {
-        "ret_cd": 2813,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0039110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0045110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0048110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0071110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0081110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0089110001"
-      },
-      {
-        "ret_cd": 2813,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0002110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0003110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0004110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0007110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0020110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0023110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0027110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0031110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0032110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0034110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0035110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0037110001"
-      },
-      {
-        "ret_cd": 2813,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0039110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0045110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0048110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0071110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0081110001"
-      },
-      {
-        "ret_cd": 2805,
-        "crt_dt": "2022-10-24",
-        "module_name": "KRBK0089110001"
-      }
-    ]
-  }
 
   app.mount("#app");
 
