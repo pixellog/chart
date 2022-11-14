@@ -1,4 +1,4 @@
-function initChart(){
+function initChart() {
   // 타임라인
   chartTimeline();
   // 고용.인건비.생산성 현황
@@ -82,24 +82,28 @@ function chartTimeline() {
       '2022-03',
       '2022-07',
     ],
-    series: [
-      {
-        name: '런웨이',
-        data: [-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 25.9, 27.2, 24.2],
-      },
-      {
-        name: '월별손익',
-        data: [3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0],
-      },
-      {
-        name: '고용인원',
-        data: [22.1, 22.0, 20.9, 18.3, 15.2, 12.8, 11.8, 13.0, 15.2],
-      },
-      {
-        name: '투자유치',
-        data: [-10.3, -9.1, -4.1, 4.4, 12.2, 16.3, 18.5, 16.7, 10.9],
-      },
-    ],
+    series: {
+      line: [
+        {
+          name: '런웨이',
+          data: [-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 25.9, 27.2, 24.2],
+        },
+        {
+          name: '월별손익',
+          data: [3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0],
+        },
+        {
+          name: '고용인원',
+          data: [22.1, 22.0, 20.9, 18.3, 15.2, 12.8, 11.8, 13.0, 15.2],
+        },
+      ],
+      area: [
+        {
+          name: '투자유치',
+          data: [-10.3, -9.1, -4.1, 4.4, 12.2, 16.3, 18.5, 16.7, 10.9],
+        },
+      ]
+    }
   };
   const style = {
     plot: {
@@ -113,14 +117,21 @@ function chartTimeline() {
           color: '#f00',
         },
       ],
-    }
+    },
+    yAxis: [{
+      title: 'Y1',
+      chartType: 'line'
+    }, {
+      title: 'Y2',
+      chartType: 'area',
+    }]
   }
 
   const options = Object.assign({}, theme, style)
 
   const chart = toastui.Chart;
   const el = document.getElementById('timeline');
-  chart.lineChart({el, data, options});
+  chart.lineAreaChart({el, data, options});
 }
 
 // 고용.인건비.생산성 현황
@@ -280,7 +291,20 @@ function chartCurrently() {
       },
     ],
   };
-  const style = {};
+  const style = {
+    plot: {
+      lines: [
+        {
+          value: '2020-11',
+          color: '#f00',
+        },
+        {
+          value: '2021-03',
+          color: '#f00',
+        },
+      ],
+    }
+  }
   const options = Object.assign({}, theme, style)
 
   const chart = toastui.Chart;
@@ -294,28 +318,36 @@ function chartProfit() {
 
   const data = {
     categories: ['2022.1', '2022.2', '2022.3', '2022.4', '2022.5', '2022.6', '2022.7', '2022.8', '2022.9', '2022.10'],
-    series: [
-      {
-        name: '지출',
-        data: [40000, 50000, 30000, 50000, 70000, 60000, 40000, 50000, 30000, 40000],
-      },
-      {
-        name: '매출',
-        data: [70000, 80000, 20000, 70000, 25000, 70000, 70000, 80000, 20000, 40000],
-      },
-      {
-        name: '손익',
-        data: [-5000, -4000, -24000, -6000, 1300, -4000, -5000, -4000, -4000, 3000],
-      },
-    ],
-  };
+    series: {
+      column: [
+        {
+          name: '지출',
+          data: [40000, 50000, 30000, 50000, 70000, 60000, 40000, 50000, 30000, 40000],
+        },
+        {
+          name: '매출',
+          data: [70000, 80000, 20000, 70000, 25000, 70000, 70000, 80000, 20000, 40000],
+        },
+        // {
+        //   name: '손익',
+        //   data: [-5000, -4000, -24000, -6000, 1300, -4000, -5000, -4000, -4000, 3000],
+        // },
+      ],
+      line: [
+        {
+          name: '손익',
+          data: [-5000, -4000, -24000, -6000, 1300, -4000, -5000, -4000, -4000, 3000],
+        },
+      ],
+    }
+  }
 
   const style = {};
   const options = Object.assign({}, theme, style)
 
   const chart = toastui.Chart;
   const el = document.getElementById('profit');
-  chart.columnChart({el, data, options});
+  chart.columnLineChart({el, data, options});
 }
 
 // Cash In/Out
