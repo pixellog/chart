@@ -5,249 +5,244 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RND > 데이터룸</title>
   <link rel="stylesheet" href="/assets/styles/app.css"/>
-  <script src="//unpkg.com/vue@latest"></script>
-  <script src="//cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
-  <script src="//cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="//uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-  <script src="//code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="/assets/js/app.js"></script>
 </head>
 <body>
 <div id="app" class="d-flex flex-column" style="min-height: 100vh">
-  <navs></navs>
+  <layout>
+    <div class="category-area">
+      <div class="container py-6 d-flex align-center justify-space-between">
 
-  <div class="category-area">
-    <div class="container py-6 d-flex align-center justify-space-between">
-
-      <div class="row no-gutters align-center">
-        <div class="col-12 col-lg-auto"><h4 class="text-white">데이터룸</h4></div>
-        <div class="col-12 col-lg-auto ml-auto my-3 my-lg-0">
-          <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']"
-               :key="item.id">
-            <input @change="onErrorCheck(item)" class="form-check-input" type="radio"
-                   name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i"
-                   :checked="item==null || item=='전체'">
-            <label class="form-check-label" :for="'inlineRadio'+i">{{ item }}</label>
+        <div class="row no-gutters align-center">
+          <div class="col-12 col-lg-auto"><h4 class="text-white">데이터룸</h4></div>
+          <div v-if="false" class="col-12 col-lg-auto ml-auto my-3 my-lg-0">
+            <div class="form-check form-check-inline text-white" v-for="(item,i) in ['전체','성공','실패']"
+                 :key="item.id">
+              <input @change="onErrorCheck(item)" class="form-check-input" type="radio"
+                     name="inlineRadioOptions" :id="'inlineRadio'+i" :value="'option'+i"
+                     :checked="item==null || item=='전체'">
+              <label class="form-check-label" :for="'inlineRadio'+i">{{ item }}</label>
+            </div>
           </div>
-        </div>
-        <div class="col-12 col-lg-auto d-flex align-center pl-3">
-          <i class="material-symbols-outlined mr-n9 position-relative">search</i>
-          <input @keyup="renderPagination" v-model="searchString" type="search"
-                 class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
+          <div class="col-12 col-lg-auto d-flex align-center pl-3 ml-auto">
+            <i class="material-symbols-outlined mr-n9 position-relative">search</i>
+            <input v-model="searchString" type="search"
+                   class="form-control rounded-pill pl-10 border-0" placeholder="Search" style="width: 240px;"/>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="container py-15 flex-grow-1">
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th v-for="(header,i) in headers" @click="setSortColumn(header.key)" :class="i==0 || 'text-center'">
-          {{ header.value }}
-          <span class="arrow" :class="{ active: this.sortColumn === header.key && this.order === 'ASC'}">&#8593;</span>
-          <span class="arrow" :class="{ active: this.sortColumn === header.key && this.order === 'DESC'}">&#8595;</span>
-        </th>
-      </tr>
-      </thead>
-      <tbody class="table-group-divider">
-      <tr v-if="!filteredWorkers.length">
-        <td colspan="4" class="text-center">검색결과가 없습니다.</td>
-      </tr>
-      <tr v-for="(item, i) in paginatedData" :key="item.id">
-        <td>
-          <a href="/dashboard" class="link-secondary text-decoration-none">{{ item.corp_nm }}</a>
-          <span v-if="item.new_status=='1'"
-                class="badge rounded-pill bg-primary ml-2 text-uppercase">new</span>
-          <span v-else-if="item.update_status=='1'" class="badge rounded-pill bg-danger ml-2 text-uppercase">update</span>
-          <span v-else></span>
-        </td>
-        <td class="text-center text-secondary" style="width: 150px;">{{ item.crt_dt }}</td>
-        <td class="text-center text-secondary" style="width: 150px;">{{ item.fin_dt }}</td>
-        <td class="text-center pb-0" style="width: 100px;">
-          <i v-if="!item.ssr_fail" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
-          <span v-else>
-                <a href="#none" data-bs-toggle="modal" :data-bs-target="'#errorInfoModal'+item.corp_no">
-                <i class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
-              </a>
-              <error-info :data="[item.corp_no, item.task_id]"></error-info>
-<!--              <error-info></error-info>-->
-          </span>
-          <!-- 메뉴얼 업데이트 아이콘 추가 -->
-          <a @click="onRefresh(item.corp_no)" href="#none" class="ml-3"><i
-            class="material-symbols-outlined font-weight-light text-primary">refresh</i></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <div id="pagination" class="tui-pagination mt-10"></div>
-  </div>
-
-  <footers></footers>
+    <div class="container py-15 flex-grow-1">
+      <v-table :columns="headers" :data="workers"></v-table>
+    </div>
+  </layout>
 </div>
+<script src="./assets/js/lib/vue@latest"></script>
+<script src="./assets/js/lib/vue3-sfc-loader"></script>
+<script src="./assets/js/lib/bootstrap.bundle.min.js"></script>
+<script src="./assets/js/lib/jquery-3.6.0.js"></script>
+<script src="./assets/js/lib/lodash.js"></script>
+<script src="./assets/js/lib/tui-pagination.js"></script>
+<script src="./assets/js/lib/tui-date-picker.js"></script>
+<script src="./assets/js/lib/tui-grid.js"></script>
+<script src="./assets/js/app.js"></script>
+<script src="./assets/js/util.js"></script>
 <script type="module">
-  const app = Vue.createApp({
-    components: {
-      "navs": Vue.defineAsyncComponent(() => loadModule("/components/navs.vue", options)),
-      "footers": Vue.defineAsyncComponent(() => loadModule("/components/footers.vue", options)),
-      "errorInfo": Vue.defineAsyncComponent(() => loadModule("/components/errorInfo.vue", options))
-    },
-    data() {
-      return {
-        headers: [],
-        workers: [],
-        sortColumn: "",
-        order: "ASC",
-        searchString: '',
-        corpList: this.selectCorpList().corpInfo,
-        pageNum: 0,
-        pageSize: 10,
-      }
-    },
-    computed: {
-      filteredWorkers() {
-        const filteredWorkers = this.searchString === ""
-          ? this.workers
-          : this.workers.filter(wo => Object.values(wo).join("").indexOf(this.searchString) !== -1);
+    const app = Vue.createApp({
+        components: {
+            "layout": Vue.defineAsyncComponent(() => loadModule("/components/layout.vue", options)),
+            "errorInfo": Vue.defineAsyncComponent(() => loadModule("/components/errorInfo.vue", options)),
+            "v-table": Vue.defineAsyncComponent(() => loadModule("/components/v-table.vue", options))
+        },
+        data() {
+            return {
+                corpNo: get_query().corpNo,
+                corpList: this.selectCorpList().corpInfo,
+                headers: [],
+                workers: [],
+                searchString: '',
+            }
+        },
+        watch: {
+            searchString: function (value) {
+                this.workers = _.filter(this.corpList, function (item) {
+                    return item.corp_nm.match(value);
+                })
+            },
+        },
+        mounted() {
+            this.selectCorpList();
+            this.getWorkers();
+        },
+        methods: {
+            onErrorCheck(x) {
+                this.pageNum = 0;
+                this.workers = this.corpList; // 필터 초기화
+                this.workers = x == '전체' ? this.corpList :
+                    this.workers.filter(error => x == '성공' ? error.ssr_fail == 0 : error.ssr_fail != 0);
+            },
+            onRefresh(i) {
+                alert(i)
+            },
+            async getWorkers() {
+                const workers = this.corpList;
 
-        const column = this.sortColumn
-        const order = this.order;
+                /*
+                    "up_dt": 업데이트 일시
+                    "crt_dt": 등록일시
+                    "corp_nm": 기업명
+                    "corp_no": 사업자번호(페이지 이동시 파라메터)
+                    "ssr_fail": 상태 (스크래핑 오류여부    0: 에러없음, 1:에러발생),
+                    "task_id": 작업아이디 (오류페이지 클릭시 파라메터로 사용)
+                    "corp_status": 배지상태 ("new"", "update, "")
+                */
 
-        filteredWorkers.sort(function (a, b) {
-          const nameA = a[column] + "".toUpperCase();
-          const nameB = b[column] + "".toUpperCase();
-          if (order === "DESC" && nameA > nameB) {
-            return -1;
-          }
-          if (order === "DESC" && nameA < nameB) {
-            return 1;
-          }
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-          return 0;
-        });
+                // 1.filter : https://nhn.github.io/tui.grid/latest/tutorial-example24-filter
+                // 2.sort : https://nhn.github.io/tui.grid/latest/tutorial-example19-sort
 
-        console.log('필터링된 데이터 수 : ' + filteredWorkers.length)
+                class CustomRenderer {
+                    constructor(props) {
+                        const el = document.createElement('div');
+                        this.el = el;
+                        this.render(props);
+                    }
 
-        return filteredWorkers;
-      },
-      paginatedData() {
-        console.log('page : ' + this.pageNum)
-        const start = this.pageNum * this.pageSize,
-          end = start + this.pageSize;
-        return this.filteredWorkers.slice(start, end);
-      }
-    },
-    mounted() {
-      this.getWorkers();
-      this.selectCorpList();
-      this.renderPagination();
-    },
-    methods: {
-      renderPagination() {
-        var pagination = new tui.Pagination('pagination', {
-          totalItems: this.filteredWorkers.length,
-          itemsPerPage: 10,
-          visiblePages: 10,
-        });
+                    getElement() {
+                        return this.el;
+                    }
 
-        var self = this;
+                    render(props) {
+                        const item = workers[props.rowKey];
+                        const app = Vue.createApp({
+                            template: `
+                        <a href="/dashboard.html?corpNo=${item.corp_no}&updateDt=${item.fin_dt}"
+                           class="link-secondary text-decoration-none">${props.value}</a>
+                        <span v-if="${item.new_status == '1'}"
+                              class="badge rounded-pill bg-primary ml-2 text-uppercase">new</span>
+                        <span v-else-if="${item.update_status == '1'}"
+                              class="badge rounded-pill bg-danger ml-2 text-uppercase">update</span>
+                        <span v-else></span>`
+                        }).mount(this.el);
+                    }
+                }
 
-        pagination.on('afterMove', function (eventData) {
-          return self.pageNum = eventData.page - 1
-        });
-      },
-      onErrorCheck(x) {
-        this.pageNum = 0;
-        this.workers = this.corpList; // 필터 초기화
-        this.workers = x == '전체' ? this.corpList :
-          this.workers.filter(error => x == '성공' ? error.ssr_fail == 0 : error.ssr_fail != 0);
-        this.renderPagination();
-      },
-      onRefresh(i) {
-        alert(i)
-      },
-      setSortColumn(column) {
-        if (this.sortColumn === column) {
-          this.order = this.order === "ASC" ? "DESC" : "ASC";
-        } else {
-          this.order = "ASC";
-          this.sortColumn = column;
+                class CustomDate {
+                    constructor(props) {
+                        const el = document.createElement('div');
+                        this.el = el;
+                        this.render(props);
+                    }
+
+                    getElement() {
+                        return this.el;
+                    }
+
+                    render(props) {
+                        this.el.innerHTML = props.value != undefined ? props.value.replaceAll('-', '.') : '';
+                    }
+                }
+
+                class CustomSSR {
+                    constructor(props) {
+                        const el = document.createElement('div');
+                        this.el = el;
+                        this.render(props);
+                    }
+
+                    getElement() {
+                        return this.el;
+                    }
+
+                    render(props) {
+                        // this.el.innerHTML = props.value==0 ? '성공' : '실패';
+                        const item = workers[props.rowKey];
+                        const app = Vue.createApp({
+                            template: `
+                                    <i v-if="${!props.value}" class="material-symbols-outlined font-weight-light text-primary">check_circle</i>
+                                    <i v-else class="material-symbols-outlined font-weight-light text-danger">unpublished</i>
+                            `
+                        }).mount(this.el);
+                    }
+                }
+
+                const headers = [
+                    {
+                        name: "corp_nm",
+                        header: "기업명",
+                        sortingType: 'desc', // 'desc', 'asc'
+                        sortable: true,
+                        resizable: true,
+                        filter: 'select', // text, number, select, date
+                        renderer: {
+                            type: CustomRenderer
+                        }
+                    },
+                    {
+                        name: "crt_dt",
+                        header: "등록일시",
+                        align: 'center',
+                        resizable: false,
+                        width: 150,
+                        filter: 'select',
+                        renderer: {
+                            type: CustomDate,
+                        }
+                    },
+                    {
+                        name: "fin_dt", // up_dt
+                        header: "업데이트",
+                        align: 'center',
+                        resizable: false,
+                        width: 150,
+                        filter: 'select',
+                        renderer: {
+                            type: CustomDate,
+                        }
+                    },
+                    {
+                        name: "ssr_fail",
+                        header: "상태",
+                        align: 'center',
+                        filter: 'select',
+                        resizable: false,
+                        width: 50,
+                        renderer: {
+                            type: CustomSSR,
+                        }
+                    },
+                ];
+
+
+                this.headers = headers;
+                this.workers = workers;
+            },
+            selectCorpList() {
+                let returnValue;
+                let params = {};
+                params.stCnt = 0;
+                params.enCnt = 1000;
+                params.searchText = this.searchString;
+                $.ajax({
+                    url: "http://localhost:8080/dataroom/selectCorpList",
+                    type: "POST",
+                    data: JSON.stringify(params),
+                    dataType: "json",
+                    async: false,
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        returnValue = data;
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+
+                return returnValue;
+            },
         }
-      },
-      async getWorkers() {
-        const workers = this.corpList;
+    });
 
-        /*
-            "up_dt": 업데이트 일시
-            "crt_dt": 등록일시
-            "corp_nm": 기업명
-            "corp_no": 사업자번호(페이지 이동시 파라메터)
-            "ssr_fail": 상태 (스크래핑 오류여부    0: 에러없음, 1:에러발생),
-            "task_id": 작업아이디 (오류페이지 클릭시 파라메터로 사용)
-            "corp_status": 배지상태 ("new"", "update, "")
-        */
-
-        const headers = [
-          {key: "corp_nm", value: "기업명"},
-          {key: "crt_dt", value: "등록일시"},
-          {key: "up_dt", value: "업데이트"},
-          {key: "ssr_fail", value: "상태"},
-        ];
-
-        this.headers = headers;
-        this.workers = workers;
-      },
-      selectCorpList() {
-        var returnValue;
-        var params = {};
-        params.stCnt = 0;
-        params.enCnt = 100;
-        params.searchText = this.searchString;
-
-        // console.log(this.corpList)
-
-        $.ajax({
-          url: "http://localhost:8080/dataroom/selectCorpList",
-          type: "POST",
-          data: JSON.stringify(params),
-          dataType: "json",
-          async: false,
-          contentType: "application/json;charset=utf-8",
-          success: function (data) {
-            returnValue = data;
-            // console.log(returnValue);
-          },
-          error: function (err) {
-            console.log(err);
-          }
-        });
-
-        return returnValue;
-      },
-    }
-  });
-
-
-  app.mount("#app");
+    app.mount("#app");
 
 </script>
-<style>
-  th {
-    cursor: pointer;
-  }
-
-  .arrow {
-    color: gray;
-  }
-
-  .active {
-    color: black;
-  }
-</style>
 </body>
 </html>
