@@ -46,13 +46,13 @@
 
 <script>
 import _ from '//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js'
-import terms1 from "./terms1.vue";
-import terms2 from "./terms2.vue";
+// import terms1 from "./terms1.vue";
+// import terms2 from "./terms2.vue";
 
 export default {
   components: {
-    terms1,
-    terms2,
+    // terms1,
+    // terms2,
   },
   data() {
     return {

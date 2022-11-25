@@ -18,7 +18,7 @@ module.exports = {
             "port": 8080
         }
     },
-    "files": 'docs',
+    "files": '',
     "watchOptions": {ignored: 'node_modules'},
     "server": { //https://browsersync.io/docs/options/#option-server
       baseDir: "docs",

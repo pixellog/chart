@@ -4,27 +4,55 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RND</title>
-  <link rel="stylesheet" href="./assets/styles/app.css"/>
+  <link rel="stylesheet" href="/assets/styles/app.css"/>
+  <script src="//unpkg.com/vue@latest"></script>
+  <script src="//cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
+  <script src="//cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="//code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="//uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+  <script src="./assets/js/app.js"></script>
+  <!--  <link rel="stylesheet" href="./assets/styles/primer.css">-->
+  <!--  <link rel="stylesheet" href="//github.githubassets.com/assets/customer-stories-legacy-782ab0e120d1.css">-->
+  <!--  <link rel="stylesheet" href="//github.githubassets.com/assets/readme-d5c741126c21.css">-->
+  <!--  ./light-719f1193e0c0.css	-->
+  <!--  ./dark-0c343b529849.css	-->
+  <!--  ./primer-5637479b6643.css	-->
+  <!--  ./global-f6f644aba0fa.css	-->
+  <!--  ./github-5d7162839c37.css	-->
+  <!--  ./site-95631ca94c30.css	-->
+  <!--  ./customer-stories-68bf51eedc0a.css	-->
+  <!--  ./customer-stories-legacy-782ab0e120d1.css-->
 </head>
 <body>
-<div id="app"></div>
-<script src="https://unpkg.com/vue@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="./assets/js/app.js"></script>
-<script type="module">
-  const app = Vue.createApp({
-    components: {
-      "navs": Vue.defineAsyncComponent(() =>
-        loadModule("./components/navs.vue", options)
-      ),
-      "footers": Vue.defineAsyncComponent(() =>
-        loadModule("./components/footers.vue", options)
-      ),
-    },
-    template: `
-      <div>
-      <navs></navs>
+<div id="app">
+  <layout>
+    <i ref="tooltip" class="material-symbols-outlined"
+       data-bs-toggle="tooltip" data-bs-placement="top"
+       data-bs-custom-class="custom-tooltip"
+       data-bs-title="This top tooltip is themed via CSS variables."
+    >info</i>
+
+    <div id="pagination" class="tui-pagination">pagination</div>
+
+
+    <div class="blue-">
+      <!--    <navs></navs>-->
+
+      <table class="table table-hover">
+        <template v-for="item in 4">
+          <tr>
+            <td @click="show = item" style="cursor:pointer;">
+              click {{item}}
+            </td>
+            <td class="text-right">
+              <i class="material-symbols-outlined">expand_{{show==item ? 'less':'more'}}</i>
+            </td>
+          </tr>
+          <tr v-if="show == item">
+            <td colspan="2" class="pa-3" style="background-color: #f8f9fa">content {{item}}</td>
+          </tr>
+        </template>
+      </table>
 
       <section>
         <div class="container p-5">
@@ -73,10 +101,10 @@
             </tbody>
           </table>
 
-          <i class="material-symbols-outlined"
-                data-bs-toggle="tooltip" data-bs-placement="top"
-                data-bs-custom-class="custom-tooltip"
-                data-bs-title="This top tooltip is themed via CSS variables."
+          <i ref="tooltip" class="material-symbols-outlined"
+             data-bs-toggle="tooltip" data-bs-placement="top"
+             data-bs-custom-class="custom-tooltip"
+             data-bs-title="This top tooltip is themed via CSS variables."
           >info</i>
 
           <button type="button" class="btn btn-secondary"
@@ -106,7 +134,8 @@
 
           <div class="tab-content">
             <div class="tab-pane" :id="item" :class="tabs !== i || 'active'"
-                 v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id">{{ i }}//{{ item }}</div>
+                 v-for="(item,i) in ['home','profile','messages','settings']" :key="item.id">{{ i }}//{{ item }}
+            </div>
           </div>
 
           <p v-for="item in 10" :key="item.id">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid architecto ea, eius labore nesciunt perferendis placeat quas tempora veritatis. Delectus eaque harum incidunt laudantium mollitia rem sit voluptate. Eligendi!</p>
@@ -114,16 +143,170 @@
 
         </div>
       </section>
-      <footers></footers>
+
+      <div class="container">
+        <div class="d-flex flex-wrap white">
+          <article class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex flex-column py-2 py-md-3" v-for="item in 10">
+            <a href="/customer-stories/3m" class="arrow-target-mktg customer-story-card color-bg-default rounded px-3 pt-3 no-underline d-flex flex-column position-relative height-full">
+              <div class="customer-story-card-hero position-relative rounded overflow-hidden">
+                <img src="/3M/3M14.jpg" class="customer-story-card-img width-full height-full" alt="">
+
+              </div>
+
+              <div class="pt-3 d-flex flex-column flex-auto">
+                <h1 class="h6-mktg color-fg-default mb-2">3M</h1>
+
+                <p class="color-fg-muted f6 flex-auto">
+          <span class="d-block mb-2">
+            Technology
+          </span>
+                </p>
+
+                <div class="d-flex width-full f5 border-top flex-justify-between py-3 color-fg-accent">
+                  Read more
+                  <svg xmlns="http://www.w3.org/2000/svg" class="octicon arrow-symbol-mktg mt-1" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path fill="currentColor" d="M7.28033 3.21967C6.98744 2.92678 6.51256 2.92678 6.21967 3.21967C5.92678 3.51256 5.92678 3.98744 6.21967 4.28033L7.28033 3.21967ZM11 8L11.5303 8.53033C11.8232 8.23744 11.8232 7.76256 11.5303 7.46967L11 8ZM6.21967 11.7197C5.92678 12.0126 5.92678 12.4874 6.21967 12.7803C6.51256 13.0732 6.98744 13.0732 7.28033 12.7803L6.21967 11.7197ZM6.21967 4.28033L10.4697 8.53033L11.5303 7.46967L7.28033 3.21967L6.21967 4.28033ZM10.4697 7.46967L6.21967 11.7197L7.28033 12.7803L11.5303 8.53033L10.4697 7.46967Z"></path>
+                    <path class="octicon-chevrow-stem" stroke="currentColor" d="M1.75 8H11" stroke-width="1.5" stroke-linecap="round"></path>
+                  </svg>
+
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
       </div>
-    `,
+
+      <div class="newsletter rounded-2">
+        <div class="d-flex flex-row flex-wrap color-bg-subtle rounded-2 flex-items-center">
+          <div class="pl-6 pr-6 pl-lg-7 pr-lg-7 py-6 py-lg-7 col-12 col-lg-6 col-xl-7">
+            <h2 class="h4-mktg color-fg-default">Subscribe to The GitHub Insider</h2>
+            <p class="f3-mktg color-fg-muted mt-2 mb-0">A newsletter for developers covering techniques, technical guides, and the latest product innovations coming from GitHub.</p>
+          </div>
+          <div class="pl-3 pl-lg-5 pr-3 pr-lg-5 pt-3 pt-lg-7 pb-3 pb-lg-7 col-12 col-lg-6 col-xl-5">
+            <form method="post" action="https://s88570519.t.eloqua.com/e/f2?elqFormName=copynewsletter-signup-form-637872624660309567&amp;elqSiteID=88570519" class="d-md-flex flex-row newsletter-form rounded-2">
+              <input type="email" id="newsletter_emailAddress" name="emailAddress" placeholder="Your email address" class="d-block width-full height-md-full mb-2 mb-md-0 f4-mktg newsletter-field rounded-2">
+              <input type="hidden" id="newsletter_classification" name="classification" value="Practitioner">
+
+              <button type="submit" class="newsletter-submit flex-shrink-0 arrow-target-mktg d-flex flex-row f3-mktg flex-items-center text-semibold rounded-2"><span>Subscribe</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="octicon arrow-symbol-mktg" width="24" height="24" viewBox="0 0 16 16" fill="none">
+                  <path fill="currentColor" d="M7.28033 3.21967C6.98744 2.92678 6.51256 2.92678 6.21967 3.21967C5.92678 3.51256 5.92678 3.98744 6.21967 4.28033L7.28033 3.21967ZM11 8L11.5303 8.53033C11.8232 8.23744 11.8232 7.76256 11.5303 7.46967L11 8ZM6.21967 11.7197C5.92678 12.0126 5.92678 12.4874 6.21967 12.7803C6.51256 13.0732 6.98744 13.0732 7.28033 12.7803L6.21967 11.7197ZM6.21967 4.28033L10.4697 8.53033L11.5303 7.46967L7.28033 3.21967L6.21967 4.28033ZM10.4697 7.46967L6.21967 11.7197L7.28033 12.7803L11.5303 8.53033L10.4697 7.46967Z"></path>
+                  <path class="octicon-chevrow-stem" stroke="currentColor" d="M1.75 8H11" stroke-width="1.5" stroke-linecap="round"></path>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <a href="/readme/topics/open-source" class="readme-underline-grow--green">
+        <span>Open Source</span>
+      </a>
+
+      <blockquote class="lh-condensed readme-home-blockquote">
+        <a href="/readme/stories/samson-goddy" class="no-underline readme-underline--green">
+          <span>That’s the beauty of open source. It gives me the opportunity to get to know other countries and collaborate with different people. It makes me a better human.</span>
+        </a>
+      </blockquote>
+
+
+      <ul class="lh-condensed readme-heading-1 readme-heading--condensed">
+        <li class="d-inline">
+          <a href="/readme/topics/open-source" class="d-inline-block no-underline readme-underline-grow--green">
+            <span>Open Source</span>
+          </a>,
+        </li>
+        <li class="d-inline">
+          <a href="/readme/topics/culture" class="d-inline-block no-underline readme-underline-grow--green">
+            <span>Culture</span>
+          </a>,
+        </li>
+        <li class="d-inline">
+          <a href="/readme/topics/security" class="d-inline-block no-underline readme-underline-grow--green">
+            <span>Security</span>
+          </a>,
+        </li>
+        <li class="d-inline">
+          <a href="/readme/topics/devops" class="d-inline-block no-underline readme-underline-grow--green" data-test-selector="topic-link">
+            <span>DevOps</span>
+          </a>,
+        </li>
+
+        <li class="d-inline">and&nbsp;<a href="/readme/topics" class="no-underline readme-underline-grow--green"><span>more</span></a>.</li>
+      </ul>
+
+      <div class=" border-top pt-9">
+        <blockquote class="col-xl-11 offset-xl-1 text-center text-md-right lh-condensed readme-home-blockquote">
+          <a href="/readme/stories/samson-goddy" class="no-underline readme-underline--green">
+            <span>That’s the beauty of open source. It gives me the opportunity to get to know other countries and collaborate with different people. It makes me a better human.</span>
+          </a>
+        </blockquote>
+
+        <div class="d-flex flex-column flex-md-row-reverse flex-items-center mt-6">
+          <div class="position-relative col-4 col-md-2 mb-4 mb-md-0 ml-md-4" style="max-width:120px">
+            <div class="position-relative readme-img-build-in js-build-in build-in-animate" data-build-margin-bottom="5">
+              <a class="position-relative d-block readme-link" data-ga-click="ReadME Stories, click, ref_page:/readme;ref_cta:Dreaming big to unify Africa’s open source community;ref_loc:Story list" href="/readme/stories/samson-goddy">
+                <figure class="readme-link__figure circle " style="height:0; padding-bottom:100%; -webkit-mask-image: -webkit-radial-gradient(#fff,#000);">
+                  <picture>
+                    <source srcset="//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=300&amp;fm=avif 300w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=240&amp;fm=avif 240w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=180&amp;fm=avif 180w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=150&amp;fm=avif 150w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=120&amp;fm=avif 120w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=60&amp;fm=avif 60w" sizes="120px" type="image/avif">
+                    <source srcset="//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=300&amp;fm=webp 300w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=240&amp;fm=webp 240w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=180&amp;fm=webp 180w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=150&amp;fm=webp 150w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=120&amp;fm=webp 120w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=60&amp;fm=webp 60w" sizes="120px" type="image/webp">
+                    <source srcset="//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=300&amp;fm=jpg 300w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=240&amp;fm=jpg 240w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=180&amp;fm=jpg 180w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=150&amp;fm=jpg 150w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=120&amp;fm=jpg 120w,//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=60&amp;fm=jpg 60w" sizes="120px" type="image/jpeg">
+                    <img class="d-block width-full readme-link__img height-auto position-absolute" width="300" height="350" loading="lazy" decoding="async" alt="Samson Goddy" src="//images.ctfassets.net/s5uo95nf6njh/43gbAeQ2eV4EDMYDHO4iE7/e1f90440ed648ed229148e5dc518179b/samson-goddy-thumbnail.jpg?w=300&amp;fm=jpg">
+                  </picture>
+                </figure>
+              </a>
+
+            </div>
+
+          </div>
+
+          <div class="col-12 col-md-10 text-center text-md-right ">
+            <a href="/readme/stories/samson-goddy" data-ga-click="ReadME Stories, click, ref_page:/readme;ref_cta:Dreaming big to unify Africa’s open source community;ref_loc:Story list" class="position-relative d-block no-underline readme-underline--green">
+              <h3 class="mb-3 readme-heading-3">
+                <span>Dreaming big to unify Africa’s open source community</span>
+              </h3>
+            </a>
+
+            <p class="text-mono text-uppercase readme-text-gray-dark f5-mktg mb-2">
+              Samson Goddy // Sugar Labs
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!--    <footers></footers>-->
+    </div>
+  </layout>
+</div>
+
+<script type="module">
+
+  const pagination = new tui.Pagination('pagination', {
+    totalItems: 300,
+    itemsPerPage: 10,
+    visiblePages: 5
+  });
+
+
+  const app = Vue.createApp({
+    components: {
+      "navs": Vue.defineAsyncComponent(() => loadModule("./components/navs.vue", options)),
+      "footers": Vue.defineAsyncComponent(() => loadModule("./components/footers.vue", options)),
+      "layout": Vue.defineAsyncComponent(() => loadModule("./components/layout.vue", options)),
+    },
     data() {
       return {
         src: "https://source.unsplash.com/random/query='nature'?orientation='landscape'",
-        tabs: 0
+        tabs: 0,
+        show: 1,
       }
     },
+    mounted() {
+      console.log(this.numberWithCommas(30000))
+    },
     methods: {
+      numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      },
       active(i) {
         this.tabs = i
       }
@@ -132,8 +315,45 @@
 
   app.mount("#app");
 
+  $(document).on("mouseover", '[data-bs-toggle="tooltip"]', function () {
+    $(this).tooltip();
+  });
+
 
 </script>
+
+<style>
+  .readme-underline--green {
+    color: #24292e;
+    text-decoration: none;
+    transition: color .4s;
+  }
+
+  .readme-underline--green:hover, .readme-underline--green:focus {
+    color: #4969ed;
+    text-decoration: none;
+  }
+
+  .no-underline {
+    text-decoration: none !important;
+  }
+
+  a {
+    background-color: transparent;
+  }
+
+  .readme-underline--green span {
+    background-image: linear-gradient(180deg, transparent 98.5%, #6ddb90 0);
+    background-repeat: no-repeat;
+    background-size: 0 100%;
+    transition: background-size 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .newsletter {
+    padding: 1px;
+    background: linear-gradient(92.05deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%);
+  }
+</style>
 
 </body>
 </html>

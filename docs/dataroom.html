@@ -222,7 +222,7 @@
                 params.enCnt = 1000;
                 params.searchText = this.searchString;
                 $.ajax({
-                    url: "http://localhost:8080/dataroom/selectCorpList",
+                    url: "/dataroom/selectCorpList",
                     type: "POST",
                     data: JSON.stringify(params),
                     dataType: "json",

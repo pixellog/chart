@@ -63,7 +63,7 @@ export default {
       params.taskId = taskId;
 
       $.ajax({
-        url: "http://localhost:8080/dataroom/selectErrorList",
+        url: "/dataroom/selectErrorList",
         type: "POST",
         data: JSON.stringify(params),
         dataType: "json",
