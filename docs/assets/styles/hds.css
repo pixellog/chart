@@ -1,5 +1,5 @@
 /*!
-* Vuetify v2.6.12
+* Vuetify v2.6.12 custom, layout 관련 부분만 사용
 * Forged by John Leider
 * Released under the MIT License.
 */
@@ -3421,11 +3421,6 @@ ol, ul {
   line-height: 1.75rem
 }
 
-.body-2, .subtitle-1 {
-  font-weight: 400;
-  font-family: Roboto, sans-serif !important
-}
-
 .body-2 {
   font-size: .875rem !important;
   letter-spacing: .0178571429em !important;
@@ -3436,11 +3431,6 @@ ol, ul {
   font-size: 1rem !important;
   letter-spacing: .03125em !important;
   line-height: 1.5rem
-}
-
-.body-1, .caption {
-  font-weight: 400;
-  font-family: Roboto, sans-serif !important
 }
 
 .caption {
