@@ -3,6 +3,7 @@
 @import url(./lib/toastui-chart.min.css);
 @import url(./lib/tui-pagination.css);
 @import url(./lib/tui-grid.css);
+@import url(./lib/jquery-ui.css);
 @import url(./hds.css);
 /* https://hangeul.naver.com/font */
 @font-face {
